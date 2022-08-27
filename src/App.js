@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import Home from "./Pages/Home";
+import { getProducts } from "./features/productSlice";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import styled from "styled-components";
+
+
 
 function App() {
+  const { category } = useSelector((reduxStore) => reduxStore.product);
+  const {userMenu} = useSelector((reduxStore) => reduxStore.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProducts(category));
+  }, [category, dispatch]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="App">
+      <Home />
+    </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+
+`
 
 export default App;
