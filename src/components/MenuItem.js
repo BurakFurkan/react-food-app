@@ -5,12 +5,19 @@ import { BsHeart } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import {addToUserMenu} from "../features/userSlice";
+import { getUserMeals } from "../features/userSlice";
+import useRandomNumber from "./useRandomNumber";
+import StarRatingComponent from 'react-star-rating-component';
 
 
 const MenuItem = ({ id,title, image, restaurantChain }) => {
 
   const { userMeals} = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
+  const price1 = useRandomNumber(50,150)
+
+  
+
 
   return (
     <Container>
@@ -34,25 +41,34 @@ const MenuItem = ({ id,title, image, restaurantChain }) => {
 
           onClick={() =>{
             dispatch(addToUserMenu(id))
+            dispatch(getUserMeals(id))
           }}
         />
       </CardHeader>
       <CardImageWrapper image={image}></CardImageWrapper>
       <CardInfoWrapper>
         <h2>{title}</h2>
+        <StarWrapper>
+        <StarRatingComponent name={"StarRating"} starCount={5} editing={false} value={useRandomNumber(1,5)} style={{fontSize:"50px"}} />
+        <StarSpan>({useRandomNumber(100,2500)})</StarSpan>
+        </StarWrapper>
         <RestaurantWrapper>
           <GoLocation
             style={{
-              fontSize: "1.5rem",
+              fontSize: "1.3rem",
               boxSizing: "border-box",
               transition: "0.3s ease-in-out",
-              margin: "0 0.5rem"
+              margin: "0 0.3rem 0 0"
             }}
           />
           {restaurantChain}
         </RestaurantWrapper>
       </CardInfoWrapper>
-      <CardFooter />
+      <CardFooter >
+            <PriceSpan>{price1}TL</PriceSpan>
+            <PriceSign>&#61;&gt;</PriceSign>
+            <DiscountSpan>{price1-useRandomNumber(5,25)}TL</DiscountSpan>
+      </CardFooter>
     </Container>
   );
 };
@@ -73,13 +89,6 @@ const Container = styled.div`
     `rotateY(${props.degx}deg) rotateX(${props.degy}deg)`};
 `;
 
-const ProductImg = styled.img`
-  width: 80%;
-  height: 80%;
-  transition: 0.6s ease-in-out;
-  object-fit: cover;
-`;
-
 const CardImageWrapper = styled.div`
   width: 250px;
   height: 250%;
@@ -98,7 +107,7 @@ const CardImageWrapper = styled.div`
 const CardHeader = styled.div`
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 5px;
   color: #777785;
@@ -116,10 +125,21 @@ const CardInfoWrapper = styled.div`
   margin: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   gap:2rem;
 `;
+
+const StarWrapper = styled.div`
+  display:flex;
+  align-items: center;
+  justify-content: center;
+`
+
+const StarSpan = styled.span`
+  margin:0 1rem;
+
+`
 
 const RestaurantWrapper = styled.div`
   width: 100%;
@@ -127,8 +147,8 @@ const RestaurantWrapper = styled.div`
   color:  #777785;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size:1.3rem;
+  justify-content: flex-start;
+  font-size:1rem;
   font-weight: 600;
 `;
 
@@ -136,6 +156,20 @@ const CardFooter = styled.div`
   width: 100%;
   height: 100%;
   color: #777785;
+  padding:1rem 0 0 0;
+
 `;
+
+const PriceSpan = styled.del`
+  margin-right:0.5rem;
+`
+
+const PriceSign=styled.span`
+  margin-right:0.5rem;
+`
+
+const DiscountSpan =styled.span`
+
+`
 
 export default MenuItem;
