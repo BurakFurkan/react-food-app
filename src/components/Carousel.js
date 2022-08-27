@@ -5,15 +5,15 @@ import ClipLoader from "react-spinners/ClipLoader";
 import {useState,useEffect} from "react"
 import "swiper/css";
 import { useSelector, useDispatch } from "react-redux";
-import { getUserMeals } from "../features/userSlice";
+import { getUserMeals, resetMeals } from "../features/userSlice";
 
 
-export default function Carousel(meal) {
+export default function Carousel() {
   const dispatch = useDispatch();
   const { userMenu, meals } = useSelector((reduxStore) => reduxStore.user);
   
   useEffect(() => {
-    userMenu.map((item) => dispatch(getUserMeals(item)))
+    userMenu.forEach((item) => dispatch(getUserMeals(item)))
 
   }, []);
 

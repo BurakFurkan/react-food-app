@@ -24,12 +24,14 @@ const initialState = {
 
 };
 
+
+
 export const getProducts = createAsyncThunk(
   "products/getProducts",
   async (selectedCategory, thunkAPI) => { 
-      
+    
     try {
-      const response = await axios(`https://api.spoonacular.com/food/menuItems/search?query=${selectedCategory}&number=12&apiKey=7153d909a4a641589d3f2a4b4ba95675`);
+      const response = await axios(`https://api.spoonacular.com/food/menuItems/search?query=${selectedCategory}&number=12&apiKey=${process.env.REACT_APP_API_KEY}`);
       return await response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });

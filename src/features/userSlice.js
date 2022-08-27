@@ -16,7 +16,7 @@ export const getUserMeals = createAsyncThunk(
   async (selectedMealID, thunkAPI) => { 
 
     try {
-      const response = await axios(`https://api.spoonacular.com/food/menuItems/${selectedMealID}?addMenuItemInformation=true&apiKey=7153d909a4a641589d3f2a4b4ba95675`);
+      const response = await axios(`https://api.spoonacular.com/food/menuItems/${selectedMealID}?addMenuItemInformation=true&apiKey=${process.env.REACT_APP_API_KEY}`);
       return await response.data;
       
     } catch (error) {
@@ -32,6 +32,7 @@ export const userSlice = createSlice({
     addToUserMenu: (state, action) => {
       state.userMenu.push(action.payload) ;
     },
+    
 
   },
   extraReducers: {
@@ -40,7 +41,7 @@ export const userSlice = createSlice({
     },
     [getUserMeals.fulfilled]: (state, action) => {
       state.isLoading = false;
-      state.meals = action.payload ;
+      state.meals.push(action.payload);
     },
     [getUserMeals.rejected]: (state, action) => {
       state.isLoading = false;
@@ -49,7 +50,7 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addToUserMenu } = userSlice.actions;
+export const { addToUserMenu, resetMeals } = userSlice.actions;
 
 export default userSlice.reducer;
 
