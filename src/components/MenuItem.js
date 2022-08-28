@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {addToUserMenu} from "../features/userSlice";
 import { getUserMeals } from "../features/userSlice";
 import useRandomNumber from "./useRandomNumber";
-import StarRatingComponent from 'react-star-rating-component';
+import ReactStars from 'react-stars';
 
 
 const MenuItem = ({ id,title, image, restaurantChain }) => {
@@ -48,8 +48,8 @@ const MenuItem = ({ id,title, image, restaurantChain }) => {
       <CardImageWrapper image={image}></CardImageWrapper>
       <CardInfoWrapper>
         <h2>{title}</h2>
-        <StarWrapper>
-        <StarRatingComponent name={"StarRating"} starCount={5} editing={false} value={useRandomNumber(1,5)} style={{fontSize:"50px"}} />
+        <StarWrapper >
+        <ReactStars edit={false} half={true} size={24} count={5} editing={false} value={useRandomNumber(1,5)}  />
         <StarSpan>({useRandomNumber(100,2500)})</StarSpan>
         </StarWrapper>
         <RestaurantWrapper>
@@ -138,6 +138,7 @@ const StarWrapper = styled.div`
 
 const StarSpan = styled.span`
   margin:0 1rem;
+  font-size:1.1rem;
 
 `
 

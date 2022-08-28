@@ -8,7 +8,8 @@ import axios from "axios";
 const initialState = {
   userMenu: [],
   isLoading: true,
-  meals:[]
+  meals:[],
+  detailedMealID:null
 };
 
 export const getUserMeals = createAsyncThunk(
@@ -42,6 +43,7 @@ export const userSlice = createSlice({
     [getUserMeals.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.meals.push(action.payload);
+      
     },
     [getUserMeals.rejected]: (state, action) => {
       state.isLoading = false;
@@ -50,7 +52,7 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addToUserMenu, resetMeals } = userSlice.actions;
+export const { addToUserMenu } = userSlice.actions;
 
 export default userSlice.reducer;
 
