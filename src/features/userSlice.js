@@ -33,7 +33,14 @@ export const userSlice = createSlice({
     addToUserMenu: (state, action) => {
       state.userMenu.push(action.payload) ;
     },
-    
+    removeFromUserMenu:(state,action) =>{
+      const filteredArr = state.userMenu.filter((item) => item!== action.payload)
+      state.userMenu = filteredArr;
+    },
+    removeFromUserMeals:(state,action) =>{
+      const filteredArr = state.meals.filter((item) => item.id!== action.payload)
+      state.meals = filteredArr;
+    },
 
   },
   extraReducers: {
@@ -52,7 +59,7 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addToUserMenu } = userSlice.actions;
+export const { addToUserMenu,removeFromUserMenu,removeFromUserMeals } = userSlice.actions;
 
 export default userSlice.reducer;
 

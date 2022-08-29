@@ -1,22 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CgAddR } from "react-icons/cg";
-import { BsHeart } from "react-icons/bs";
+import { BsHeart,BsCheckSquare } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
-import {addToUserMenu} from "../features/userSlice";
+import {addToUserMenu,removeFromUserMenu,removeFromUserMeals} from "../features/userSlice";
 import { getUserMeals } from "../features/userSlice";
 import useRandomNumber from "./useRandomNumber";
 import ReactStars from 'react-stars';
 
 
-const MenuItem = ({ id,title, image, restaurantChain }) => {
+const MenuItem = ({ id,title, image, restaurantChain,isMain }) => {
 
-  const { userMeals} = useSelector((reduxStore) => reduxStore.user);
+  const { userMeals,userMenu} = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
   const price1 = useRandomNumber(50,150)
-
-  
 
 
   return (
@@ -30,7 +28,7 @@ const MenuItem = ({ id,title, image, restaurantChain }) => {
             transition: "0.3s ease-in-out",
           }}
         />
-        <CgAddR
+        {userMenu.includes(id)?<BsCheckSquare
           style={{
             alignSelf: "flex-end",
             fontSize: "1.5rem",
@@ -40,10 +38,25 @@ const MenuItem = ({ id,title, image, restaurantChain }) => {
           }}
 
           onClick={() =>{
-            dispatch(addToUserMenu(id))
-            dispatch(getUserMeals(id))
+            dispatch(removeFromUserMenu(id))
+            dispatch(removeFromUserMeals(id))
           }}
-        />
+        />:
+        <CgAddR
+        style={{
+          alignSelf: "flex-end",
+          fontSize: "1.5rem",
+          cursor: "pointer",
+          boxSizing: "border-box",
+          transition: "0.3s ease-in-out",
+        }}
+
+        onClick={() =>{
+          dispatch(addToUserMenu(id))
+          dispatch(getUserMeals(id))
+        }}
+      />}
+        
       </CardHeader>
       <CardImageWrapper image={image}></CardImageWrapper>
       <CardInfoWrapper>
