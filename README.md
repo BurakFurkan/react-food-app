@@ -1,10 +1,10 @@
-# Getting Started with Create React App
+-----USAGE------
+You should get an api key from https://spoonacular.com/food-api
+create .env file under the food-app folder 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+add REACT_APP_API_KEY=YOUR_API_KEY to .env file
 
-## Available Scripts
 
-In the project directory, you can run:
 
 ### `npm start`
 
