@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { CgAddR } from "react-icons/cg";
-import { BsHeart, BsCheckSquare } from "react-icons/bs";
-import { GoLocation } from "react-icons/go";
+import { BsHeart } from "react-icons/bs";
+import { TiDeleteOutline } from "react-icons/ti";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addToUserMenu,
@@ -10,16 +10,12 @@ import {
   removeFromUserMeals,
 } from "../features/userSlice";
 import { getUserMeals } from "../features/userSlice";
-import useRandomNumber from "./useRandomNumber";
-import ReactStars from "react-stars";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
+import { motion } from "framer-motion";
 
-const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
-  const { userMeals, userMenu } = useSelector((reduxStore) => reduxStore.user);
+const DetailedMenuItem = ({ id, title, images ,modalHandler, selectedId, selectHandler  } ) => {
+  const { userMenu } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
-  const price1 = useRandomNumber(50, 150);
-  const MySwal = withReactContent(Swal);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -34,7 +30,7 @@ const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
   });
 
   return (
-    <Container>
+    <Container >
       <CardHeader>
         <BsHeart
           style={{
@@ -45,24 +41,27 @@ const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
           }}
         />
         {userMenu.includes(id) ? (
-          <BsCheckSquare
+          {selectedId}?<TiDeleteOutline
             style={{
               alignSelf: "flex-end",
-              fontSize: "1.5rem",
+              fontSize: "2rem",
               cursor: "pointer",
               boxSizing: "border-box",
               transition: "0.3s ease-in-out",
             }}
             onClick={() => {
+              selectHandler(null)
+              modalHandler()      
               dispatch(removeFromUserMenu(id));
               dispatch(removeFromUserMeals(id));
+              
               Toast.fire({
                 icon: "error",
                 title: "Item removed to User Daily Meal",
               });
             }}
           />
-        ) : (
+        :"") : (
           <CgAddR
             style={{
               alignSelf: "flex-end",
@@ -74,50 +73,39 @@ const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
             onClick={() => {
               dispatch(addToUserMenu(id));
               dispatch(getUserMeals(id));
-              Toast.fire({
-                icon: "success",
-                title: "Item added to User Daily Meal",
-              });
             }}
           />
         )}
       </CardHeader>
-      <CardImageWrapper image={image}></CardImageWrapper>
+      <CardImageWrapper images={images[1]}>
+        {console.log()}
+      </CardImageWrapper>
       <CardInfoWrapper>
-        <h2>{title}</h2>
-        <StarWrapper>
-          <ReactStars
-            edit={false}
-            half={true}
-            size={24}
-            count={5}
-            editing={false}
-            value={useRandomNumber(1, 5)}
-          />
-          <StarSpan>({useRandomNumber(100, 2500)})</StarSpan>
-        </StarWrapper>
-        <RestaurantWrapper>
-          <GoLocation
-            style={{
-              fontSize: "1.3rem",
-              boxSizing: "border-box",
-              transition: "0.3s ease-in-out",
-              margin: "0 0.3rem 0 0",
-            }}
-          />
-          {restaurantChain}
-        </RestaurantWrapper>
+        <h2 style={{ cursor: "pointer" }} onClick={() => {
+          selectHandler(id)
+          modalHandler()  }} >{title}</h2>
       </CardInfoWrapper>
       <CardFooter>
-        <PriceSpan>{price1}TL</PriceSpan>
-        <PriceSign>&#61;&gt;</PriceSign>
-        <DiscountSpan>{price1 - useRandomNumber(5, 25)}TL</DiscountSpan>
+        <StyledTable>
+          <tbody>
+            <StyledTR>
+              <StyledTH>Nutritient</StyledTH>
+              <StyledTH>Value</StyledTH>
+              <StyledTH>Daily Amount</StyledTH>
+            </StyledTR>
+            <StyledTR>
+              <StyledTD>Alfreds Futterkiste</StyledTD>
+              <StyledTD>Alfreds Futterkiste</StyledTD>
+              <StyledTD>Alfreds Futterkiste</StyledTD>
+            </StyledTR>
+          </tbody>
+        </StyledTable>
       </CardFooter>
     </Container>
   );
 };
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   width: 300px;
   height: 450px;
   border-radius: 26px;
@@ -129,14 +117,12 @@ const Container = styled.div`
   align-items: center;
   padding: 1rem;
   color: white;
-  transform: ${(props) =>
-    `rotateY(${props.degx}deg) rotateX(${props.degy}deg)`};
 `;
 
 const CardImageWrapper = styled.div`
-  width: 250px;
-  height: 250%;
-  background-image: ${(props) => `url(${props.image})`};
+  width: 100%;
+  height: 150%;
+  background-image: ${(props) => `url(${props.images})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -164,7 +150,7 @@ const CardHeader = styled.div`
 
 const CardInfoWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 50%;
   color: #777785;
   margin: 1rem;
   display: flex;
@@ -174,43 +160,19 @@ const CardInfoWrapper = styled.div`
   gap: 2rem;
 `;
 
-const StarWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StarSpan = styled.span`
-  margin: 0 1rem;
-  font-size: 1.1rem;
-`;
-
-const RestaurantWrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  color: #777785;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 1rem;
-  font-weight: 600;
-`;
-
 const CardFooter = styled.div`
   width: 100%;
   height: 100%;
   color: #777785;
   padding: 1rem 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 `;
 
-const PriceSpan = styled.del`
-  margin-right: 0.5rem;
-`;
+const StyledTable = styled.table``;
+const StyledTR = styled.tr``;
+const StyledTH = styled.th``;
+const StyledTD = styled.td``;
 
-const PriceSign = styled.span`
-  margin-right: 0.5rem;
-`;
-
-const DiscountSpan = styled.span``;
-
-export default MenuItem;
+export default DetailedMenuItem;

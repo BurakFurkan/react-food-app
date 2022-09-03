@@ -6,7 +6,7 @@ import TodayMenu from "./Pages/TodayMenu";
 import Dashboard from "./Pages/Dashboard";
 import { store } from "./store";
 import { Provider } from "react-redux";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
