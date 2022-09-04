@@ -13,7 +13,15 @@ import { getUserMeals } from "../features/userSlice";
 import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 
-const DetailedMenuItem = ({ id, title, images ,modalHandler, selectedId, selectHandler  } ) => {
+const DetailedMenuItem = ({
+  id,
+  title,
+  images,
+  modalHandler,
+  selectedId,
+  selectHandler,
+  nutrition,
+}) => {
   const { userMenu } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
 
@@ -30,7 +38,11 @@ const DetailedMenuItem = ({ id, title, images ,modalHandler, selectedId, selectH
   });
 
   return (
-    <Container initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
+    <Container
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <CardHeader>
         <BsHeart
           style={{
@@ -41,27 +53,31 @@ const DetailedMenuItem = ({ id, title, images ,modalHandler, selectedId, selectH
           }}
         />
         {userMenu.includes(id) ? (
-          {selectedId}?<TiDeleteOutline
-            style={{
-              alignSelf: "flex-end",
-              fontSize: "2rem",
-              cursor: "pointer",
-              boxSizing: "border-box",
-              transition: "0.3s ease-in-out",
-            }}
-            onClick={() => {
-              selectHandler(null)
-              modalHandler()      
-              dispatch(removeFromUserMenu(id));
-              dispatch(removeFromUserMeals(id));
-              
-              Toast.fire({
-                icon: "error",
-                title: "Item removed to User Daily Meal",
-              });
-            }}
-          />
-        :"") : (
+          { selectedId } ? (
+            <TiDeleteOutline
+              style={{
+                alignSelf: "flex-end",
+                fontSize: "2rem",
+                cursor: "pointer",
+                boxSizing: "border-box",
+                transition: "0.3s ease-in-out",
+              }}
+              onClick={() => {
+                selectHandler(null);
+                modalHandler();
+                dispatch(removeFromUserMenu(id));
+                dispatch(removeFromUserMeals(id));
+
+                Toast.fire({
+                  icon: "error",
+                  title: "Item removed to User Daily Meal",
+                });
+              }}
+            />
+          ) : (
+            ""
+          )
+        ) : (
           <CgAddR
             style={{
               alignSelf: "flex-end",
@@ -77,13 +93,17 @@ const DetailedMenuItem = ({ id, title, images ,modalHandler, selectedId, selectH
           />
         )}
       </CardHeader>
-      <CardImageWrapper images={images[1]}>
-        {console.log()}
-      </CardImageWrapper>
+      <CardImageWrapper images={images[1]} />
       <CardInfoWrapper>
-        <h2 style={{ cursor: "pointer" }} onClick={() => {
-          selectHandler(id)
-          modalHandler()  }} >{title}</h2>
+        <h2
+          style={{ cursor: "pointer", fontSize: "1.5rem" }}
+          onClick={() => {
+            selectHandler(id);
+            modalHandler();
+          }}
+        >
+          {title}
+        </h2>
       </CardInfoWrapper>
       <CardFooter>
         <StyledTable>
@@ -93,11 +113,19 @@ const DetailedMenuItem = ({ id, title, images ,modalHandler, selectedId, selectH
               <StyledTH>Value</StyledTH>
               <StyledTH>Daily Amount</StyledTH>
             </StyledTR>
-            <StyledTR>
-              <StyledTD>Alfreds Futterkiste</StyledTD>
-              <StyledTD>Alfreds Futterkiste</StyledTD>
-              <StyledTD>Alfreds Futterkiste</StyledTD>
-            </StyledTR>
+            {(nutrition.nutrients).map((nutrient, index) => {
+              return (
+                <StyledTR key={index}>
+                  <StyledTD>{nutrient.name}</StyledTD>
+                  <StyledTD>
+                    {nutrient.amount} {nutrient.unit}
+                  </StyledTD>
+                  <StyledTD>
+                    {nutrient.percentOfDailyNeeds} {nutrient.unit}
+                  </StyledTD>
+                </StyledTR>
+              );
+            })}
           </tbody>
         </StyledTable>
       </CardFooter>
@@ -106,8 +134,8 @@ const DetailedMenuItem = ({ id, title, images ,modalHandler, selectedId, selectH
 };
 
 const Container = styled(motion.div)`
-  width: 300px;
-  height: 450px;
+  width: 350px;
+  height: 550px;
   border-radius: 26px;
   background: #bccccd;
   box-shadow: -5px -5px 13px #848f90, 5px 5px 13px #f4ffff;
@@ -121,14 +149,14 @@ const Container = styled(motion.div)`
 
 const CardImageWrapper = styled.div`
   width: 100%;
-  height: 150%;
+  height: 400px;
   background-image: ${(props) => `url(${props.images})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   -webkit-box-shadow: 1px 2px 9px 2px #777785;
   box-shadow: 1px 2px 9px 2px #777785;
-  border-radius: 50%;
+  border-radius: 25px;
   box-sizing: border-box;
   overflow: hidden;
   padding: 1rem;
@@ -150,7 +178,7 @@ const CardHeader = styled.div`
 
 const CardInfoWrapper = styled.div`
   width: 100%;
-  height: 50%;
+  height: 150px;
   color: #777785;
   margin: 1rem;
   display: flex;
@@ -162,17 +190,55 @@ const CardInfoWrapper = styled.div`
 
 const CardFooter = styled.div`
   width: 100%;
-  height: 100%;
+  height: 550px;
   color: #777785;
-  padding: 1rem 0 0 0;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  overflow-x:hidden;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-const StyledTable = styled.table``;
-const StyledTR = styled.tr``;
-const StyledTH = styled.th``;
-const StyledTD = styled.td``;
+const StyledTable = styled.table`
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  
+`;
+const StyledTR = styled.tr`
+  &:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+
+  &:hover {
+    background-color: #3B9AE1;
+    color:white;
+  }
+`;
+const StyledTH = styled.th`
+  padding: 2px;
+  background: rgba(255, 255, 255, 0.5);
+  text-align: left;
+  border:2px solid #777785;
+
+  
+`;
+const StyledTD = styled.td`
+  padding: 2px 4px;
+  text-align: left;
+  white-space: nowrap;
+  border:2px solid #777785;
+
+  
+`;
 
 export default DetailedMenuItem;
+
+
