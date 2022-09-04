@@ -54,9 +54,9 @@ export default function Carousel() {
     return (
       <CarouselWrapper>
         <Swiper
-          spaceBetween={20}
+          spaceBetween={10}
           slidesPerView={3}
-          style={{ width: "85%", padding: "2rem" }}
+          style={{ width: "100%", padding: "2rem" }}
         >
           {meals.map((meal) => {
             return (

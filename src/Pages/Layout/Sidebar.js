@@ -22,7 +22,7 @@ function Sidebar() {
 }
 
 const Container = styled.div`
-  width: 150px;
+  width: 150px !important;
   height: 350px;
   border-radius: 26px;
   background: #bccccd;
@@ -32,6 +32,8 @@ const Container = styled.div`
   display: flex;
   position: relative;
   overflow: hidden;
+  font-size: 1.2rem;
+  box-sizing: border-box;
 `;
 
 const UList = styled.ul`
@@ -54,11 +56,13 @@ const List = styled.li`
   cursor: pointer;
   font-size: 1.2rem;
   letter-spacing: 1px;
+  
 
   &:hover {
     background: rgba(255, 255, 255, 0.5);
     transition: 0.5s ease-in-out;
     color: #14213d;
+    font-size: 1.2rem;
   }
 `;
 
@@ -74,16 +78,19 @@ const StyledLink = styled(NavLink)`
   letter-spacing: 1px;
   text-decoration: none;
 
+
   &:hover {
     background: rgba(255, 255, 255, 0.5);
     transition: 0.5s ease-in-out;
     color: #14213d;
+
   }
 
   &.active {
     background: rgba(255, 255, 255, 0.5);
     transition: 0.5s ease-in-out;
     color: #14213d;
+
   }
 `;
 

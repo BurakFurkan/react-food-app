@@ -14,6 +14,10 @@ import useRandomNumber from "./useRandomNumber";
 import ReactStars from "react-stars";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import {
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 
 const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
   const { userMeals, userMenu } = useSelector((reduxStore) => reduxStore.user);
@@ -34,7 +38,7 @@ const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
   });
 
   return (
-    <Container>
+    <Container initial={{opacity:0 , y:200, transition:{duration:1}}} animate={{opacity:1 , y:0}} exit={{opacity:0 , y:-100 , transition:{duration:0.1}}} >
       <CardHeader>
         <BsHeart
           style={{
@@ -117,7 +121,7 @@ const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
   );
 };
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   width: 300px;
   height: 450px;
   border-radius: 26px;

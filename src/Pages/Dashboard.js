@@ -2,14 +2,20 @@ import React from "react";
 import Navbar from "./Layout/Navbar";
 import Sidebar from "./Layout/Sidebar";
 import styled from "styled-components";
+import {
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 
 const Dashboard = () => {
   return (
-    <Container>
+    <Container >
       <Navbar />
-        <PageWrapper>
+        <PageWrapper  >
         <Sidebar />
-        Dashboard
+        <ContentWrapper  >
+          Dashboard
+        </ContentWrapper>
         </PageWrapper>
     </Container>
   );
@@ -30,7 +36,18 @@ const PageWrapper = styled.div`
   gap: 1rem;
   padding:1rem;
   align-items: flex-start;
-
-
 `
+
+const ContentWrapper = styled(motion.div)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #bccccd;
+  width: 68vw;
+  gap:0.75rem;
+  
+`;
 export default Dashboard;

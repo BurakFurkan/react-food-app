@@ -1,24 +1,22 @@
-import Home from "./Pages/Home";
+
 import { getProducts } from "./features/productSlice";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-
-
+import AnimatedRoutes from "./Pages/AnimatedRoutes";
 
 function App() {
-  const { category } = useSelector((reduxStore) => reduxStore.product);
-  const {userMenu} = useSelector((reduxStore) => reduxStore.user);
+  const { category, page } = useSelector((reduxStore) => reduxStore.product);
+  const { userMenu } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProducts(category));
-  }, [category, dispatch]);
-
+  }, [category, page,dispatch]);
 
   return (
     <Container className="App">
-      <Home />
+      <AnimatedRoutes/>
     </Container>
   );
 }
@@ -26,7 +24,6 @@ function App() {
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-
-`
+`;
 
 export default App;

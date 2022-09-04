@@ -1,11 +1,15 @@
 import React from "react";
 import styled from "styled-components";
+import {
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 
 const SideCart = () => {
-  return <Container>User Inventory</Container>;
+  return <Container initial={{opacity:0 , y:-100}} animate={{opacity:1 , y:0}} exit={{opacity:0 , y:20 , transition:{duration:0.1}}} >User Inventory</Container>;
 };
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   width: 15vw;
   height: 65vh;
   border-radius: 26px;

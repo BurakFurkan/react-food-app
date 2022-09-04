@@ -30,7 +30,7 @@ const DetailedMenuItem = ({ id, title, images ,modalHandler, selectedId, selectH
   });
 
   return (
-    <Container >
+    <Container initial={{opacity:0}} animate={{opacity:1}} exit={{opacity:0}}>
       <CardHeader>
         <BsHeart
           style={{

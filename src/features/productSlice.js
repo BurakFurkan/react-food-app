@@ -8,6 +8,7 @@ const initialState = {
   category: "burger",
   products: [],
   isLoading: true,
+  page:1,
   categories :{
     burger:"burger",
     kebab:"kebab",
@@ -28,10 +29,11 @@ const initialState = {
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
-  async (selectedCategory, thunkAPI) => { 
-    
+  async (selectedCategory,thunkAPI) => { 
+    const currentState = thunkAPI.getState();
     try {
-      const response = await axios(`https://api.spoonacular.com/food/menuItems/search?query=${selectedCategory}&number=12&apiKey=${process.env.REACT_APP_API_KEY}`);
+      
+      const response = await axios(`https://api.spoonacular.com/food/menuItems/search?query=${selectedCategory}&number=12&offset=${currentState.product.page}&apiKey=${process.env.REACT_APP_API_KEY}`);
       return await response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });
@@ -45,6 +47,12 @@ export const productSlice = createSlice({
   reducers: {
     pickCategory: (state, action) => {
       state.category = action.payload;
+    },
+    nextPage: (state) => {
+      state.page += 1
+    },
+    previousPage: (state) => {
+      state.page -= 1
     },
 
   },
@@ -63,7 +71,7 @@ export const productSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { pickCategory } = productSlice.actions;
+export const { pickCategory,nextPage,previousPage } = productSlice.actions;
 
 export default productSlice.reducer;
 

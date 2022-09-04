@@ -5,16 +5,23 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { getUserMeals } from "../features/userSlice";
 import Carousel from "../components/Carousel";
+import {
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 
 const TodayMenu = () => {
  
 
   return (
-    <Container>
+    <Container  >
       <Navbar />
-      <PageWrapper>
+      <PageWrapper  >
         <Sidebar />
-        <Carousel/>
+        <ContentWrapper initial={{opacity:0 , y:100}} animate={{opacity:1 , y:0}} exit={{opacity:0 , y:-100 , transition:{duration:0.2}}} >
+          <Carousel/>
+        </ContentWrapper>
+        
       </PageWrapper>
     </Container>
   );
@@ -23,7 +30,8 @@ const TodayMenu = () => {
 const Container = styled.div`
   background: #bccccd;
   width: 100%;
-  height: 90vh;
+  height: 100%;
+  overflow: hidden;
 `;
 
 const PageWrapper = styled.div`
@@ -31,8 +39,20 @@ const PageWrapper = styled.div`
   height: 100%;
   display: flex;
   justify-content: flex-start;
-  gap: 2rem;
   padding: 1rem;
   align-items: flex-start;
+  box-sizing: border-box;
+`;
+
+const ContentWrapper = styled(motion.div)`
+  width: 88%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #bccccd;
+  
+  gap:0.75rem;
 `;
 export default TodayMenu;
