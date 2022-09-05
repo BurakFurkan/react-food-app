@@ -181,17 +181,3 @@ const DeleteBtn = styled(motion.div)`
 
 export default SideCart;
 
-<AnimationDiv>
-  <SideItem
-    drag="x"
-    dragConstraints={{ left: 0, right: 0 }}
-    dragElastic={{ left: 0.2, right: 0.1 }}
-  >
-    <SideImageWrapper>Image</SideImageWrapper>
-    <SideInfoWrapper>Info</SideInfoWrapper>
-    <SideFooterWrapper>Footer</SideFooterWrapper>
-  </SideItem>
-  <DeleteBtn>
-    <ImBin style={{ fontSize: "1.5rem" }} />
-  </DeleteBtn>
-</AnimationDiv>;
