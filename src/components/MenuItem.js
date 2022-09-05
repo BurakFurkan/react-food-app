@@ -13,17 +13,13 @@ import { getUserMeals } from "../features/userSlice";
 import useRandomNumber from "./useRandomNumber";
 import ReactStars from "react-stars";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import {
-  motion,
-  AnimatePresence,
-} from "framer-motion";
 
-const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
-  const { userMeals, userMenu } = useSelector((reduxStore) => reduxStore.user);
+import { motion } from "framer-motion";
+
+const MenuItem = ({ id, title, image, restaurantChain }) => {
+  const { userMenu } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
   const price1 = useRandomNumber(50, 150);
-  const MySwal = withReactContent(Swal);
 
   const Toast = Swal.mixin({
     toast: true,
@@ -31,6 +27,9 @@ const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
+    iconColor: "#777785",
+    background: "#bccccd",
+    color: "#777785",
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);
@@ -38,7 +37,11 @@ const MenuItem = ({ id, title, image, restaurantChain, isMain }) => {
   });
 
   return (
-    <Container initial={{opacity:0 , y:200, transition:{duration:1}}} animate={{opacity:1 , y:0}} exit={{opacity:0 , y:-100 , transition:{duration:0.1}}} >
+    <Container
+      initial={{ opacity: 0, y: 200, transition: { duration: 1 } }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -100, transition: { duration: 0.1 } }}
+    >
       <CardHeader>
         <BsHeart
           style={{

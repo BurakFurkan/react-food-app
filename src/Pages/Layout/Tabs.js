@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import MenuItem from "../../components/MenuItem";
 import { useSelector, useDispatch } from "react-redux";
@@ -14,6 +14,14 @@ function Tabs() {
   const { products, isLoading, category } = useSelector(
     (store) => store.product
   );
+  const { meals } = useSelector(
+    (store) => store.user
+  );
+
+    useEffect(() =>{
+
+    },[meals])
+
   const dispatch = useDispatch();
 
   if (isLoading) {
@@ -46,6 +54,7 @@ const Container = styled.div`
   position: relative;
   margin-top: 0.8rem;
   background-color: #bccccd;
+  scroll-behavior: smooth;
 
   &::-webkit-scrollbar {
     display: none;
