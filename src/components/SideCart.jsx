@@ -73,7 +73,7 @@ const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
   position: relative;
-  padding: 1rem 0 0 0;
+  padding: 1rem 5px 5px 5px;
   overflow: hidden;
 `;
 
@@ -81,13 +81,12 @@ const SideItemWrapper = styled.ul`
   width: 100%;
   height: 100%;
   background: #bccccd;
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   gap: 0.3rem;
-  padding: 0.5rem 0;
+  padding: 0.4rem 0;
   overflow: scroll;
   scroll-behavior: smooth;
 

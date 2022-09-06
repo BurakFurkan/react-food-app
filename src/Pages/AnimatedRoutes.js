@@ -9,6 +9,7 @@ import { Routes, Route, Outlet, useLocation } from "react-router-dom";
 import Home from "../Pages/Home";
 import TodayMenu from "../Pages/TodayMenu";
 import Dashboard from "../Pages/Dashboard";
+import NotFound from "./NotFound";
 
 const AnimatedRoutes = () => {
   const location = useLocation();
@@ -18,6 +19,7 @@ const AnimatedRoutes = () => {
         <Route path="/" element={<Home />}></Route>
         <Route path="/todaymenu" element={<TodayMenu />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
     </AnimatePresence>
   );

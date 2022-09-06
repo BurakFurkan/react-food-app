@@ -89,7 +89,9 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
           />
         )}
       </CardHeader>
-      <CardImageWrapper image={image}></CardImageWrapper>
+      <CardImageWrapper>
+        <CardImage src={image} alt="CardImage" />
+      </CardImageWrapper>
       <CardInfoWrapper>
         <h2>{title}</h2>
         <StarWrapper>
@@ -126,7 +128,7 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
 
 const Container = styled(motion.div)`
   width: 300px;
-  height: 450px;
+  height: 400px;
   border-radius: 26px;
   background: #bccccd;
   box-shadow: -5px -5px 13px #848f90, 5px 5px 13px #f4ffff;
@@ -136,23 +138,27 @@ const Container = styled(motion.div)`
   align-items: center;
   padding: 1rem;
   color: white;
-  transform: ${(props) =>
-    `rotateY(${props.degx}deg) rotateX(${props.degy}deg)`};
 `;
 
 const CardImageWrapper = styled.div`
-  width: 250px;
-  height: 250%;
-  background-image: ${(props) => `url(${props.image})`};
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  height: auto;
+  min-height: 150px;
+  width: auto;
+  min-width: 150px;
   -webkit-box-shadow: 1px 2px 9px 2px #777785;
   box-shadow: 1px 2px 9px 2px #777785;
   border-radius: 50%;
   box-sizing: border-box;
   overflow: hidden;
-  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CardImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 `;
 
 const CardHeader = styled.div`
@@ -178,7 +184,7 @@ const CardInfoWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 2rem;
+  gap: 0.5rem;
 `;
 
 const StarWrapper = styled.div`
@@ -205,7 +211,7 @@ const RestaurantWrapper = styled.div`
 
 const CardFooter = styled.div`
   width: 100%;
-  height: 100%;
+  height: 35%;
   color: #777785;
   padding: 1rem 0 0 0;
 `;

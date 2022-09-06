@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { CgAddR } from "react-icons/cg";
 import { BsHeart } from "react-icons/bs";
 import { TiDeleteOutline } from "react-icons/ti";
+import { GiMagnifyingGlass } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addToUserMenu,
@@ -31,6 +32,9 @@ const DetailedMenuItem = ({
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
+    iconColor: "#777785",
+    background: "#bccccd",
+    color: "#777785",
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);
@@ -50,6 +54,18 @@ const DetailedMenuItem = ({
             cursor: "pointer",
             boxSizing: "border-box",
             transition: "0.3s ease-in-out",
+          }}
+        />
+        <GiMagnifyingGlass
+          style={{
+            fontSize: "1.5rem",
+            cursor: "pointer",
+            boxSizing: "border-box",
+            transition: "0.3s ease-in-out",
+          }}
+          onClick={() => {
+            selectHandler(id);
+            modalHandler();
           }}
         />
         {userMenu.includes(id) ? (
@@ -95,15 +111,7 @@ const DetailedMenuItem = ({
       </CardHeader>
       <CardImageWrapper images={images[1]} />
       <CardInfoWrapper>
-        <h2
-          style={{ cursor: "pointer", fontSize: "1.5rem" }}
-          onClick={() => {
-            selectHandler(id);
-            modalHandler();
-          }}
-        >
-          {title}
-        </h2>
+        <h2 style={{ fontSize: "1.5rem" }}>{title}</h2>
       </CardInfoWrapper>
       <CardFooter>
         <StyledTable>
@@ -113,7 +121,7 @@ const DetailedMenuItem = ({
               <StyledTH>Value</StyledTH>
               <StyledTH>Daily Amount</StyledTH>
             </StyledTR>
-            {(nutrition.nutrients).map((nutrient, index) => {
+            {nutrition.nutrients.map((nutrient, index) => {
               return (
                 <StyledTR key={index}>
                   <StyledTD>{nutrient.name}</StyledTD>
@@ -195,7 +203,7 @@ const CardFooter = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  overflow-x:hidden;
+  overflow-x: hidden;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -210,7 +218,6 @@ const StyledTable = styled.table`
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  
 `;
 const StyledTR = styled.tr`
   &:nth-child(odd) {
@@ -218,27 +225,21 @@ const StyledTR = styled.tr`
   }
 
   &:hover {
-    background-color: #3B9AE1;
-    color:white;
+    background-color: #3b9ae1;
+    color: white;
   }
 `;
 const StyledTH = styled.th`
   padding: 2px;
   background: rgba(255, 255, 255, 0.5);
   text-align: left;
-  border:2px solid #777785;
-
-  
+  border: 2px solid #777785;
 `;
 const StyledTD = styled.td`
   padding: 2px 4px;
   text-align: left;
   white-space: nowrap;
-  border:2px solid #777785;
-
-  
+  border: 2px solid #777785;
 `;
 
 export default DetailedMenuItem;
-
-
