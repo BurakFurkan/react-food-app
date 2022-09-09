@@ -185,6 +185,13 @@ const CardInfoWrapper = styled.div`
   align-items: flex-start;
   justify-content: center;
   gap: 0.5rem;
+  h2 {
+    width: 95%;
+    height: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
 `;
 
 const StarWrapper = styled.div`

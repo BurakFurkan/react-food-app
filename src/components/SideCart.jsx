@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { ImBin } from "react-icons/im";
+import { GoLocation } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromUserMeals, removeFromUserMenu } from "../features/userSlice";
 import yellowStar from "../assets/yellowStar.png";
@@ -9,12 +10,11 @@ import yellowStar from "../assets/yellowStar.png";
 const SideCart = () => {
   const { meals } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
-  const[dragStart ,setDragStart] = useState(0)
+  const [dragStart, setDragStart] = useState(0);
 
   const handleDragEnd = (e, info, mealID) => {
     const dragEnd = info.point.x;
-    console.log(dragEnd , dragStart)
-    if ((dragStart-dragEnd) > 200) {
+    if (dragStart - dragEnd > 200) {
       dispatch(removeFromUserMenu(mealID));
       dispatch(removeFromUserMeals(mealID));
     }
@@ -28,35 +28,40 @@ const SideCart = () => {
     >
       <h2 style={{ color: "#777785" }}>User Inventory</h2>
       <SideItemWrapper>
-        {meals.slice(0).reverse().map((meal) => {
-          return (
-            <AnimationDiv
-              key={meal.id}
-              initial={{ opacity: 0, y: -200, transition: { duration: 1 } }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 100, transition: { duration: 0.1 } }}
-            >
-              <SideItem
-                drag="x"
-                dragConstraints={{ left: 0, right: 0 }}
-                dragElastic={{ left: 0.2, right: 0.1 }}
-                onDragStart={(e,info) => setDragStart(info.point.x)}
-                onDragEnd={(e, info) => handleDragEnd(e, info, meal.id)}
-                dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+        {meals
+          .slice(0)
+          .reverse()
+          .map((meal) => {
+            return (
+              <AnimationDiv
+                key={meal.id}
+                initial={{ opacity: 0, y: -200, transition: { duration: 1 } }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 100, transition: { duration: 0.1 } }}
               >
-                <SideImageWrapper>
-                  <StyledStar src={yellowStar} alt="yellowStar" />
-                  <SideImage src={meal.images[0]} alt="MealImage" />
-                </SideImageWrapper>
-                <SideInfoWrapper>{meal.title}</SideInfoWrapper>
-                <SideFooterWrapper>{meal.restaurantChain}</SideFooterWrapper>
-              </SideItem>
-              <DeleteBtn>
-                <ImBin style={{ fontSize: "1.5rem" }} />
-              </DeleteBtn>
-            </AnimationDiv>
-          );
-        })}
+                <SideItem
+                  drag="x"
+                  dragConstraints={{ left: 0, right: 0 }}
+                  dragElastic={{ left: 0.15, right: 0.1 }}
+                  onDragStart={(e, info) => setDragStart(info.point.x)}
+                  onDragEnd={(e, info) => handleDragEnd(e, info, meal.id)}
+                  dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+                >
+                  <SideImageWrapper>
+                    <StyledStar src={yellowStar} alt="yellowStar" />
+                    <SideImage src={meal.images[0]} alt="MealImage" />
+                  </SideImageWrapper>
+                  <SideInfoWrapper> {meal.title}</SideInfoWrapper>
+                  <SideFooterWrapper>
+                    <GoLocation /> {meal.restaurantChain}
+                  </SideFooterWrapper>
+                </SideItem>
+                <DeleteBtn>
+                  <ImBin style={{ fontSize: "1.5rem" }} />
+                </DeleteBtn>
+              </AnimationDiv>
+            );
+          })}
       </SideItemWrapper>
     </Container>
   );
@@ -111,7 +116,8 @@ const SideItem = styled(motion.li)`
   box-sizing: border-box;
   position: relative;
   z-index: 2;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
+  letter-spacing: 1px;
   gap: 10px;
   padding-right: 5px;
 `;
@@ -134,8 +140,11 @@ const SideImage = styled.img`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75%;
-  height: 75%;
+  width: auto;
+  max-width: 75%;
+  height: auto;
+  max-height: 75%;
+  object-fit: cover;
   z-index: 2;
 `;
 
@@ -147,10 +156,16 @@ const StyledStar = styled.img`
 `;
 const SideInfoWrapper = styled.div`
   width: 40%;
+  height: 85%;
   background: #f4f4f5;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 10px 5px;
+  text-overflow: ellipsis;
+  white-space: pre-line;
+  overflow: hidden;
 `;
 const SideFooterWrapper = styled.div`
   width: 25%;
@@ -158,15 +173,18 @@ const SideFooterWrapper = styled.div`
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 10px;
+  gap: 3px;
 `;
 
 const DeleteBtn = styled(motion.div)`
   z-index: 1;
   position: absolute;
   height: 95%;
-  width: 40%;
+  width: 100%;
   top: 50%;
   right: 0;
   display: flex;
@@ -179,4 +197,3 @@ const DeleteBtn = styled(motion.div)`
 `;
 
 export default SideCart;
-

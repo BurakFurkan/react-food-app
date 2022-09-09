@@ -2,9 +2,9 @@ import React from "react";
 import Navbar from "./Layout/Navbar";
 import Sidebar from "./Layout/Sidebar";
 import styled from "styled-components";
+import MainChart from "../components/MainChart";
 import {
-  motion,
-  AnimatePresence,
+  motion
 } from "framer-motion";
 
 const Dashboard = () => {
@@ -14,7 +14,7 @@ const Dashboard = () => {
         <PageWrapper  >
         <Sidebar />
         <ContentWrapper  >
-          Dashboard
+         <MainChart/>
         </ContentWrapper>
         </PageWrapper>
     </Container>
@@ -39,14 +39,14 @@ const PageWrapper = styled.div`
 `
 
 const ContentWrapper = styled(motion.div)`
-  width: 100%;
-  height: 100%;
+  width: 85vw;
+  height: 85vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  background: #bccccd;
-  width: 68vw;
+  background: black;
+  border-radius:10px;
   gap:0.75rem;
   
 `;
