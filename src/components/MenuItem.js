@@ -179,7 +179,7 @@ const CardInfoWrapper = styled.div`
   width: 100%;
   height: 100%;
   color: #777785;
-  margin: 1rem;
+  margin: 0.5rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -187,7 +187,7 @@ const CardInfoWrapper = styled.div`
   gap: 0.5rem;
   h2 {
     width: 95%;
-    height: 100px;
+    height: 36px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
@@ -207,7 +207,7 @@ const StarSpan = styled.span`
 
 const RestaurantWrapper = styled.div`
   width: 100%;
-  height: 100%;
+  height: 50px;
   color: #777785;
   display: flex;
   align-items: center;
