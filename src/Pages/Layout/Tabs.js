@@ -59,6 +59,11 @@ const Container = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  @media (max-width: 992px) {
+    width: 330px;
+  }
+
 `;
 
 const MenuWrapper = styled.div`

@@ -1,11 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom"
 
 const Navbar = () => {
   return (
     <Container>
       <LogoDiv>
-        <MainLogo>HealthFree</MainLogo>
+        <StyledLink to="/" >
+          <MainLogo>HealthFree</MainLogo>
+        </StyledLink>
       </LogoDiv>
       <NavRight>
         <Contact>Contact</Contact>
@@ -26,21 +29,48 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 992px) {
+    padding: 5px;
+    width: 95vw;
+    height: 250px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
   
 `;
 
 const LogoDiv = styled.div`
-  width: 80px;
-  height: 60px;
+  width: 300px;
+  height:100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 992px) {
+    justify-content: center;
+    align-items: center;
+  }
+  
+
 `;
+
+const StyledLink = styled(Link)`
+  text-decoration:none;
+`
+
 const MainLogo = styled.span`
-  width: 90%;
-  height: 90%;
+  width: 250px;
+  height: 100px;
   font-size: 35px;
   cursor: pointer;
   src: url("https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap");
   font-family: "Rubik Dirt", cursive;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color:#f4f4f5;
   filter: drop-shadow(0 0 0.50rem #888895);
 `;
 
@@ -56,6 +86,15 @@ const NavRight = styled.div`
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   overflow: hidden;
+  @media (max-width: 992px) {
+    width: 320px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+
 `;
 
 const Contact = styled.div`
@@ -72,5 +111,9 @@ const Contact = styled.div`
     background: rgba(255, 255, 255, 0.5);
     transition: 0.5s ease-in-out;
     color: #14213d;
+  }
+
+  @media (max-width: 992px) {
+    height: 100%;
   }
 `;

@@ -6,7 +6,9 @@
  box-sizing: border-box; 
  margin: 0;
  padding: 0;  
+
 }
+
 
 body{
     width:100%;
@@ -15,3 +17,4 @@ body{
     color:rgb(237, 234, 222);
     font-family: 'Figtree', sans-serif;
 }
+

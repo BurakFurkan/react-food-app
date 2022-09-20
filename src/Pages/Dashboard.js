@@ -26,6 +26,13 @@ const Container = styled.div`
   width: 100%;
   height: 100%;
 
+  @media (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
 `;
 
 const PageWrapper = styled.div`
@@ -36,6 +43,14 @@ const PageWrapper = styled.div`
   gap: 1rem;
   padding:1rem;
   align-items: flex-start;
+
+  @media (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+  }
 `
 
 const ContentWrapper = styled(motion.div)`

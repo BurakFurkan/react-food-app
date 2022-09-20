@@ -80,6 +80,11 @@ const Container = styled(motion.div)`
   position: relative;
   padding: 1rem 5px 5px 5px;
   overflow: hidden;
+
+  @media (max-width: 992px) {
+    width:320px;
+  }
+
 `;
 
 const SideItemWrapper = styled.ul`

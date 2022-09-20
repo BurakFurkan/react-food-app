@@ -109,7 +109,7 @@ const DetailedMenuItem = ({
           />
         )}
       </CardHeader>
-      <CardImageWrapper images={images[1]} />
+      <CardImageWrapper images={(images[1] || images )} />
       <CardInfoWrapper>
         <h2 style={{ fontSize: "1.5rem" }}>{title}</h2>
       </CardInfoWrapper>
@@ -153,6 +153,10 @@ const Container = styled(motion.div)`
   align-items: center;
   padding: 1rem;
   color: white;
+
+  @media (max-width: 992px) {
+    width: 300px;
+  }
 `;
 
 const CardImageWrapper = styled.div`
@@ -209,6 +213,8 @@ const CardFooter = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  
 `;
 
 const StyledTable = styled.table`
@@ -218,6 +224,12 @@ const StyledTable = styled.table`
   display: flex;
   justify-content: center;
   align-items: flex-start;
+
+  @media (max-width: 992px) {
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size:0.8rem;
+  }
 `;
 const StyledTR = styled.tr`
   &:nth-child(odd) {

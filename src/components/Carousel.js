@@ -25,7 +25,6 @@ export default function Carousel() {
     return meal.id === selectedId;
   });
 
-
   const modalHandler = () => {
     selectedId && setIsOpen(isOpen ? false : true);
   };
@@ -54,13 +53,23 @@ export default function Carousel() {
     return (
       <CarouselWrapper>
         <Swiper
+          breakpoints={{
+            // when window width is >= 640px
+            320: {
+              width: 320,
+              slidesPerView: 1,
+              direction:"horizontal"
+            }
+          }}
           spaceBetween={10}
           slidesPerView={3}
           style={{ width: "100%", padding: "2rem" }}
         >
           {meals.map((meal) => {
             return (
-              <SwiperSlide key={meal.id}>
+              <SwiperSlide
+                key={meal.id}
+              >
                 <DetailedMenuItem
                   modalHandler={modalHandler}
                   selectHandler={selectHandler}
@@ -71,11 +80,14 @@ export default function Carousel() {
             );
           })}
           {isOpen && (
-            <ModalWrapper data-id="modal" onClick={(e) =>{
-              (e.target.dataset.id==="modal")&&modalHandler()
-              e.preventDefault()
-
-            }} layoutId={selectedId}>
+            <ModalWrapper
+              data-id="modal"
+              onClick={(e) => {
+                e.target.dataset.id === "modal" && modalHandler();
+                e.preventDefault();
+              }}
+              layoutId={selectedId}
+            >
               <DetailedMenuItem
                 modalHandler={modalHandler}
                 selectHandler={selectHandler}
@@ -92,6 +104,11 @@ export default function Carousel() {
 const CarouselWrapper = styled.div`
   width: 100%;
   height: 100%;
+
+  @media (max-width: 992px) {
+    width: 320px;
+
+  }
 `;
 
 const ModalWrapper = styled(motion.div)`

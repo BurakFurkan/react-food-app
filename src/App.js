@@ -1,4 +1,3 @@
-
 import { getProducts } from "./features/productSlice";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,11 +11,11 @@ function App() {
 
   useEffect(() => {
     dispatch(getProducts(category));
-  }, [category, page,dispatch]);
+  }, [category, page, dispatch]);
 
   return (
     <Container className="App">
-      <AnimatedRoutes/>
+      <AnimatedRoutes />
     </Container>
   );
 }
@@ -24,6 +23,7 @@ function App() {
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
+  
 `;
 
 export default App;

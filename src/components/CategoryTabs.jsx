@@ -35,6 +35,15 @@ const CategoryWrapper = styled.div`
   overflow: hidden;
   background: #f4f4f5;
   box-shadow: -5px -5px 13px #848f90, 5px 5px 13px #f4ffff;
+
+  @media (max-width: 992px) {
+    width:320px;
+    height: 150px;
+    display: flex;
+    flex-wrap: wrap;
+    gap:0.5rem;
+    padding:0 10px;
+  }
 `;
 
 const CategoryTab = styled.span`
@@ -61,6 +70,16 @@ const CategoryTab = styled.span`
   &:focus {
     background: #777785;
   }
+
+  @media (max-width: 992px) {
+    width: 25%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
 `;
 
 export default CategoryTabs;

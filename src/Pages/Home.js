@@ -6,10 +6,7 @@ import Tabs from "./Layout/Tabs";
 import CategoryTabs from "../components/CategoryTabs";
 import SideCart from "../components/SideCart";
 import { HomePagination } from "../components/HomePagination";
-import {
-  motion,
-  AnimatePresence,
-} from "framer-motion";
+import {motion} from "framer-motion";
 
 const Home = () => {
   return (
@@ -31,7 +28,14 @@ const Home = () => {
 const Container = styled.div`
   background: #bccccd;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+
+  @media (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
 `;
 
@@ -43,6 +47,14 @@ const PageWrapper = styled.div`
   gap: 1rem;
   padding:1rem;
   align-items: flex-start;
+
+  @media (max-width: 992px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+  }
 
 `
 
