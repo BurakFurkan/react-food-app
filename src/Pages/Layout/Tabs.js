@@ -3,6 +3,7 @@ import styled from "styled-components";
 import MenuItem from "../../components/MenuItem";
 import { useSelector, useDispatch } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
+import ErrorHandler from "../../components/ErrorHandler";
 
 function Tabs() {
   const cssOverride = {
@@ -11,7 +12,7 @@ function Tabs() {
     borderColor: "#f4f4f5",
   };
 
-  const { products, isLoading, category } = useSelector(
+  const { products, isLoading, category,error } = useSelector(
     (store) => store.product
   );
   const { meals } = useSelector(
@@ -30,6 +31,8 @@ function Tabs() {
         <ClipLoader loading={isLoading} cssOverride={cssOverride} size={150} />
       </LoadingDiv>
     );
+  }else if (error){
+    return <ErrorHandler/>
   }
 
   return (

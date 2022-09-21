@@ -27,8 +27,9 @@ const Home = () => {
 
 const Container = styled.div`
   background: #bccccd;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  overflow:hidden;
 
   @media (max-width: 992px) {
     display: flex;

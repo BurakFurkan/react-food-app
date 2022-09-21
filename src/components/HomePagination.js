@@ -5,9 +5,13 @@ import styled from "styled-components";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 
 export function HomePagination() {
-  const { page } = useSelector((reduxStore) => reduxStore.product);
+  const { page,error } = useSelector((reduxStore) => reduxStore.product);
   const dispatch = useDispatch();
 
+  if (error===true) {
+    return ("")}
+  
+  
   return (
     <PaginationWrapper>
       {(page>1)?<BiLeftArrowAlt

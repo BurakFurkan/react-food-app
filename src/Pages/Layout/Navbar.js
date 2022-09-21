@@ -22,7 +22,7 @@ const Navbar = () => {
 export default Navbar;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 98vw;
   height: 70px;
   padding: 10px;
   box-sizing: border-box;
@@ -46,7 +46,7 @@ const LogoDiv = styled.div`
   height:100px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
   @media (max-width: 992px) {
     justify-content: center;
@@ -75,7 +75,7 @@ const MainLogo = styled.span`
 `;
 
 const NavRight = styled.div`
-  width: 500px;
+  width: 450px;
   height: 90%;
   display: flex;
   justify-content: space-evenly;

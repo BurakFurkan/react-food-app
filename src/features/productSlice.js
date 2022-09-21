@@ -9,6 +9,7 @@ const initialState = {
   products: [],
   isLoading: true,
   page:1,
+  error:false,
   categories :{
     burger:"burger",
     kebab:"kebab",
@@ -66,6 +67,8 @@ export const productSlice = createSlice({
     },
     [getProducts.rejected]: (state, action) => {
       state.isLoading = false;
+      (action.error.message==="Rejected")?(state.error=true) : (state.error=false)
+      
     },
   },
 });
