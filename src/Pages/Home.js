@@ -29,9 +29,8 @@ const Container = styled.div`
   background: #bccccd;
   width: 100vw;
   height: 100vh;
-  overflow:hidden;
 
-  @media (max-width: 992px) {
+  @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;

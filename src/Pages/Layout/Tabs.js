@@ -63,7 +63,7 @@ const Container = styled.div`
     display: none;
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: 768px) {
     width: 330px;
   }
 

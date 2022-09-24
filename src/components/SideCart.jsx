@@ -42,7 +42,7 @@ const SideCart = () => {
                 <SideItem
                   drag="x"
                   dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={{ left: 0.15, right: 0.1 }}
+                  dragElastic={{ left: 0.1, right: 0.01 }}
                   onDragStart={(e, info) => setDragStart(info.point.x)}
                   onDragEnd={(e, info) => handleDragEnd(e, info, meal.id)}
                   dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
@@ -179,7 +179,7 @@ const SideFooterWrapper = styled.div`
   border-bottom-right-radius: 15px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 10px;
   gap: 3px;
@@ -189,9 +189,9 @@ const DeleteBtn = styled(motion.div)`
   z-index: 1;
   position: absolute;
   height: 95%;
-  width: 100%;
+  width: 50%;
   top: 50%;
-  right: 0;
+  right: 2px;
   display: flex;
   justify-content: flex-end;
   align-items: center;

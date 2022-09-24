@@ -3,20 +3,28 @@ import Navbar from "./Layout/Navbar";
 import Sidebar from "./Layout/Sidebar";
 import styled from "styled-components";
 import MainChart from "../components/MainChart";
-import {
-  motion
-} from "framer-motion";
+import MealChart from "../components/MealChart";
+import { useSelector, useDispatch } from "react-redux";
+import { motion } from "framer-motion";
 
 const Dashboard = () => {
+  const { userMenu, meals } = useSelector((reduxStore) => reduxStore.user);
+  
   return (
-    <Container >
+    <Container>
       <Navbar />
-        <PageWrapper  >
+      <PageWrapper>
         <Sidebar />
-        <ContentWrapper  >
-         <MainChart/>
+        <ContentWrapper>
+          <MainChart />
+          <hr style={{width:"100%",height:"3px", color:"#777785"}} />
+          <MealsChartWrapper>
+          {(meals.length>0)?( meals.map((meal) =>{
+            return <MealChart key={meal.id} meal={meal}/>
+          }) ):null}
+          </MealsChartWrapper>
         </ContentWrapper>
-        </PageWrapper>
+      </PageWrapper>
     </Container>
   );
 };
@@ -32,7 +40,6 @@ const Container = styled.div`
     justify-content: flex-start;
     align-items: center;
   }
-
 `;
 
 const PageWrapper = styled.div`
@@ -41,7 +48,7 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   gap: 1rem;
-  padding:1rem;
+  padding: 1rem;
   align-items: flex-start;
 
   @media (max-width: 992px) {
@@ -51,7 +58,7 @@ const PageWrapper = styled.div`
     justify-content: center;
     padding: 5px;
   }
-`
+`;
 
 const ContentWrapper = styled(motion.div)`
   width: 85vw;
@@ -60,9 +67,25 @@ const ContentWrapper = styled(motion.div)`
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background: black;
-  border-radius:10px;
-  gap:0.75rem;
-  
+  border-radius: 10px;
+  gap: 1rem;
+  position: relative;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
+
+const MealsChartWrapper = styled.div`
+width: 100%;
+flex:3;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap:1rem;
+
+`
+
 export default Dashboard;

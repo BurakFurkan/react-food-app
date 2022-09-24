@@ -53,16 +53,28 @@ export default function Carousel() {
     return (
       <CarouselWrapper>
         <Swiper
-          breakpoints={{
-            // when window width is >= 640px
-            320: {
-              width: 320,
-              slidesPerView: 1,
-              direction:"horizontal"
-            }
-          }}
-          spaceBetween={10}
-          slidesPerView={3}
+        breakpoints={{
+          320: {
+            width: 100,
+            spaceBetween:20,
+            slidesPerView: 1,
+            direction:"horizontal"
+          },
+          1024: {
+            effect:"cube",
+            spaceBetween:5,
+            slidesPerView:3,
+            direction:"horizontal",
+ 
+          },
+          2560: {
+
+            spaceBetween:10,
+            slidesPerView:3,
+            direction:"horizontal"
+          }
+        }}
+
           style={{ width: "100%", padding: "2rem" }}
         >
           {meals.map((meal) => {
@@ -105,7 +117,7 @@ const CarouselWrapper = styled.div`
   width: 100%;
   height: 100%;
 
-  @media (max-width: 992px) {
+  @media (max-width: 768px) {
     width: 320px;
 
   }

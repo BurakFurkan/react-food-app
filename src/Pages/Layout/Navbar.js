@@ -11,9 +11,9 @@ const Navbar = () => {
         </StyledLink>
       </LogoDiv>
       <NavRight>
-        <Contact>Contact</Contact>
-        <Contact>Contact</Contact>
-        <Contact>Contact</Contact>
+        <Contact>Fao</Contact>
+        <Contact>Blog</Contact>
+        <Contact>User</Contact>
       </NavRight>
     </Container>
   );
@@ -49,6 +49,7 @@ const LogoDiv = styled.div`
   justify-content: flex-start;
 
   @media (max-width: 992px) {
+    height:60px;
     justify-content: center;
     align-items: center;
   }
@@ -88,7 +89,7 @@ const NavRight = styled.div`
   overflow: hidden;
   @media (max-width: 992px) {
     width: 320px;
-    height: 100px;
+    height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;

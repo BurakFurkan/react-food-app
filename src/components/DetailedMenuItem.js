@@ -225,7 +225,7 @@ const StyledTable = styled.table`
   justify-content: center;
   align-items: flex-start;
 
-  @media (max-width: 992px) {
+  @media (max-width: 768px) {
     align-items: flex-start;
     justify-content: flex-start;
     font-size:0.8rem;

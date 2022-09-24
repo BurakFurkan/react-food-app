@@ -24,34 +24,30 @@ ChartJS.register(
 
 
 
-const MainChart = () => {
-  const { userMenu, meals } = useSelector((reduxStore) => reduxStore.user);
+const MealChart = (props) => {
+  
   return (
     <MainWrapper>
       <UserInfo>
-        <h1>Welcome</h1>
-        <h1 style={{ paddingLeft: "2.5rem" }}>Mr. Jeckyll</h1>
+        <img src={props.meal.images[1]} alt={props.meal.title} />
       </UserInfo>
       <InfoWrapper>
-        <h1>Overall</h1>
-        <h1 style={{ paddingLeft: "2.5rem" }}>Nutrients</h1>
+        <h1 >{props.meal.title}</h1>
       </InfoWrapper>
-      {(meals.length>0)?(<ChartWrapper>
-        <Bar options={DashboardChart(meals[0]).config} data={DashboardChart(meals[0]).data}  />
-        </ChartWrapper>):null}
+      <ChartWrapper>
+        <Bar options={DashboardChart(props.meal).config} data={DashboardChart(props.meal).data}  />
+        </ChartWrapper>
     </MainWrapper>
   );
 };
 
-export default MainChart;
+export default MealChart;
 
 const MainWrapper = styled.div`
   width: 100%;
+  height: 200px;
   border-radius: 10px;
-  background: rgba(255,255,255,1);
-  z-index: 55;
-  position: sticky;
-  top:0;
+  background: rgba(255,255,255,0.5);
   display: flex;
   color: #777785;
   flex:1;
@@ -72,11 +68,19 @@ const UserInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   color: #777785;
   padding: 1rem;
-  font-family: "Marck Script", cursive;
+
+  img{
+    width: 100%;
+    height:auto;
+    border-radius: 30%;
+    object-fit:cover;
+   object-position:50% 50%;
+  }
+  
 
 `;
 
@@ -89,6 +93,7 @@ const InfoWrapper = styled.div`
   text-align: center;
   padding-right: 2rem;
   position: relative;
+  font-family: "Marck Script", cursive;
   &:before{
     content:"";
     width:1px;
