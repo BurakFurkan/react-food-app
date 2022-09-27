@@ -9,14 +9,14 @@ function Sidebar() {
   return (
     <Container>
       <UList>
-        <List>
-          <StyledLink to="/"><GiForkKnifeSpoon style={{margin:"0 0.5rem"}} />Meals</StyledLink>
+        <List >
+          <StyledLink to="/"  ><GiForkKnifeSpoon  /><p>Meals</p></StyledLink>
         </List>
-        <List>
-          <StyledLink to="/todaymenu"><BsFillCalendarCheckFill style={{margin:"0 0.5rem"}} />Today's Menu</StyledLink>
+        <List >
+          <StyledLink to="/todaymenu" ><BsFillCalendarCheckFill  /><p>Today's Menu</p></StyledLink>
         </List>
-        <List>
-          <StyledLink to="/dashboard"><BsGraphUp style={{margin:"0 0.5rem"}} />Dashboard</StyledLink>
+        <List >
+          <StyledLink to="/dashboard" ><BsGraphUp  /><p>Dashboard</p></StyledLink>
         </List>
       </UList>
     </Container>
@@ -89,8 +89,17 @@ const List = styled.li`
   }
 
   @media (max-width: 992px) {
-    width: 100%;
     height: 100%;
+
+    &:nth-child(1){
+      flex:1;
+    }
+    &:nth-child(1){
+      flex:3;
+    }
+    &:nth-child(1){
+      flex:2;
+    }
   }
 `;
 
@@ -106,6 +115,7 @@ const StyledLink = styled(NavLink)`
   letter-spacing: 1px;
   text-decoration: none;
   padding-left:0.5rem;
+  gap:0.5rem;
 
 
   &:hover {
@@ -122,8 +132,11 @@ const StyledLink = styled(NavLink)`
 
   }
 
-  @media (max-width: 992px) {
-    padding:0 10px;
+  @media (max-width: 768px) {
+    justify-content:center;
+    align-items:center;
+    padding: 0 ;
+    font-size: 1rem;
   }
 
 `;
