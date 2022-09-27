@@ -9,7 +9,9 @@ const initialState = {
   userMenu: [],
   isLoading: true,
   meals:[],
-  detailedMealID:null
+  detailedMealID:null,
+  isLoggedIn:false,
+  userName:""
 };
 
 export const getUserMeals = createAsyncThunk(
@@ -41,6 +43,12 @@ export const userSlice = createSlice({
       const filteredArr = state.meals.filter((item) => item.id!== action.payload)
       state.meals = filteredArr;
     },
+    registerUserName:(state,action) =>{
+      state.userName = action.payload
+    },
+    login:(state) =>{
+      state.isLoggedIn = true
+    },
 
   },
   extraReducers: {
@@ -59,7 +67,7 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addToUserMenu,removeFromUserMenu,removeFromUserMeals } = userSlice.actions;
+export const { addToUserMenu,removeFromUserMenu,removeFromUserMeals,registerUserName,login } = userSlice.actions;
 
 export default userSlice.reducer;
 

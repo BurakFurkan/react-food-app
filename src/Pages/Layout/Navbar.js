@@ -1,18 +1,23 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+
+  const openInNewTab = url => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <Container>
       <LogoDiv>
-        <StyledLink to="/" >
+        <StyledLink to="/">
           <MainLogo>HealthFree</MainLogo>
         </StyledLink>
       </LogoDiv>
       <NavRight>
-        <Contact>Fao</Contact>
-        <Contact>Blog</Contact>
+      <Contact onClick={() =>{openInNewTab("https://www.fao.org/home/en/")}} >FAO</Contact>
+        <StyledNavLink to="/">Blog</StyledNavLink>
         <Contact>User</Contact>
       </NavRight>
     </Container>
@@ -38,28 +43,25 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
   }
-  
 `;
 
 const LogoDiv = styled.div`
   width: 300px;
-  height:100px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
   @media (max-width: 992px) {
-    height:60px;
+    height: 60px;
     justify-content: center;
     align-items: center;
   }
-  
-
 `;
 
 const StyledLink = styled(Link)`
-  text-decoration:none;
-`
+  text-decoration: none;
+`;
 
 const MainLogo = styled.span`
   width: 250px;
@@ -71,8 +73,8 @@ const MainLogo = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  color:#f4f4f5;
-  filter: drop-shadow(0 0 0.50rem #888895);
+  color: #f4f4f5;
+  filter: drop-shadow(0 0 0.5rem #888895);
 `;
 
 const NavRight = styled.div`
@@ -93,9 +95,7 @@ const NavRight = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    
   }
-
 `;
 
 const Contact = styled.div`
@@ -107,6 +107,30 @@ const Contact = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.5);
+    transition: 0.5s ease-in-out;
+    color: #14213d;
+  }
+
+  @media (max-width: 992px) {
+    height: 100%;
+  }
+`;
+
+const StyledNavLink = styled.a`
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  font-size: 1.1rem;
+  width: 34%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  
+
 
   &:hover {
     background: rgba(255, 255, 255, 0.5);
