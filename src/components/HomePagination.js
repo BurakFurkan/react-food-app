@@ -17,18 +17,18 @@ export function HomePagination() {
       {(page>1)?<BiLeftArrowAlt
         aria-label="Increment value"
         onClick={() => dispatch(previousPage())}
-        style={{ cursor: "pointer", fontSize: "2rem" }}
+        style={{ cursor: "pointer", fontSize: "2rem",boxShadow:"0 8px 32px 0 rgba(31, 38, 135, 0.37)",borderRadius:"50%",backdropFilter:"blur(12px)" }}
         color="#777785"
       />:<BiLeftArrowAlt
       aria-label="Increment value"
-      style={{fontSize: "2rem" }}
+      style={{fontSize: "2rem",boxShadow:"0 8px 32px 0 rgba(31, 38, 135, 0.37)",borderRadius:"50%",backdropFilter:"blur(12px)" }}
       color="#adadad"
     />}
       <span style={{ fontSize: "1.5rem" }}>{page}</span>
       <BiRightArrowAlt
         aria-label="Decrement value"
         onClick={() => dispatch(nextPage())}
-        style={{ cursor: "pointer", fontSize: "2rem" }}
+        style={{ cursor: "pointer", fontSize: "2rem",boxShadow:"0 8px 32px 0 rgba(31, 38, 135, 0.37)",borderRadius:"50%",backdropFilter:"blur(12px)" }}
         color="#777785"
       />
     </PaginationWrapper>
@@ -36,7 +36,7 @@ export function HomePagination() {
 }
 
 const PaginationWrapper = styled.div`
-  width: 5rem;
+  width: 6rem;
   height: 1.5rem;
   display: flex;
   justify-content: space-evenly;

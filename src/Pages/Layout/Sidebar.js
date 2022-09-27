@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import { GiForkKnifeSpoon } from "react-icons/gi";
+import { BsFillCalendarCheckFill,BsGraphUp } from "react-icons/bs";
 
 function Sidebar() {
 
@@ -8,13 +10,13 @@ function Sidebar() {
     <Container>
       <UList>
         <List>
-          <StyledLink to="/">Meals</StyledLink>
+          <StyledLink to="/"><GiForkKnifeSpoon style={{margin:"0 0.5rem"}} />Meals</StyledLink>
         </List>
         <List>
-          <StyledLink to="/todaymenu">Today's Menu</StyledLink>
+          <StyledLink to="/todaymenu"><BsFillCalendarCheckFill style={{margin:"0 0.5rem"}} />Today's Menu</StyledLink>
         </List>
         <List>
-          <StyledLink to="/dashboard">Dashboard</StyledLink>
+          <StyledLink to="/dashboard"><BsGraphUp style={{margin:"0 0.5rem"}} />Dashboard</StyledLink>
         </List>
       </UList>
     </Container>
@@ -97,12 +99,13 @@ const StyledLink = styled(NavLink)`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   cursor: pointer;
   font-size: 1.2rem;
   letter-spacing: 1px;
   text-decoration: none;
+  padding-left:0.5rem;
 
 
   &:hover {

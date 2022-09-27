@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import userImage from "../../assets/userPhoto.png";
+import { BiWorld,BiBookBookmark } from "react-icons/bi";
 
 const Navbar = () => {
 
@@ -16,9 +18,9 @@ const Navbar = () => {
         </StyledLink>
       </LogoDiv>
       <NavRight>
-      <Contact onClick={() =>{openInNewTab("https://www.fao.org/home/en/")}} >FAO</Contact>
-        <StyledNavLink to="/">Blog</StyledNavLink>
-        <Contact>User</Contact>
+      <Contact onClick={() =>{openInNewTab("https://www.fao.org/home/en/")}} ><BiWorld style={{fontSize: "1.3rem"}}/>FAO</Contact>
+        <StyledNavLink to="/"><BiBookBookmark style={{fontSize: "1.3rem"}}/>Blog</StyledNavLink>
+        <Contact><StyledImage src={userImage} alt="userImage" />User</Contact>
       </NavRight>
     </Container>
   );
@@ -107,6 +109,7 @@ const Contact = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  gap:0.3rem;
 
   &:hover {
     background: rgba(255, 255, 255, 0.5);
@@ -117,6 +120,14 @@ const Contact = styled.div`
   @media (max-width: 992px) {
     height: 100%;
   }
+`;
+
+const StyledImage = styled.img`
+  width:2rem;
+  height: 2rem;
+  border-radius: 50%;
+  margin:0 5px;
+  border:1px solid #777785;
 `;
 
 const StyledNavLink = styled.a`
@@ -142,3 +153,5 @@ const StyledNavLink = styled.a`
     height: 100%;
   }
 `;
+
+

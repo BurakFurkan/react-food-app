@@ -25,12 +25,12 @@ ChartJS.register(
 
 
 const MainChart = () => {
-  const { userMenu, meals } = useSelector((reduxStore) => reduxStore.user);
+  const { userMenu, meals,userName } = useSelector((reduxStore) => reduxStore.user);
   return (
     <MainWrapper>
       <UserInfo>
         <h1>Welcome</h1>
-        <h1 style={{ paddingLeft: "2.5rem" }}>Mr. Jeckyll</h1>
+        <h1 style={{ paddingLeft: "2.5rem" }}>{userName}</h1>
       </UserInfo>
       <InfoWrapper>
         <h1>Overall</h1>
