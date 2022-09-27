@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
-import {  useDispatch } from "react-redux";
-import { registerUserName,login } from "../features/userSlice";
+import { useDispatch } from "react-redux";
+import { registerUserName, login } from "../features/userSlice";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -23,7 +23,11 @@ const LoginPage = () => {
   const watchMail = watch("mailInput");
 
   return (
-    <Container initial={{opacity:0 , y:-100}} animate={{opacity:1 , y:0}} exit={{opacity:0 , y:200 , transition:{duration:0.1}}}>
+    <Container
+      initial={{ opacity: 0, y: -100 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 200, transition: { duration: 0.1 } }}
+    >
       <LogoDiv>
         <MainLogo>HealthFree</MainLogo>
       </LogoDiv>
@@ -47,7 +51,15 @@ const LoginPage = () => {
             <label>Password</label>
             <input
               autoComplete="off"
-              {...register("passwordInput", { required: true })}
+              {...register("passwordInput", {
+                required: true,
+                minLength: {
+                  value: 8,
+                  message:
+                    "Your password must be have at least 8 characters long",
+                },
+                maxLength: 20,
+              })}
             />
             {errors.passwordInput && (
               <span style={{ alignSelf: "flex-start", color: "#777785" }}>
@@ -60,7 +72,14 @@ const LoginPage = () => {
             <label>Email</label>
             <input
               autoComplete="off"
-              {...register("mailInput", { required: true })}
+              {...register("mailInput", {
+                required: true,
+                pattern: {
+                  value:
+                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                  message: "Please enter a valid email",
+                },
+              })}
             />
             {errors.mailInput && (
               <span style={{ alignSelf: "flex-start", color: "#777785" }}>
