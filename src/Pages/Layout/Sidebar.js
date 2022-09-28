@@ -94,10 +94,10 @@ const List = styled.li`
     &:nth-child(1){
       flex:1;
     }
-    &:nth-child(1){
+    &:nth-child(2){
       flex:3;
     }
-    &:nth-child(1){
+    &:nth-child(3){
       flex:2;
     }
   }
@@ -135,8 +135,15 @@ const StyledLink = styled(NavLink)`
   @media (max-width: 768px) {
     justify-content:center;
     align-items:center;
-    padding: 0 ;
+    padding: 3px ;
     font-size: 1rem;
+    p{
+      flex:2;
+    }
+
+    svg{
+      flex:1;
+    }
   }
 
 `;

@@ -78,7 +78,14 @@ const UserInfo = styled.div`
     height:auto;
     border-radius: 30%;
     object-fit:cover;
-   object-position:50% 50%;
+    object-position:50% 50%;
+  }
+
+  @media (max-width: 768px) {
+    height:50%;
+    img{
+      width:45%
+    }
   }
   
 
@@ -109,6 +116,23 @@ const InfoWrapper = styled.div`
     background-color: #777785;
     position: absolute;
     right:0;
+  }
+
+  @media (max-width: 992px) {
+    font-size:0.8rem;
+
+    &:before{
+    width:80%;
+    height: 1px;
+    top:0;
+    left:10%;
+  }
+  &:after{
+    width:80%;
+    height: 1px;
+    bottom:0;
+    left:10%;
+  }
   }
 `;
 

@@ -30,11 +30,11 @@ const MainChart = () => {
     <MainWrapper>
       <UserInfo>
         <h1>Welcome</h1>
-        <h1 style={{ paddingLeft: "2.5rem" }}>{userName}</h1>
+        <h1 >{userName}</h1>
       </UserInfo>
       <InfoWrapper>
         <h1>Overall</h1>
-        <h1 style={{ paddingLeft: "2.5rem" }}>Nutrients</h1>
+        <h1 >Nutrients</h1>
       </InfoWrapper>
       {(meals.length>0)?(<ChartWrapper>
         <Bar options={DashboardChart(meals[0]).config} data={DashboardChart(meals[0]).data}  />
@@ -78,6 +78,28 @@ const UserInfo = styled.div`
   padding: 1rem;
   font-family: "Marck Script", cursive;
 
+    h1{
+      padding-left:2.5rem;
+    }
+
+  @media (max-width: 768px) {
+    height:85px;
+    display: flex;
+    flex-direction:row;
+    align-items: flex-start;
+    justify-content: center;
+    gap:0.5rem;
+    padding: 5px;
+
+    h1{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding:0;
+    }
+
+  }
+
 `;
 
 const InfoWrapper = styled.div`
@@ -104,6 +126,34 @@ const InfoWrapper = styled.div`
     background-color: #777785;
     position: absolute;
     right:0;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction:row;
+    align-items: center;
+    justify-content: center;
+    gap:0.5rem;
+    padding:0;
+
+    h1{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:0;
+    }
+
+    &:before{
+      width:100%;
+      height: 1px;
+      top:-5px;
+  }
+  &:after{
+    width:100%;
+    height: 1px;
+    bottom:-5px;
+  }
+
   }
 `;
 

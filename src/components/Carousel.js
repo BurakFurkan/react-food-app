@@ -54,28 +54,28 @@ export default function Carousel() {
       <CarouselWrapper>
         <Swiper
         breakpoints={{
-          320: {
-            width: 100,
-            spaceBetween:20,
-            slidesPerView: 1,
-            direction:"horizontal"
+          0: {
+            slidesPerView:1,
+            spaceBetween:10,
+            direction:"horizontal",
+            mousewheel: true,
           },
           1024: {
-            effect:"cube",
             spaceBetween:5,
             slidesPerView:3,
             direction:"horizontal",
+            mousewheel: true,
  
           },
           2560: {
-
             spaceBetween:10,
             slidesPerView:3,
-            direction:"horizontal"
+            direction:"horizontal",
+            mousewheel: true,
           }
         }}
 
-          style={{ width: "100%", padding: "2rem" }}
+          style={{ width: "100%", padding: "0.5rem" }}
         >
           {meals.map((meal) => {
             return (
