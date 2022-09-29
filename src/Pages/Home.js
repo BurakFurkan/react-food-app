@@ -6,27 +6,33 @@ import Tabs from "./Layout/Tabs";
 import CategoryTabs from "../components/CategoryTabs";
 import SideCart from "../components/SideCart";
 import { HomePagination } from "../components/HomePagination";
-import {motion} from "framer-motion";
+import { motion } from "framer-motion";
 
 const Home = () => {
+
+  
   return (
-    <Container >
-      <Navbar />
-      <PageWrapper  >
-        <Sidebar />
-        <ContentWrapper initial={{opacity:0 , y:-100}} animate={{opacity:1 , y:0}} exit={{opacity:0 , y:20 , transition:{duration:0.1}}} >
-          <CategoryTabs />
-          <Tabs />
-          <HomePagination/>
-        </ContentWrapper>
-        <SideCart  />
-      </PageWrapper>
-    </Container>
+    <Container>
+        <Navbar />
+        <PageWrapper>
+          <Sidebar />
+          <ContentWrapper
+            initial={{ opacity: 0, y: -100 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20, transition: { duration: 0.1 } }}
+          >
+            <CategoryTabs />
+            <Tabs />
+            <HomePagination />
+          </ContentWrapper>
+          <SideCart />
+        </PageWrapper>
+      </Container>
   );
 };
 
 const Container = styled.div`
-  background: #bccccd;
+  background: ${(props) => props.theme.main_bg};
   width: 100vw;
   height: 100vh;
 
@@ -36,7 +42,6 @@ const Container = styled.div`
     justify-content: flex-start;
     align-items: center;
   }
-
 `;
 
 const PageWrapper = styled.div`
@@ -45,7 +50,7 @@ const PageWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
   gap: 1rem;
-  padding:1rem;
+  padding: 1rem;
   align-items: flex-start;
 
   @media (max-width: 992px) {
@@ -55,18 +60,19 @@ const PageWrapper = styled.div`
     justify-content: center;
     padding: 5px;
   }
-
-`
+`;
 
 const ContentWrapper = styled(motion.div)`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #bccccd;
+  background: ${props => props.theme.main_bg};
   width: 68vw;
-  gap:0.75rem;
-
+  gap: 0.75rem;
 `;
+
+
+
 
 export default Home;

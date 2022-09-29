@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import DashboardChart from "./DashboardChart";
-import { useSelector, useDispatch } from "react-redux";
-import useMealOptionGenerator from "./useMealOptionGenerator";
+import { useSelector} from "react-redux";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -25,7 +24,7 @@ ChartJS.register(
 
 
 const MainChart = () => {
-  const { userMenu, meals,userName } = useSelector((reduxStore) => reduxStore.user);
+  const { meals,userName } = useSelector((reduxStore) => reduxStore.user);
   return (
     <MainWrapper>
       <UserInfo>
@@ -48,12 +47,12 @@ export default MainChart;
 const MainWrapper = styled.div`
   width: 100%;
   border-radius: 10px;
-  background: rgba(255,255,255,1);
+  background: ${(props) => props.theme.second_bg};
   z-index: 55;
   position: sticky;
   top:0;
   display: flex;
-  color: #777785;
+  color: ${(props) => props.theme.text_color};
   flex:1;
 
   @media (max-width: 992px) {
@@ -74,7 +73,7 @@ const UserInfo = styled.div`
   gap: 1rem;
   justify-content: flex-start;
   align-items: flex-start;
-  color: #777785;
+  color: ${(props) => props.theme.text_color};
   padding: 1rem;
   font-family: "Marck Script", cursive;
 
@@ -115,7 +114,7 @@ const InfoWrapper = styled.div`
     content:"";
     width:1px;
     height: 80%;
-    background-color: #777785;
+    background-color: ${(props) => props.theme.text_color};
     position: absolute;
     left:0;
   }
@@ -123,7 +122,7 @@ const InfoWrapper = styled.div`
     content:"";
     width:1px;
     height: 80%;
-    background-color: #777785;
+    background-color: ${(props) => props.theme.text_color};
     position: absolute;
     right:0;
   }

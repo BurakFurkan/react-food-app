@@ -10,7 +10,7 @@ const initialState = {
   isLoading: true,
   meals:[],
   detailedMealID:null,
-  isLoggedIn:false,
+  isLoggedIn:true,
   userName:""
 };
 

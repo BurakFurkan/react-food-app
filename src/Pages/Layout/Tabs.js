@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import MenuItem from "../../components/MenuItem";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
 import ErrorHandler from "../../components/ErrorHandler";
 
@@ -12,7 +12,7 @@ function Tabs() {
     borderColor: "#f4f4f5",
   };
 
-  const { products, isLoading, category,error } = useSelector(
+  const { products, isLoading,error } = useSelector(
     (store) => store.product
   );
   const { meals } = useSelector(
@@ -23,7 +23,6 @@ function Tabs() {
 
     },[meals])
 
-  const dispatch = useDispatch();
 
   if (isLoading) {
     return (
@@ -56,7 +55,7 @@ const Container = styled.div`
   box-sizing: border-box;
   position: relative;
   margin-top: 0.8rem;
-  background-color: #bccccd;
+  background-color: ${(props) => props.theme.main_bg};
   scroll-behavior: smooth;
 
   &::-webkit-scrollbar {

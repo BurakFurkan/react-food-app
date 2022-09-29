@@ -1,4 +1,4 @@
-import React ,{useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { pickCategory } from "../features/productSlice";
@@ -33,8 +33,8 @@ const CategoryWrapper = styled.div`
   justify-content: space-between;
   border-radius: 5px;
   overflow: hidden;
-  background: #f4f4f5;
-  box-shadow: -5px -5px 13px #848f90, 5px 5px 13px #f4ffff;
+  background: ${(props) => props.theme.second_bg};
+  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1}, 5px 5px 13px ${(props) => props.theme.box_shadow2};
 
   @media (max-width: 992px) {
     width:320px;
@@ -47,7 +47,7 @@ const CategoryWrapper = styled.div`
 `;
 
 const CategoryTab = styled.span`
-  color: #777785;
+  color: ${(props) => props.theme.text_color};
   width: 90%;
   height: 100%;
   display: flex;
@@ -58,17 +58,17 @@ const CategoryTab = styled.span`
 
   &:hover {
     cursor: pointer;
-    background: rgba(119, 119, 133, 0.7);
+    background: ${(props) => props.theme.text_hover};
     color: white;
   }
 
   &.isActive{
-    background: rgba(119, 119, 133, 1);
+    background: ${(props) => props.theme.text_color};
     color: white;
   }
 
   &:focus {
-    background: #777785;
+    background: ${(props) => props.theme.text_color};
   }
 
   @media (max-width: 992px) {

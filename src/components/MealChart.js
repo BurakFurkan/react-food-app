@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import DashboardChart from "./DashboardChart";
-import { useSelector, useDispatch } from "react-redux";
-import useMealOptionGenerator from "./useMealOptionGenerator";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -47,7 +45,7 @@ const MainWrapper = styled.div`
   width: 100%;
   height: 200px;
   border-radius: 10px;
-  background: rgba(255,255,255,0.5);
+  background: ${(props) => props.theme.hover};
   display: flex;
   color: #777785;
   flex:1;
@@ -70,7 +68,7 @@ const UserInfo = styled.div`
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  color: #777785;
+  color: ${(props) => props.theme.text_color};
   padding: 1rem;
 
   img{
@@ -105,7 +103,7 @@ const InfoWrapper = styled.div`
     content:"";
     width:1px;
     height: 80%;
-    background-color: #777785;
+    background-color: ${(props) => props.theme.text_color};
     position: absolute;
     left:0;
   }
@@ -113,7 +111,7 @@ const InfoWrapper = styled.div`
     content:"";
     width:1px;
     height: 80%;
-    background-color: #777785;
+    background-color: ${(props) => props.theme.text_color};
     position: absolute;
     right:0;
   }

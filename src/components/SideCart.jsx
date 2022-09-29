@@ -26,7 +26,7 @@ const SideCart = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, transition: { duration: 0.1 } }}
     >
-      <h2 style={{ color: "#777785" }}>User Inventory</h2>
+      <h2 >User Inventory</h2>
       <SideItemWrapper>
         {meals
           .slice(0)
@@ -71,8 +71,8 @@ const Container = styled(motion.div)`
   width: 15vw;
   height: 65vh;
   border-radius: 26px;
-  background: #f4f4f5;
-  box-shadow: -5px -5px 13px #848f90, 5px 5px 13px #f4ffff;
+  background: ${props => props.theme.second_bg};
+  box-shadow: -5px -5px 13px ${props => props.theme.box_shadow1}, 5px 5px 13px ${props => props.theme.box_shadow2};
   align-items: center;
   justify-content: flex-start;
   display: flex;
@@ -80,6 +80,10 @@ const Container = styled(motion.div)`
   position: relative;
   padding: 1rem 5px 5px 5px;
   overflow: hidden;
+
+    h2{
+      color:${props => props.theme.text_color}
+    }
 
   @media (max-width: 992px) {
     width:320px;
@@ -90,7 +94,7 @@ const Container = styled(motion.div)`
 const SideItemWrapper = styled.ul`
   width: 100%;
   height: 100%;
-  background: #bccccd;
+  background: ${props => props.theme.main_bg};
   border-radius: 15px;
   display: flex;
   flex-direction: column;
@@ -116,7 +120,7 @@ const SideItem = styled(motion.li)`
   width: 100%;
   height: 75px;
   border-radius: 15px;
-  color: #777785;
+  color: ${props => props.theme.text_color};
   display: flex;
   box-sizing: border-box;
   position: relative;
@@ -130,13 +134,13 @@ const SideItem = styled(motion.li)`
 const SideImageWrapper = styled.div`
   width: 35%;
   height: 75px;
-  background: #777785;
+  background: ${props => props.theme.text_color};
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #f4f4f5;
+  color: ${props => props.theme.second_bg};
   padding-bottom: 5px;
 `;
 
@@ -162,7 +166,7 @@ const StyledStar = styled.img`
 const SideInfoWrapper = styled.div`
   width: 40%;
   height: 85%;
-  background: #f4f4f5;
+  background: ${props => props.theme.second_bg};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -174,7 +178,7 @@ const SideInfoWrapper = styled.div`
 `;
 const SideFooterWrapper = styled.div`
   width: 25%;
-  background: #f4f4f5;
+  background: ${props => props.theme.second_bg};
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   display: flex;

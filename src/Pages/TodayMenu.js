@@ -1,11 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import Navbar from "./Layout/Navbar";
 import Sidebar from "./Layout/Sidebar";
 import styled from "styled-components";
-import { useSelector, useDispatch } from "react-redux";
-import { getUserMeals } from "../features/userSlice";
 import Carousel from "../components/Carousel";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const TodayMenu = () => {
   return (
@@ -26,7 +24,7 @@ const TodayMenu = () => {
 };
 
 const Container = styled.div`
-  background: #bccccd;
+  background: ${(props) => props.theme.main_bg};
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -64,7 +62,7 @@ const ContentWrapper = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: #bccccd;
+  background: ${(props) => props.theme.main_bg};
   gap: 0.75rem;
 `;
 export default TodayMenu;

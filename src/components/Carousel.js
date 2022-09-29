@@ -1,26 +1,19 @@
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import DetailedMenuItem from "../components/DetailedMenuItem";
-import ClipLoader from "react-spinners/ClipLoader";
-import { useState, useEffect } from "react";
-import styled from "styled-components";
+import { useState } from "react";
+import styled, {useTheme} from "styled-components";
 import "swiper/css";
-import { useSelector, useDispatch } from "react-redux";
-import { getUserMeals } from "../features/userSlice";
-import {
-  motion,
-  AnimatePresence,
-  LayoutGroup,
-  addScaleCorrector,
-} from "framer-motion";
+import { useSelector } from "react-redux";
+import { motion } from "framer-motion";
 import { CgAddR } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
 
 export default function Carousel() {
-  const dispatch = useDispatch();
   const { userMenu, meals } = useSelector((reduxStore) => reduxStore.user);
   const [selectedId, setSelectedId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const theme=useTheme();
   const selectedMeal = meals.filter((meal) => {
     return meal.id === selectedId;
   });
@@ -35,7 +28,7 @@ export default function Carousel() {
   if (userMenu.length === 0) {
     return (
       <EmptyWrapper>
-        <h1>Add Some Meal</h1>
+        <h1 style={{color:`${theme.second_bg}`}} >Add Some Meal</h1>
         <NavLink to="/">
           <CgAddR
             style={{
@@ -43,7 +36,7 @@ export default function Carousel() {
               cursor: "pointer",
               boxSizing: "border-box",
               transition: "0.3s ease-in-out",
-              color: "rgb(237, 234, 222)",
+              color:`${theme.second_bg}`,
             }}
           />
         </NavLink>
@@ -53,35 +46,31 @@ export default function Carousel() {
     return (
       <CarouselWrapper>
         <Swiper
-        breakpoints={{
-          0: {
-            slidesPerView:1,
-            spaceBetween:10,
-            direction:"horizontal",
-            mousewheel: true,
-          },
-          1024: {
-            spaceBetween:5,
-            slidesPerView:3,
-            direction:"horizontal",
-            mousewheel: true,
- 
-          },
-          2560: {
-            spaceBetween:10,
-            slidesPerView:3,
-            direction:"horizontal",
-            mousewheel: true,
-          }
-        }}
-
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+              direction: "horizontal",
+              mousewheel: true,
+            },
+            1024: {
+              spaceBetween: 5,
+              slidesPerView: 3,
+              direction: "horizontal",
+              mousewheel: true,
+            },
+            2560: {
+              spaceBetween: 10,
+              slidesPerView: 3,
+              direction: "horizontal",
+              mousewheel: true,
+            },
+          }}
           style={{ width: "100%", padding: "0.5rem" }}
         >
           {meals.map((meal) => {
             return (
-              <SwiperSlide
-                key={meal.id}
-              >
+              <SwiperSlide key={meal.id}>
                 <DetailedMenuItem
                   modalHandler={modalHandler}
                   selectHandler={selectHandler}
@@ -119,7 +108,6 @@ const CarouselWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 320px;
-
   }
 `;
 

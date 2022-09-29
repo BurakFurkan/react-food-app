@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import styled,{useTheme} from "styled-components";
 import { CgAddR } from "react-icons/cg";
 import { BsHeart } from "react-icons/bs";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -25,6 +25,7 @@ const DetailedMenuItem = ({
 }) => {
   const { userMenu } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
+  const theme=useTheme();
 
   const Toast = Swal.mixin({
     toast: true,
@@ -32,9 +33,9 @@ const DetailedMenuItem = ({
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
-    iconColor: "#777785",
-    background: "#bccccd",
-    color: "#777785",
+    iconColor: `${theme.text_color}`,
+    background: `${theme.main_bg}`,
+    color: `${theme.text_color}`,
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);
@@ -117,9 +118,9 @@ const DetailedMenuItem = ({
         <StyledTable>
           <tbody>
             <StyledTR>
-              <StyledTH>Nutritient</StyledTH>
-              <StyledTH>Value</StyledTH>
-              <StyledTH>Daily Amount</StyledTH>
+              <StyledTH style={{color:`${theme.text_color}`}} >Nutritient</StyledTH>
+              <StyledTH style={{color:`${theme.text_color}`}} >Value</StyledTH>
+              <StyledTH style={{color:`${theme.text_color}`}} >Daily Amount</StyledTH>
             </StyledTR>
             {nutrition.nutrients.map((nutrient, index) => {
               return (
@@ -145,8 +146,8 @@ const Container = styled(motion.div)`
   width: 350px;
   height: 550px;
   border-radius: 26px;
-  background: #bccccd;
-  box-shadow: -5px -5px 13px #848f90, 5px 5px 13px #f4ffff;
+  background: ${(props) => props.theme.main_bg};
+  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1}, 5px 5px 13px ${(props) => props.theme.box_shadow2};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -166,8 +167,8 @@ const CardImageWrapper = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  -webkit-box-shadow: 1px 2px 9px 2px #777785;
-  box-shadow: 1px 2px 9px 2px #777785;
+  -webkit-box-shadow: 1px 2px 9px 2px ${(props) => props.theme.text_color};
+  box-shadow: 1px 2px 9px 2px ${(props) => props.theme.text_color};
   border-radius: 25px;
   box-sizing: border-box;
   overflow: hidden;
@@ -180,7 +181,7 @@ const CardHeader = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 5px;
-  color: #777785;
+  color: ${(props) => props.theme.text_color};
 
   & > *:hover {
     transform: scale(1.1);
@@ -191,7 +192,7 @@ const CardHeader = styled.div`
 const CardInfoWrapper = styled.div`
   width: 100%;
   height: 150px;
-  color: #777785;
+  color: ${(props) => props.theme.text_color};
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -203,7 +204,7 @@ const CardInfoWrapper = styled.div`
 const CardFooter = styled.div`
   width: 100%;
   height: 550px;
-  color: #777785;
+  color: ${(props) => props.theme.text_color};
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -233,25 +234,25 @@ const StyledTable = styled.table`
 `;
 const StyledTR = styled.tr`
   &:nth-child(odd) {
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: ${(props) => props.theme.hover};
   }
 
   &:hover {
-    background-color: #3b9ae1;
-    color: white;
+    background-color: ${(props) => props.theme.table_hover};
+    color: ${(props) => props.theme.active};
   }
 `;
 const StyledTH = styled.th`
   padding: 2px;
-  background: rgba(255, 255, 255, 0.5);
+  background: ${(props) => props.theme.hover};
   text-align: left;
-  border: 2px solid #777785;
+  border: 2px solid ${(props) => props.theme.text_color};
 `;
 const StyledTD = styled.td`
   padding: 2px 4px;
   text-align: left;
   white-space: nowrap;
-  border: 2px solid #777785;
+  border: 2px solid ${(props) => props.theme.text_color};
 `;
 
 export default DetailedMenuItem;

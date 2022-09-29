@@ -75,8 +75,8 @@ const MainLogo = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #f4f4f5;
-  filter: drop-shadow(0 0 0.5rem #888895);
+  color: ${props => props.theme.second_bg};
+  filter: drop-shadow(0 0 0.5rem ${props => props.theme.logo_shadow});
 `;
 
 const NavRight = styled.div`
@@ -85,9 +85,9 @@ const NavRight = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: ${props => props.theme.main_bg};
   border-radius: 5px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  box-shadow:  -5px -5px 13px ${(props) => props.theme.box_shadow1}, 5px 5px 13px ${(props) => props.theme.box_shadow2};
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   overflow: hidden;
@@ -112,9 +112,9 @@ const Contact = styled.div`
   gap:0.3rem;
 
   &:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: ${props => props.theme.hover};
     transition: 0.5s ease-in-out;
-    color: #14213d;
+    color: ${(props) => props.theme.text_color2};
   }
 
   @media (max-width: 992px) {
@@ -127,7 +127,7 @@ const StyledImage = styled.img`
   height: 2rem;
   border-radius: 50%;
   margin:0 5px;
-  border:1px solid #777785;
+  border:1px solid ${props => props.theme.text_color};
 `;
 
 const StyledNavLink = styled.a`
@@ -144,9 +144,9 @@ const StyledNavLink = styled.a`
 
 
   &:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: ${props => props.theme.hover};
     transition: 0.5s ease-in-out;
-    color: #14213d;
+    color: ${(props) => props.theme.text_color2};
   }
 
   @media (max-width: 992px) {

@@ -4,11 +4,11 @@ import Sidebar from "./Layout/Sidebar";
 import styled from "styled-components";
 import MainChart from "../components/MainChart";
 import MealChart from "../components/MealChart";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import { motion } from "framer-motion";
 
 const Dashboard = () => {
-  const { userMenu, meals } = useSelector((reduxStore) => reduxStore.user);
+  const {  meals } = useSelector((reduxStore) => reduxStore.user);
   
   return (
     <Container>
@@ -17,7 +17,7 @@ const Dashboard = () => {
         <Sidebar />
         <ContentWrapper>
           <MainChart />
-          <hr style={{width:"100%",height:"3px", color:"#777785"}} />
+          <hr />
           <MealsChartWrapper>
           {(meals.length>0)?( meals.map((meal) =>{
             return <MealChart key={meal.id} meal={meal}/>
@@ -30,7 +30,7 @@ const Dashboard = () => {
 };
 
 const Container = styled.div`
-  background: #bccccd;
+  background: ${(props) => props.theme.main_bg};
   width: 100%;
   height: 100%;
 
@@ -74,6 +74,12 @@ const ContentWrapper = styled(motion.div)`
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  hr{
+    width:100%;
+    height:3px;
+    color:${(props) => props.theme.text_color};
   }
 `;
 

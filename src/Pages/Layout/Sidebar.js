@@ -27,8 +27,8 @@ const Container = styled.div`
   width: 150px ;
   height: 350px;
   border-radius: 26px;
-  background: #bccccd;
-  box-shadow: -5px -5px 13px #848f90, 5px 5px 13px #f4ffff;
+  background: ${(props) => props.theme.main_bg};
+  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1}, 5px 5px 13px ${(props) => props.theme.box_shadow2};
   align-items: center;
   justify-content: center;
   display: flex;
@@ -44,7 +44,6 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
     border-radius:5px;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   }
 
 
@@ -70,7 +69,7 @@ const UList = styled.ul`
 
 const List = styled.li`
   list-style: none;
-  color: #f4f4f5;
+  color: ${(props) => props.theme.second_bg};
   width: 100%;
   height: 34%;
   display: flex;
@@ -80,13 +79,6 @@ const List = styled.li`
   font-size: 1.2rem;
   letter-spacing: 1px;
   
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.5);
-    transition: 0.5s ease-in-out;
-    color: #14213d;
-    font-size: 1.2rem;
-  }
 
   @media (max-width: 992px) {
     height: 100%;
@@ -104,7 +96,7 @@ const List = styled.li`
 `;
 
 const StyledLink = styled(NavLink)`
-  color: #f4f4f5;
+  color: ${(props) => props.theme.second_bg};
   width: 100%;
   height: 100%;
   display: flex;
@@ -119,16 +111,16 @@ const StyledLink = styled(NavLink)`
 
 
   &:hover {
-    background: rgba(255, 255, 255, 0.5);
+    background: ${(props) => props.theme.hover};
     transition: 0.5s ease-in-out;
-    color: #14213d;
+    color: ${(props) => props.theme.text_color2};
 
   }
 
   &.active {
-    background: rgba(255, 255, 255, 0.5);
+    background: ${(props) => props.theme.active};
     transition: 0.5s ease-in-out;
-    color: #14213d;
+    color: ${(props) => props.theme.text_color2};
 
   }
 

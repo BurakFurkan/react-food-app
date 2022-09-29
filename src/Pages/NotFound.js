@@ -1,10 +1,11 @@
 import React from "react";
-import styled from "styled-components";
+import styled,{useTheme} from "styled-components";
 import { VscQuestion } from "react-icons/vsc";
 import { GiReturnArrow } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
 
 const NotFound = () => {
+  const theme=useTheme()
   return (
     <Container>
       <VscQuestion
@@ -12,7 +13,7 @@ const NotFound = () => {
           fontSize: "2.5rem",
           boxSizing: "border-box",
           transition: "0.3s ease-in-out",
-          color: "rgb(237, 234, 222)",
+          color: `${theme.second_bg}`,
         }}
       />
       <h2>Ooops.. Seems like You're lost?</h2>
@@ -23,7 +24,7 @@ const NotFound = () => {
             cursor: "pointer",
             boxSizing: "border-box",
             transition: "0.3s ease-in-out",
-            color: "rgb(237, 234, 222)",
+            color: `${theme.second_bg}`,
           }}
         />
       </NavLink>
