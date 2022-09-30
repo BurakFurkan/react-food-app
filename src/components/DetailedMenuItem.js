@@ -5,6 +5,7 @@ import { BsHeart } from "react-icons/bs";
 import { TiDeleteOutline } from "react-icons/ti";
 import { GiMagnifyingGlass } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   addToUserMenu,
   removeFromUserMenu,
@@ -23,6 +24,7 @@ const DetailedMenuItem = ({
   selectHandler,
   nutrition,
 }) => {
+  const { t, i18n } = useTranslation();
   const { userMenu } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
   const theme=useTheme();
@@ -118,14 +120,14 @@ const DetailedMenuItem = ({
         <StyledTable>
           <tbody>
             <StyledTR>
-              <StyledTH style={{color:`${theme.text_color}`}} >Nutritient</StyledTH>
-              <StyledTH style={{color:`${theme.text_color}`}} >Value</StyledTH>
-              <StyledTH style={{color:`${theme.text_color}`}} >Daily Amount</StyledTH>
+              <StyledTH style={{color:`${theme.text_color2}`}} >{t("nutrients")}</StyledTH>
+              <StyledTH style={{color:`${theme.text_color2}`}} >{t("value")}</StyledTH>
+              <StyledTH style={{color:`${theme.text_color2}`}} >{t("dailyamount")}</StyledTH>
             </StyledTR>
             {nutrition.nutrients.map((nutrient, index) => {
               return (
                 <StyledTR key={index}>
-                  <StyledTD>{nutrient.name}</StyledTD>
+                  <StyledTD>{t(`${nutrient.name}`)}</StyledTD>
                   <StyledTD>
                     {nutrient.amount} {nutrient.unit}
                   </StyledTD>
@@ -235,11 +237,12 @@ const StyledTable = styled.table`
 const StyledTR = styled.tr`
   &:nth-child(odd) {
     background-color: ${(props) => props.theme.hover};
+    color:${(props) => props.theme.text_color3};
   }
 
   &:hover {
     background-color: ${(props) => props.theme.table_hover};
-    color: ${(props) => props.theme.active};
+    color: ${(props) => props.theme.second_bg};
   }
 `;
 const StyledTH = styled.th`

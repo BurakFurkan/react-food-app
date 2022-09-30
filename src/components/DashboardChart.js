@@ -1,4 +1,4 @@
-import React , {useState} from "react";
+import React from "react";
 import useMealOptionGenerator from "./useMealOptionGenerator"
 import {
   Chart as ChartJS,
@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+
 
 
 ChartJS.register(

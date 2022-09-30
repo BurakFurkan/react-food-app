@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function useMealOptionGenerator(meal) {
+  const { t, i18n } = useTranslation();
   const [allValues, setAllValues] = useState({
     mealID: null,
     mealName: "",
@@ -16,7 +18,7 @@ export default function useMealOptionGenerator(meal) {
     
     meal.nutrition.nutrients.forEach((nutrient) => {
       
-      nutrientsNameArray.push(nutrient.name + "-" +(nutrient.unit))
+      nutrientsNameArray.push(t(`${nutrient.name}`) + "-" +(nutrient.unit))
       nutrientsAmountArray.push(nutrient.amount)
       
 
@@ -33,7 +35,6 @@ export default function useMealOptionGenerator(meal) {
 
   },[meal])
 
-  console.log("1")
   return allValues;
 }
 

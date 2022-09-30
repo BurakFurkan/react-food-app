@@ -2,13 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import userImage from "../../assets/userPhoto.png";
-import { BiWorld,BiBookBookmark } from "react-icons/bi";
+import { BiWorld, BiBookBookmark } from "react-icons/bi";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
-
-  const openInNewTab = url => {
-    window.open(url, '_blank', 'noopener,noreferrer');
+  const openInNewTab = (url) => {
+    window.open(url, "_blank", "noopener,noreferrer");
   };
+
+  const { t, i18n } = useTranslation();
 
   return (
     <Container>
@@ -18,9 +20,22 @@ const Navbar = () => {
         </StyledLink>
       </LogoDiv>
       <NavRight>
-      <Contact onClick={() =>{openInNewTab("https://www.fao.org/home/en/")}} ><BiWorld style={{fontSize: "1.3rem"}}/>FAO</Contact>
-        <StyledNavLink to="/"><BiBookBookmark style={{fontSize: "1.3rem"}}/>Blog</StyledNavLink>
-        <Contact><StyledImage src={userImage} alt="userImage" />User</Contact>
+        <Contact
+          onClick={() => {
+            openInNewTab("https://www.fao.org/home/en/");
+          }}
+        >
+          <BiWorld style={{ fontSize: "1.3rem" }} />
+          FAO
+        </Contact>
+        <StyledNavLink to="/">
+          <BiBookBookmark style={{ fontSize: "1.3rem" }} />
+          {t("options")}
+        </StyledNavLink>
+        <Contact>
+          <StyledImage src={userImage} alt="userImage" />
+          {t("user")}
+        </Contact>
       </NavRight>
     </Container>
   );
@@ -75,8 +90,8 @@ const MainLogo = styled.span`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${props => props.theme.second_bg};
-  filter: drop-shadow(0 0 0.5rem ${props => props.theme.logo_shadow});
+  color: ${(props) => props.theme.second_bg};
+  filter: drop-shadow(0 0 0.5rem ${(props) => props.theme.logo_shadow});
 `;
 
 const NavRight = styled.div`
@@ -85,12 +100,14 @@ const NavRight = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background: ${props => props.theme.main_bg};
+  background: ${(props) => props.theme.main_bg};
   border-radius: 5px;
-  box-shadow:  -5px -5px 13px ${(props) => props.theme.box_shadow1}, 5px 5px 13px ${(props) => props.theme.box_shadow2};
+  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1},
+    5px 5px 13px ${(props) => props.theme.box_shadow2};
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   overflow: hidden;
+  color: ${(props) => props.theme.text_color};
   @media (max-width: 992px) {
     width: 320px;
     height: 50px;
@@ -109,10 +126,10 @@ const Contact = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap:0.3rem;
+  gap: 0.3rem;
 
   &:hover {
-    background: ${props => props.theme.hover};
+    background: ${(props) => props.theme.hover};
     transition: 0.5s ease-in-out;
     color: ${(props) => props.theme.text_color2};
   }
@@ -123,11 +140,11 @@ const Contact = styled.div`
 `;
 
 const StyledImage = styled.img`
-  width:2rem;
+  width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  margin:0 5px;
-  border:1px solid ${props => props.theme.text_color};
+  margin: 0 5px;
+  border: 1px solid ${(props) => props.theme.text_color};
 `;
 
 const StyledNavLink = styled.a`
@@ -140,11 +157,9 @@ const StyledNavLink = styled.a`
   justify-content: center;
   align-items: center;
   text-decoration: none;
-  
-
 
   &:hover {
-    background: ${props => props.theme.hover};
+    background: ${(props) => props.theme.hover};
     transition: 0.5s ease-in-out;
     color: ${(props) => props.theme.text_color2};
   }
@@ -153,5 +168,3 @@ const StyledNavLink = styled.a`
     height: 100%;
   }
 `;
-
-

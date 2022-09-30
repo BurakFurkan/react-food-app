@@ -9,25 +9,23 @@ import { HomePagination } from "../components/HomePagination";
 import { motion } from "framer-motion";
 
 const Home = () => {
-
-  
   return (
     <Container>
-        <Navbar />
-        <PageWrapper>
-          <Sidebar />
-          <ContentWrapper
-            initial={{ opacity: 0, y: -100 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20, transition: { duration: 0.1 } }}
-          >
-            <CategoryTabs />
-            <Tabs />
-            <HomePagination />
-          </ContentWrapper>
-          <SideCart />
-        </PageWrapper>
-      </Container>
+      <Navbar />
+      <PageWrapper>
+        <Sidebar />
+        <ContentWrapper
+          initial={{ opacity: 0, y: -100 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 20, transition: { duration: 0.1 } }}
+        >
+          <CategoryTabs />
+          <Tabs />
+          <HomePagination />
+        </ContentWrapper>
+        <SideCart />
+      </PageWrapper>
+    </Container>
   );
 };
 
@@ -67,12 +65,9 @@ const ContentWrapper = styled(motion.div)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: ${props => props.theme.main_bg};
+  background: ${(props) => props.theme.main_bg};
   width: 68vw;
   gap: 0.75rem;
 `;
-
-
-
 
 export default Home;

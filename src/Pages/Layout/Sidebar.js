@@ -3,20 +3,23 @@ import styled from "styled-components";
 import { NavLink } from "react-router-dom";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { BsFillCalendarCheckFill,BsGraphUp } from "react-icons/bs";
+import { useTranslation } from 'react-i18next';
 
 function Sidebar() {
+
+  const { t, i18n } = useTranslation();
 
   return (
     <Container>
       <UList>
         <List >
-          <StyledLink to="/"  ><GiForkKnifeSpoon  /><p>Meals</p></StyledLink>
+          <StyledLink to="/"  ><GiForkKnifeSpoon  /><p>{t("meals")}</p></StyledLink>
         </List>
         <List >
-          <StyledLink to="/todaymenu" ><BsFillCalendarCheckFill  /><p>Today's Menu</p></StyledLink>
+          <StyledLink to="/todaymenu" ><BsFillCalendarCheckFill  /><p>{t("todaymenu")}</p></StyledLink>
         </List>
         <List >
-          <StyledLink to="/dashboard" ><BsGraphUp  /><p>Dashboard</p></StyledLink>
+          <StyledLink to="/dashboard" ><BsGraphUp  /><p>{t("dashboard")}</p></StyledLink>
         </List>
       </UList>
     </Container>

@@ -68,7 +68,7 @@ const UserInfo = styled.div`
   gap: 1rem;
   justify-content: center;
   align-items: center;
-  color: ${(props) => props.theme.text_color};
+  color: ${(props) => props.theme.text_color3};
   padding: 1rem;
 
   img{
@@ -99,6 +99,7 @@ const InfoWrapper = styled.div`
   padding-right: 2rem;
   position: relative;
   font-family: "Marck Script", cursive;
+  color: ${(props) => props.theme.text_color3};
   &:before{
     content:"";
     width:1px;

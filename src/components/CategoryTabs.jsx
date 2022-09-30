@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { pickCategory } from "../features/productSlice";
+import { useTranslation } from "react-i18next";
 
 const CategoryTabs = () => {
+  const { t, i18n } = useTranslation();
   const { categories,category } = useSelector((reduxStore) => reduxStore.product);
   const dispatch = useDispatch();
 
@@ -17,7 +19,7 @@ const CategoryTabs = () => {
               dispatch(pickCategory(tabCategory));
             }}
           >
-            {tabCategory}
+          {t(`${tabCategory}`)}
           </CategoryTab>
         );
       })}
@@ -47,7 +49,7 @@ const CategoryWrapper = styled.div`
 `;
 
 const CategoryTab = styled.span`
-  color: ${(props) => props.theme.text_color};
+  color: ${(props) => props.theme.text_color2};
   width: 90%;
   height: 100%;
   display: flex;
@@ -58,13 +60,13 @@ const CategoryTab = styled.span`
 
   &:hover {
     cursor: pointer;
-    background: ${(props) => props.theme.text_hover};
-    color: white;
+    background: ${(props) => props.theme.hover2};
+    color: ${(props) => props.theme.second_bg};
   }
 
   &.isActive{
-    background: ${(props) => props.theme.text_color};
-    color: white;
+    background: ${(props) => props.theme.active2};
+    color: ${(props) => props.theme.second_bg};
   }
 
   &:focus {

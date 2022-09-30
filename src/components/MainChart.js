@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import DashboardChart from "./DashboardChart";
 import { useSelector} from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -24,16 +25,17 @@ ChartJS.register(
 
 
 const MainChart = () => {
+  const { t, i18n } = useTranslation();
   const { meals,userName } = useSelector((reduxStore) => reduxStore.user);
   return (
     <MainWrapper>
       <UserInfo>
-        <h1>Welcome</h1>
+        <h1>{t("welcome")}</h1>
         <h1 >{userName}</h1>
       </UserInfo>
       <InfoWrapper>
-        <h1>Overall</h1>
-        <h1 >Nutrients</h1>
+        <h1>{t("overall")}</h1>
+        <h1 >{t("nutrients")}</h1>
       </InfoWrapper>
       {(meals.length>0)?(<ChartWrapper>
         <Bar options={DashboardChart(meals[0]).config} data={DashboardChart(meals[0]).data}  />
@@ -73,12 +75,13 @@ const UserInfo = styled.div`
   gap: 1rem;
   justify-content: flex-start;
   align-items: flex-start;
-  color: ${(props) => props.theme.text_color};
+  color: ${(props) => props.theme.text_color3};
   padding: 1rem;
   font-family: "Marck Script", cursive;
 
     h1{
       padding-left:2.5rem;
+      color: ${(props) => props.theme.text_color3};
     }
 
   @media (max-width: 768px) {
@@ -110,6 +113,7 @@ const InfoWrapper = styled.div`
   text-align: center;
   padding-right: 2rem;
   position: relative;
+  color: ${(props) => props.theme.text_color3};
   &:before{
     content:"";
     width:1px;

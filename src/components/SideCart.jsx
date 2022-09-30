@@ -6,9 +6,11 @@ import { GoLocation } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromUserMeals, removeFromUserMenu } from "../features/userSlice";
 import yellowStar from "../assets/yellowStar.png";
+import { useTranslation } from "react-i18next";
 
 const SideCart = () => {
   const { meals } = useSelector((reduxStore) => reduxStore.user);
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const [dragStart, setDragStart] = useState(0);
 
@@ -26,7 +28,7 @@ const SideCart = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, transition: { duration: 0.1 } }}
     >
-      <h2 >User Inventory</h2>
+      <h2 >{t("userinventory")}</h2>
       <SideItemWrapper>
         {meals
           .slice(0)
@@ -116,11 +118,11 @@ const AnimationDiv = styled(motion.div)`
 `;
 
 const SideItem = styled(motion.li)`
-  background: #f4f4f5;
+  background: ${props => props.theme.second_bg};
   width: 100%;
   height: 75px;
   border-radius: 15px;
-  color: ${props => props.theme.text_color};
+  color: ${props => props.theme.text_color2};
   display: flex;
   box-sizing: border-box;
   position: relative;
@@ -132,9 +134,9 @@ const SideItem = styled(motion.li)`
 `;
 
 const SideImageWrapper = styled.div`
-  width: 35%;
+  flex:1;
   height: 75px;
-  background: ${props => props.theme.text_color};
+  background: ${props => props.theme.text_color2};
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   display: flex;
@@ -164,7 +166,7 @@ const StyledStar = styled.img`
   z-index: 1;
 `;
 const SideInfoWrapper = styled.div`
-  width: 40%;
+  flex:1;
   height: 85%;
   background: ${props => props.theme.second_bg};
   display: flex;
@@ -177,7 +179,7 @@ const SideInfoWrapper = styled.div`
   overflow: hidden;
 `;
 const SideFooterWrapper = styled.div`
-  width: 25%;
+  flex:1;
   background: ${props => props.theme.second_bg};
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
