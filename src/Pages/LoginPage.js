@@ -32,7 +32,7 @@ const LoginPage = () => {
         <MainLogo>HealthFree</MainLogo>
       </LogoDiv>
       <PageWrapper>
-        <h1 style={{ color: "#777785" }}>Register for free</h1>
+        <h1 style={{ color: "#777785" }}>Register Form</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputGroup inputcontrol={watchName}>
             <label>Name</label>
@@ -88,7 +88,7 @@ const LoginPage = () => {
             )}
           </InputGroup>
 
-          <SubmitInput type="submit" value="Register" />
+          <SubmitInput type="submit" value="Register For Free..." />
         </form>
       </PageWrapper>
     </Container>
@@ -97,8 +97,8 @@ const LoginPage = () => {
 
 const Container = styled(motion.div)`
   background: #bccccd;
-  width: 80vw;
-  height: 85vh;
+  width: 100vw;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -150,7 +150,7 @@ const MainLogo = styled.span`
 
 const PageWrapper = styled.div`
   width: 30vw;
-  height: 100vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -164,6 +164,8 @@ const PageWrapper = styled.div`
   -webkit-backdrop-filter: blur(12px);
 
   form {
+    width: 90%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -182,7 +184,7 @@ const PageWrapper = styled.div`
 `;
 
 const InputGroup = styled.div`
-  width: 90%;
+  width: 85%;
   height: 50px;
   position: relative;
 
