@@ -1,25 +1,45 @@
-import React from "react";
+import React, { useState,useRef,useEffect} from "react";
+import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import userImage from "../../assets/userPhoto.png";
-import { BiWorld, BiBookBookmark } from "react-icons/bi";
+import { BiWorld } from "react-icons/bi";
+import { IoOptionsOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
+import { Dropdown } from "../../components/Dropdown";
 
 const Navbar = () => {
   const openInNewTab = (url) => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
-
+  const portalRef = useRef();
+  const portalRoot = document.getElementById("modal-root")
+  const DropdownPortal = () => createPortal(<Dropdown info={info}/>,portalRoot)
   const { t, i18n } = useTranslation();
 
+  const [info,setInfo] = useState({isOpen:false,top:0,left:0})
+
+  const clickHandler =() =>{
+    const top= portalRef.current.getBoundingClientRect().top;
+    const left= portalRef.current.getBoundingClientRect().left;
+    const isOpen = true;
+    setInfo({...info,isOpen:isOpen,top:top,left:left})
+  }
+
+  const leaveHandler = () =>{
+    const isOpen = false;
+    setInfo({...info,isOpen:isOpen})
+  }
+
+
   return (
-    <Container>
+    <Container >
       <LogoDiv>
         <StyledLink to="/">
           <MainLogo>HealthFree</MainLogo>
         </StyledLink>
       </LogoDiv>
-      <NavRight>
+      <NavRight  >
         <Contact
           onClick={() => {
             openInNewTab("https://www.fao.org/home/en/");
@@ -28,15 +48,19 @@ const Navbar = () => {
           <BiWorld style={{ fontSize: "1.3rem" }} />
           FAO
         </Contact>
-        <StyledNavLink to="/">
-          <BiBookBookmark style={{ fontSize: "1.3rem" }} />
+        <StyledNavLink ref={portalRef} onMouseOver={clickHandler} onMouseLeave={leaveHandler} to="/">
+          <IoOptionsOutline style={{ fontSize: "1.3rem" }} />
           {t("options")}
+          {info.isOpen?DropdownPortal():null}
         </StyledNavLink>
         <Contact>
           <StyledImage src={userImage} alt="userImage" />
           {t("user")}
         </Contact>
+        
       </NavRight>
+      
+      
     </Container>
   );
 };
@@ -51,6 +75,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index:500 !important;
 
   @media (max-width: 992px) {
     padding: 5px;
@@ -78,6 +103,7 @@ const LogoDiv = styled.div`
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+  position: relative;
 `;
 
 const MainLogo = styled.span`
@@ -106,8 +132,9 @@ const NavRight = styled.div`
     5px 5px 13px ${(props) => props.theme.box_shadow2};
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  overflow: hidden;
   color: ${(props) => props.theme.text_color};
+  position: relative;
+  overflow: hidden;
   @media (max-width: 992px) {
     width: 320px;
     height: 50px;
@@ -157,6 +184,8 @@ const StyledNavLink = styled.a`
   justify-content: center;
   align-items: center;
   text-decoration: none;
+  position: relative;
+  z-index:800 !important;
 
   &:hover {
     background: ${(props) => props.theme.hover};

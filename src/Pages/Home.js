@@ -8,11 +8,13 @@ import SideCart from "../components/SideCart";
 import { HomePagination } from "../components/HomePagination";
 import { motion } from "framer-motion";
 
+
 const Home = () => {
+
   return (
-    <Container>
-      <Navbar />
-      <PageWrapper>
+    <Container  >
+      <Navbar/>
+      <PageWrapper >
         <Sidebar />
         <ContentWrapper
           initial={{ opacity: 0, y: -100 }}
@@ -33,6 +35,7 @@ const Container = styled.div`
   background: ${(props) => props.theme.main_bg};
   width: 100vw;
   height: 100vh;
+
 
   @media (max-width: 768px) {
     display: flex;

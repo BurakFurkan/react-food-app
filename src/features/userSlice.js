@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
+import {lightTheme,darkTheme} from "./Themes";
 
 
 
@@ -11,7 +12,9 @@ const initialState = {
   meals:[],
   detailedMealID:null,
   isLoggedIn:true,
-  userName:""
+  userName:"",
+  theme:lightTheme,
+  lang:"en",
 };
 
 export const getUserMeals = createAsyncThunk(
@@ -49,6 +52,22 @@ export const userSlice = createSlice({
     login:(state) =>{
       state.isLoggedIn = true
     },
+    themeHandler:(state,action) =>{
+      switch (action.payload) {
+        case "lightTheme":
+          state.theme=lightTheme
+          break;
+        case "darkTheme":
+          state.theme=darkTheme
+          break;
+        default:
+          state.theme=lightTheme
+          break;
+      }
+    },
+    langHandler:(state,action)=>{
+      state.lang=action.payload
+    }
 
   },
   extraReducers: {
@@ -67,7 +86,7 @@ export const userSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addToUserMenu,removeFromUserMenu,removeFromUserMeals,registerUserName,login } = userSlice.actions;
+export const { addToUserMenu,removeFromUserMenu,removeFromUserMeals,registerUserName,login,themeHandler,langHandler } = userSlice.actions;
 
 export default userSlice.reducer;
 

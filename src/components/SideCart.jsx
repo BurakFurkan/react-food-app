@@ -118,8 +118,8 @@ const AnimationDiv = styled(motion.div)`
 `;
 
 const SideItem = styled(motion.li)`
+  width:100%;
   background: ${props => props.theme.second_bg};
-  width: 100%;
   height: 75px;
   border-radius: 15px;
   color: ${props => props.theme.text_color2};
@@ -129,12 +129,12 @@ const SideItem = styled(motion.li)`
   z-index: 2;
   font-size: 0.7rem;
   letter-spacing: 1px;
-  gap: 10px;
+  gap: 3px;
   padding-right: 5px;
 `;
 
 const SideImageWrapper = styled.div`
-  flex:1;
+  flex:3.5;
   height: 75px;
   background: ${props => props.theme.text_color2};
   border-top-left-radius: 15px;
@@ -166,20 +166,20 @@ const StyledStar = styled.img`
   z-index: 1;
 `;
 const SideInfoWrapper = styled.div`
-  flex:1;
-  height: 85%;
+  flex:3.5;
+  height: 95%;
   background: ${props => props.theme.second_bg};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  padding: 10px 5px;
+  padding: 5px 5px;
   text-overflow: ellipsis;
   white-space: pre-line;
   overflow: hidden;
 `;
 const SideFooterWrapper = styled.div`
-  flex:1;
+  flex:3;
   background: ${props => props.theme.second_bg};
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
