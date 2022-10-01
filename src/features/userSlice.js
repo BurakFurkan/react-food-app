@@ -11,7 +11,7 @@ const initialState = {
   isLoading: true,
   meals:[],
   detailedMealID:null,
-  isLoggedIn:true,
+  isLoggedIn:false,
   userName:"",
   theme:lightTheme,
   lang:"en",
