@@ -39,7 +39,7 @@ export default function useOverAllChartOptions() {
   meal.name=nameArray;
   meal.amount=amountArray;
   
-  console.log(meal)
+
   return meal;
   
 }

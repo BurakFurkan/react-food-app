@@ -28,7 +28,7 @@ export const Dropdown = ({info}) => {
       <ul>
         <li><DropdownThemes colorarray={["#bccccd","#f4f4f5","#777785","#848f90"]} theme="lightTheme" /></li>
         <li><DropdownThemes colorarray={["#041C32","#ECB365","#777785b3","#ecb365b3"]} theme="darkTheme"/></li>
-        <li><DropdownThemes colorarray={["#fff","#fff","#fff","#fff"]} theme="lightTheme"/></li>
+        <li><DropdownThemes colorarray={["#637F06","#637F06","#F5E281","#9EAA64"]} theme="greenTheme"/></li>
         <li><DropdownThemes colorarray={["#fff","#fff","#fff","#fff"]} theme="lightTheme"/></li>
       </ul>
     </Container>

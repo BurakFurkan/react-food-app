@@ -8,8 +8,10 @@ import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import { CgAddR } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 export default function Carousel() {
+  const { t, i18n } = useTranslation();
   const { userMenu, meals } = useSelector((reduxStore) => reduxStore.user);
   const [selectedId, setSelectedId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +30,7 @@ export default function Carousel() {
   if (userMenu.length === 0) {
     return (
       <EmptyWrapper>
-        <h1 style={{color:`${theme.second_bg}`}} >Add Some Meal</h1>
+        <h1 style={{color:`${theme.second_bg}`}} >{t("add meal")}</h1>
         <NavLink to="/">
           <CgAddR
             style={{

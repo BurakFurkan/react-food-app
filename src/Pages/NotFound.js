@@ -3,9 +3,11 @@ import styled,{useTheme} from "styled-components";
 import { VscQuestion } from "react-icons/vsc";
 import { GiReturnArrow } from "react-icons/gi";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 const NotFound = () => {
-  const theme=useTheme()
+  const theme=useTheme();
+  const { t, i18n } = useTranslation();
   return (
     <Container>
       <VscQuestion
@@ -16,7 +18,7 @@ const NotFound = () => {
           color: `${theme.second_bg}`,
         }}
       />
-      <h2>Ooops.. Seems like You're lost?</h2>
+      <h2>{t("not found")}</h2>
       <NavLink to="/">
         <GiReturnArrow
           style={{

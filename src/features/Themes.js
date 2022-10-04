@@ -31,3 +31,20 @@ export const darkTheme = {
   disabled:"#adadad",
   table_hover:"#ecb365b3"
 };
+export const greenTheme = {
+  main_bg:'#637F06',
+  second_bg:'#FCC404',
+  text_color:"#D3D59E",
+  text_color2:"#637F06",
+  text_color3:"#041C32",
+  text_hover:"#9EAA64",
+  box_shadow1:"#D3D59E",
+  box_shadow2:"#9EAA64",
+  logo_shadow:"#888895",
+  hover:"#fcc404b3",
+  hover2:"#041c3299",
+  active:"#FCC404",
+  active2:"#637f06b3",
+  disabled:"#adadad",
+  table_hover:"#F5E281"
+};

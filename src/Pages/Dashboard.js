@@ -11,7 +11,7 @@ import useOverAllChartOptions from "../components/useOverAllChartOptions";
 
 const Dashboard = () => {
   const {  meals } = useSelector((reduxStore) => reduxStore.user);
-   useOverAllChartOptions();
+
   return (
     <Container>
       <Navbar />

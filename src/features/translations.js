@@ -60,7 +60,9 @@ export const translationsEn = {
     Selenium:"Selenium",
     Zinc:"Zinc",
     overall:"Overall",
-    "overall nutrients":"Overall Nutrients"
+    "overall nutrients":"Overall Nutrients",
+    "not found":"Ooops.. Seems like You're lost?",
+    "add meal":"Add Some Meal"
     
 };
 
@@ -126,6 +128,8 @@ export const translationsTr = {
     Selenium:"Selenyum",
     Zinc:"Çinko",
     overall:"Tüm",
-    "overall nutrients":"Tüm Besin Maddeleri"
+    "overall nutrients":"Tüm Besin Maddeleri",
+    "not found":"Kaybolmuş gibi görünüyorsun?",
+    "add meal":"Yemek Ekle"
 };
 
