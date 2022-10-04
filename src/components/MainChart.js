@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import DashboardChart from "./DashboardChart";
+import OverallChart from "../components/OverallChart";
 import { useSelector} from "react-redux";
 import { useTranslation } from "react-i18next";
 import {
@@ -38,7 +39,7 @@ const MainChart = () => {
         <h1 >{t("nutrients")}</h1>
       </InfoWrapper>
       {(meals.length>0)?(<ChartWrapper>
-        <Bar options={DashboardChart(meals[0]).config} data={DashboardChart(meals[0]).data}  />
+        <Bar options={OverallChart().config} data={OverallChart().data}  />
         </ChartWrapper>):null}
     </MainWrapper>
   );

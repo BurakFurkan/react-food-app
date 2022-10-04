@@ -60,6 +60,7 @@ export const translationsEn = {
     Selenium:"Selenium",
     Zinc:"Zinc",
     overall:"Overall",
+    "overall nutrients":"Overall Nutrients"
     
 };
 
@@ -82,7 +83,7 @@ export const translationsTr = {
     dessert:"Tatlı",
     waffle:"Waffle",
     userinventory:"Sepetim",
-    nutrients:"Besin Maddesi",
+    nutrients:"Besin Maddeleri",
     value:"Değer",
     dailyamount:"Günlük İhtiyaç",
     Carbohydrates:"Karbonhidrat",
@@ -124,6 +125,7 @@ export const translationsTr = {
     Potassium:"Potasyum",
     Selenium:"Selenyum",
     Zinc:"Çinko",
-    overall:"Tüm"
+    overall:"Tüm",
+    "overall nutrients":"Tüm Besin Maddeleri"
 };
 
