@@ -90,6 +90,9 @@ const Container = styled(motion.div)`
   @media (max-width: 992px) {
     width:320px;
   }
+  @media (max-width: 1330px){
+    margin-top:100px;
+  }
 
 `;
 
@@ -109,6 +112,8 @@ const SideItemWrapper = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
+
+  
 `;
 
 const AnimationDiv = styled(motion.div)`
@@ -131,6 +136,15 @@ const SideItem = styled(motion.li)`
   letter-spacing: 1px;
   gap: 3px;
   padding-right: 5px;
+  @media (max-width: 992px){
+    flex-direction:row;
+  }
+  @media (max-width: 1330px){
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
 `;
 
 const SideImageWrapper = styled.div`
@@ -144,6 +158,13 @@ const SideImageWrapper = styled.div`
   align-items: center;
   color: ${props => props.theme.second_bg};
   padding-bottom: 5px;
+  @media (max-width: 1330px){
+    width: 80%;
+    border-radius: 5px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const SideImage = styled.img`
@@ -164,6 +185,7 @@ const StyledStar = styled.img`
   height: 70px;
   position: absolute;
   z-index: 1;
+  
 `;
 const SideInfoWrapper = styled.div`
   flex:3.5;
@@ -177,6 +199,11 @@ const SideInfoWrapper = styled.div`
   text-overflow: ellipsis;
   white-space: pre-line;
   overflow: hidden;
+  @media (max-width: 1330px){
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 const SideFooterWrapper = styled.div`
   flex:3;
@@ -189,6 +216,11 @@ const SideFooterWrapper = styled.div`
   align-items: center;
   padding: 10px;
   gap: 3px;
+  @media (max-width: 1330px){
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const DeleteBtn = styled(motion.div)`

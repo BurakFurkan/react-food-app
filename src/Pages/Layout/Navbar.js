@@ -85,6 +85,10 @@ const Container = styled.div`
     justify-content: center;
     align-items: center;
   }
+
+  @media (max-width: 1330px){
+    height: 150px;
+  }
 `;
 
 const LogoDiv = styled.div`
@@ -136,11 +140,14 @@ const NavRight = styled.div`
   position: relative;
   overflow: hidden;
   @media (max-width: 992px) {
-    width: 320px;
+    width: 85%;
     height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+  @media (max-width: 1330px){
+    height: 55px;
   }
 `;
 

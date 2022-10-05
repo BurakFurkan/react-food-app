@@ -40,13 +40,25 @@ const Container = styled.div`
   font-size: 1.2rem;
   box-sizing: border-box;
 
-  @media (max-width: 992px) {
+  @media (max-width: 480px) {
     width: 320px;
     height: 60px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius:5px;
+  }
+  @media (max-width: 992px) {
+    width: 85vw;
+    height: 60px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius:5px;
+    margin-top: 0 !important;
+  }
+  @media (max-width: 1330px){
+    margin-top:100px;
   }
 
 
@@ -66,7 +78,7 @@ const UList = styled.ul`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap:10px;
+    
   }
 `;
 
@@ -83,7 +95,7 @@ const List = styled.li`
   letter-spacing: 1px;
   
 
-  @media (max-width: 992px) {
+  @media (max-width: 480px) {
     height: 100%;
 
     &:nth-child(1){
@@ -96,6 +108,12 @@ const List = styled.li`
       flex:2;
     }
   }
+
+  @media (max-width: 992px){
+    height: 100%;
+    
+  }
+  
 `;
 
 const StyledLink = styled(NavLink)`
@@ -103,7 +121,7 @@ const StyledLink = styled(NavLink)`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   cursor: pointer;
   font-size: 1.2rem;

@@ -58,9 +58,10 @@ const PageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 5px;
   }
+
 `;
 
 const ContentWrapper = styled(motion.div)`
