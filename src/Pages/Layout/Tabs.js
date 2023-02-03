@@ -27,7 +27,7 @@ function Tabs() {
   if (isLoading) {
     return (
       <LoadingDiv>
-        <ClipLoader loading={isLoading} cssOverride={cssOverride} size={150} />
+        <ClipLoader loading={isLoading}  cssOverride={cssOverride} size={100} />
       </LoadingDiv>
     );
   }else if (error){
@@ -86,8 +86,7 @@ const MenuWrapper = styled.div`
 `;
 
 const LoadingDiv = styled.div`
-  width: 100%;
-  height: 70vh;
+
   margin-top: 0.8rem;
   display: flex;
   justify-content: center;

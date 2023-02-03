@@ -1,4 +1,4 @@
-import React, { useState,useRef,useEffect} from "react";
+import React, { useState, useRef } from "react";
 import { createPortal } from "react-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -13,33 +13,33 @@ const Navbar = () => {
     window.open(url, "_blank", "noopener,noreferrer");
   };
   const portalRef = useRef();
-  const portalRoot = document.getElementById("modal-root")
-  const DropdownPortal = () => createPortal(<Dropdown info={info}/>,portalRoot)
-  const { t, i18n } = useTranslation();
+  const portalRoot = document.getElementById("modal-root");
+  const DropdownPortal = () =>
+    createPortal(<Dropdown info={info} />, portalRoot);
+  const { t } = useTranslation();
 
-  const [info,setInfo] = useState({isOpen:false,top:0,left:0})
+  const [info, setInfo] = useState({ isOpen: false, top: 0, left: 0 });
 
-  const clickHandler =() =>{
-    const top= portalRef.current.getBoundingClientRect().top;
-    const left= portalRef.current.getBoundingClientRect().left;
+  const clickHandler = () => {
+    const top = portalRef.current.getBoundingClientRect().top;
+    const left = portalRef.current.getBoundingClientRect().left;
     const isOpen = true;
-    setInfo({...info,isOpen:isOpen,top:top,left:left})
-  }
+    setInfo({ ...info, isOpen: isOpen, top: top, left: left });
+  };
 
-  const leaveHandler = () =>{
+  const leaveHandler = () => {
     const isOpen = false;
-    setInfo({...info,isOpen:isOpen})
-  }
-
+    setInfo({ ...info, isOpen: isOpen });
+  };
 
   return (
-    <Container >
+    <Container>
       <LogoDiv>
         <StyledLink to="/">
           <MainLogo>HealthFree</MainLogo>
         </StyledLink>
       </LogoDiv>
-      <NavRight  >
+      <NavRight>
         <Contact
           onClick={() => {
             openInNewTab("https://www.fao.org/home/en/");
@@ -48,19 +48,21 @@ const Navbar = () => {
           <BiWorld style={{ fontSize: "1.3rem" }} />
           FAO
         </Contact>
-        <StyledNavLink ref={portalRef} onMouseOver={clickHandler} onMouseLeave={leaveHandler} to="/">
+        <StyledNavLink
+          ref={portalRef}
+          onMouseOver={clickHandler}
+          onMouseLeave={leaveHandler}
+          to="/"
+        >
           <IoOptionsOutline style={{ fontSize: "1.3rem" }} />
           {t("options")}
-          {info.isOpen?DropdownPortal():null}
+          {info.isOpen ? DropdownPortal() : null}
         </StyledNavLink>
         <Contact>
           <StyledImage src={userImage} alt="userImage" />
           {t("user")}
         </Contact>
-        
       </NavRight>
-      
-      
     </Container>
   );
 };
@@ -68,38 +70,34 @@ const Navbar = () => {
 export default Navbar;
 
 const Container = styled.div`
-  width: 98vw;
-  height: 70px;
-  padding: 10px;
+  padding: 0.5rem;
+  min-height: 70px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index:500 !important;
+  z-index: 500 !important;
 
   @media (max-width: 992px) {
     padding: 5px;
-    width: 95vw;
-    height: 250px;
+    min-height: 250px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
-  @media (max-width: 1330px){
-    height: 150px;
+  @media (max-width: 1330px) {
+    min-height: 150px;
   }
 `;
 
 const LogoDiv = styled.div`
-  width: 300px;
-  height: 100px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
   @media (max-width: 992px) {
-    height: 60px;
+    min-height: 60px;
     justify-content: center;
     align-items: center;
   }
@@ -111,8 +109,6 @@ const StyledLink = styled(Link)`
 `;
 
 const MainLogo = styled.span`
-  width: 250px;
-  height: 100px;
   font-size: 35px;
   cursor: pointer;
   src: url("https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap");
@@ -125,11 +121,9 @@ const MainLogo = styled.span`
 `;
 
 const NavRight = styled.div`
-  width: 450px;
-  height: 90%;
   display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
   background: ${(props) => props.theme.main_bg};
   border-radius: 5px;
   box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1},
@@ -140,14 +134,13 @@ const NavRight = styled.div`
   position: relative;
   overflow: hidden;
   @media (max-width: 992px) {
-    width: 85%;
-    height: 50px;
+    min-height: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  @media (max-width: 1330px){
-    height: 55px;
+  @media (max-width: 1330px) {
+    min-height: 55px;
   }
 `;
 
@@ -155,12 +148,11 @@ const Contact = styled.div`
   cursor: pointer;
   letter-spacing: 1.5px;
   font-size: 1.1rem;
-  width: 34%;
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 0.3rem;
+  padding: 0.5rem;
 
   &:hover {
     background: ${(props) => props.theme.hover};
@@ -185,14 +177,13 @@ const StyledNavLink = styled.a`
   cursor: pointer;
   letter-spacing: 1.5px;
   font-size: 1.1rem;
-  width: 34%;
-  height: 100%;
+  padding: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   text-decoration: none;
   position: relative;
-  z-index:800 !important;
+  z-index: 800 !important;
 
   &:hover {
     background: ${(props) => props.theme.hover};

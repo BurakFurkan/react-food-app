@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 function Sidebar() {
 
-  const { t, i18n } = useTranslation();
+  const { t} = useTranslation();
 
   return (
     <Container>
@@ -121,7 +121,7 @@ const StyledLink = styled(NavLink)`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   cursor: pointer;
   font-size: 1.2rem;

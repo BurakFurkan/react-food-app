@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 const SideCart = () => {
   const { meals } = useSelector((reduxStore) => reduxStore.user);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [dragStart, setDragStart] = useState(0);
 
@@ -72,7 +72,7 @@ const SideCart = () => {
 const Container = styled(motion.div)`
   width: 15vw;
   height: 65vh;
-  border-radius: 26px;
+  border-radius: 0.8rem;
   background: ${props => props.theme.second_bg};
   box-shadow: -5px -5px 13px ${props => props.theme.box_shadow1}, 5px 5px 13px ${props => props.theme.box_shadow2};
   align-items: center;
@@ -100,7 +100,7 @@ const SideItemWrapper = styled.ul`
   width: 100%;
   height: 100%;
   background: ${props => props.theme.main_bg};
-  border-radius: 15px;
+  border-radius: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

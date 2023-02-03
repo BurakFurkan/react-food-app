@@ -33,21 +33,17 @@ const Home = () => {
 
 const Container = styled.div`
   background: ${(props) => props.theme.main_bg};
-  width: 100vw;
-  height: 100vh;
-
-
+  min-height:100vh;
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap:1rem;
   }
 `;
 
 const PageWrapper = styled.div`
-  width: 100%;
-  height: (100%-100px);
   display: flex;
   justify-content: flex-start;
   gap: 1rem;
@@ -66,11 +62,12 @@ const PageWrapper = styled.div`
 
 const ContentWrapper = styled(motion.div)`
   display: flex;
+  padding:1rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: ${(props) => props.theme.main_bg};
-  width: 68vw;
+  min-width: 68vw;
   gap: 0.75rem;
 `;
 

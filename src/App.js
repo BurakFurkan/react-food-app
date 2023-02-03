@@ -1,7 +1,7 @@
 import { getProducts } from "./features/productSlice";
-import { useEffect,useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import styled, { ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 import AnimatedRoutes from "./Pages/AnimatedRoutes";
 import i18n from "i18next";
 import {initReactI18next} from "react-i18next";
@@ -32,18 +32,11 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container className="App">
+      <div className="App">
         <AnimatedRoutes />
-      </Container>
+      </div>
     </ThemeProvider>
   );
 }
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-`;
-
-
 
 export default App;

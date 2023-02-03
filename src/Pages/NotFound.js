@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 const NotFound = () => {
   const theme=useTheme();
-  const { t, i18n } = useTranslation();
+  const { t} = useTranslation();
   return (
     <Container>
       <VscQuestion
