@@ -37,8 +37,7 @@ const CategoryWrapper = styled.div`
   border-radius: 5px;
   overflow: hidden;
   background: ${(props) => props.theme.second_bg};
-  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1},
-    5px 5px 13px ${(props) => props.theme.box_shadow2};
+  box-shadow: 0px 1px 3px 0 ${(props) => props.theme.box_shadow1};
 
   @media (max-width: 992px) {
     display: flex;
@@ -58,12 +57,12 @@ const CategoryTab = styled.span`
   &:hover {
     cursor: pointer;
     background: ${(props) => props.theme.hover2};
-    color: ${(props) => props.theme.second_bg};
+    color: ${(props) => props.theme.text_active};
   }
 
   &.isActive {
     background: ${(props) => props.theme.active2};
-    color: ${(props) => props.theme.second_bg};
+    color: ${(props) => props.theme.text_active};
   }
 
   &:focus {

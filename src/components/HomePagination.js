@@ -18,18 +18,18 @@ export function HomePagination() {
       {(page>1)?<BiLeftArrowAlt
         aria-label="Increment value"
         onClick={() => dispatch(previousPage())}
-        style={{ cursor: "pointer", fontSize: "2rem",boxShadow:`0 8px 32px 0 ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
+        style={{ cursor: "pointer", fontSize: "2rem",boxShadow:`0px 4px 6px -1px ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
         color={theme.text_color}
       />:<BiLeftArrowAlt
       aria-label="Increment value"
-      style={{fontSize: "2rem",boxShadow:`0 8px 32px 0 ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
+      style={{fontSize: "2rem",boxShadow:`0px 4px 6px -1px ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
       color={theme.disabled}
     />}
       <span style={{ fontSize: "1.5rem" }}>{page}</span>
       <BiRightArrowAlt
         aria-label="Decrement value"
         onClick={() => dispatch(nextPage())}
-        style={{ cursor: "pointer", fontSize: "2rem",boxShadow:`0 8px 32px 0 ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
+        style={{ cursor: "pointer", fontSize: "2rem",boxShadow:`0px 4px 6px -1px ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
         color={theme.text_color}
       />
     </PaginationWrapper>

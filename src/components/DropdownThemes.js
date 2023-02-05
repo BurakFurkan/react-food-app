@@ -25,17 +25,13 @@ const Color = styled.div`
   border-radius: 50%;
   position: absolute;
   top: 50%;
-  box-shadow: -3px -3px 7px ${(props) => props.theme.box_shadow1},
-    2px 2px 5px ${(props) => props.theme.box_shadow2};
-  backdrop-filter: blur(12px);
-
+  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   border: 2px solid ${(props) => props.theme.main_bg};
   &:nth-child(1) {
     top: 50%;
     margin-top: -15px;
     left: 10%;
     background-color: ${(props) => props.color};
-
     z-index: 5;
   }
   &:nth-child(2) {

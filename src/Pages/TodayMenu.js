@@ -25,9 +25,6 @@ const TodayMenu = () => {
 
 const Container = styled.div`
   background: ${(props) => props.theme.main_bg};
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
 
   @media (max-width: 992px) {
     display: flex;
@@ -38,8 +35,6 @@ const Container = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   justify-content: flex-start;
   padding: 1rem;
@@ -57,7 +52,7 @@ const PageWrapper = styled.div`
 
 const ContentWrapper = styled(motion.div)`
    width: 85vw;
-  height: 85vh;
+  height: calc(100vh - 102px);
   display: flex;
   flex-direction: column;
   justify-content: center;

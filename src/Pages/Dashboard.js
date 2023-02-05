@@ -64,7 +64,7 @@ const PageWrapper = styled.div`
 
 const ContentWrapper = styled(motion.div)`
   width: 85vw;
-  height: 85vh;
+  height: calc(100vh - 102px);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

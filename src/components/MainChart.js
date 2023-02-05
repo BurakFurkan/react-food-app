@@ -26,7 +26,7 @@ ChartJS.register(
 
 
 const MainChart = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { meals,userName } = useSelector((reduxStore) => reduxStore.user);
   return (
     <MainWrapper>
@@ -50,7 +50,8 @@ export default MainChart;
 const MainWrapper = styled.div`
   width: 100%;
   border-radius: 10px;
-  background: ${(props) => props.theme.second_bg};
+  background: ${(props) => props.theme.main_bg_200};
+  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   z-index: 55;
   position: sticky;
   top:0;

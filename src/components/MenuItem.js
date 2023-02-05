@@ -130,8 +130,8 @@ const Container = styled(motion.div)`
   width: 300px;
   height: 400px;
   border-radius: 26px;
-  background: ${(props) => props.theme.main_bg};
-  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1}, 5px 5px 13px ${(props) => props.theme.box_shadow2};
+  background: ${(props) => props.theme.main_bg_200};
+  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -145,8 +145,7 @@ const CardImageWrapper = styled.div`
   min-height: 150px;
   width: auto;
   min-width: 150px;
-  -webkit-box-shadow: 1px 2px 9px 2px ${(props) => props.theme.text_color};
-  box-shadow: 1px 2px 9px 2px ${(props) => props.theme.text_color};
+  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.text_color};
   border-radius: 50%;
   box-sizing: border-box;
   overflow: hidden;

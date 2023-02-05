@@ -24,7 +24,7 @@ const DetailedMenuItem = ({
   selectHandler,
   nutrition,
 }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { userMenu } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
   const theme=useTheme();
@@ -148,8 +148,8 @@ const Container = styled(motion.div)`
   width: 350px;
   height: 550px;
   border-radius: 26px;
-  background: ${(props) => props.theme.main_bg};
-  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1}, 5px 5px 13px ${(props) => props.theme.box_shadow2};
+  background: ${(props) => props.theme.main_bg_200};
+  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow2};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -169,8 +169,8 @@ const CardImageWrapper = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  -webkit-box-shadow: 1px 2px 9px 2px ${(props) => props.theme.text_color};
-  box-shadow: 1px 2px 9px 2px ${(props) => props.theme.text_color};
+  -webkit-box-shadow:  1px 1px 6px -1px ${(props) => props.theme.text_color};
+  box-shadow:  1px 1px 6px -1px ${(props) => props.theme.text_color};
   border-radius: 25px;
   box-sizing: border-box;
   overflow: hidden;
@@ -241,8 +241,8 @@ const StyledTR = styled.tr`
   }
 
   &:hover {
-    background-color: ${(props) => props.theme.table_hover};
-    color: ${(props) => props.theme.second_bg};
+    background-color: ${(props) => props.theme.active};
+    color: ${(props) => props.theme.text_color2};
   }
 `;
 const StyledTH = styled.th`

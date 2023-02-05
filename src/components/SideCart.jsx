@@ -74,7 +74,7 @@ const Container = styled(motion.div)`
   height: 65vh;
   border-radius: 0.8rem;
   background: ${props => props.theme.second_bg};
-  box-shadow: -5px -5px 13px ${props => props.theme.box_shadow1}, 5px 5px 13px ${props => props.theme.box_shadow2};
+  box-shadow: 0px 4px 6px -1px ${props => props.theme.box_shadow1};
   align-items: center;
   justify-content: flex-start;
   display: flex;
@@ -84,7 +84,7 @@ const Container = styled(motion.div)`
   overflow: hidden;
 
     h2{
-      color:${props => props.theme.text_color}
+      color:${props => props.theme.text_color2}
     }
 
   @media (max-width: 992px) {
@@ -128,6 +128,7 @@ const SideItem = styled(motion.li)`
   height: 75px;
   border-radius: 15px;
   color: ${props => props.theme.text_color2};
+  box-shadow: 0px 1px 3px -1px ${(props) => props.theme.text_color};
   display: flex;
   box-sizing: border-box;
   position: relative;
@@ -150,7 +151,7 @@ const SideItem = styled(motion.li)`
 const SideImageWrapper = styled.div`
   flex:3.5;
   height: 75px;
-  background: ${props => props.theme.text_color2};
+  background: ${props => props.theme.main_bg_200};
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   display: flex;

@@ -26,7 +26,7 @@ export const Dropdown = ({info}) => {
       </ul>
       <p>Themes</p>
       <ul>
-        <li><DropdownThemes colorarray={["#bccccd","#f4f4f5","#777785","#848f90"]} theme="lightTheme" /></li>
+        <li><DropdownThemes colorarray={["#FFFFFF","#57BE6C","#F7F7F7","#101010"]} theme="lightTheme" /></li>
         <li><DropdownThemes colorarray={["#041C32","#ECB365","#777785b3","#ecb365b3"]} theme="darkTheme"/></li>
         <li><DropdownThemes colorarray={["#637F06","#637F06","#F5E281","#9EAA64"]} theme="greenTheme"/></li>
         <li><DropdownThemes colorarray={["#fff","#fff","#fff","#fff"]} theme="lightTheme"/></li>
@@ -37,15 +37,11 @@ export const Dropdown = ({info}) => {
 
 const Container = styled(motion.div)`
   position: absolute;
-
   width: 200px;
   height: 200px;
   border-radius:5px;
   background-color: ${(props) => props.theme.main_bg};
-  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1},
-    5px 5px 13px ${(props) => props.theme.box_shadow2};
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   color: ${(props) => props.theme.text_color};
 
   z-index: 999 !important;
@@ -66,6 +62,7 @@ const Container = styled(motion.div)`
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-items: center;
+    gap:0.3rem;
 
     li {
       width: 80px;
@@ -74,6 +71,8 @@ const Container = styled(motion.div)`
       justify-content: space-evenly;
       align-items: center;
       list-style: none;
+      border-radius: 4px;
+      background: ${(props) => props.theme.main_bg_200};
       &:hover {
         background: ${(props) => props.theme.hover};
         transition: 0.5s ease-in-out;

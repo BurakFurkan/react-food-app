@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 
 export default function Carousel() {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { userMenu, meals } = useSelector((reduxStore) => reduxStore.user);
   const [selectedId, setSelectedId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);

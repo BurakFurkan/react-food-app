@@ -117,19 +117,15 @@ const MainLogo = styled.span`
   justify-content: center;
   align-items: center;
   color: ${(props) => props.theme.second_bg};
-  filter: drop-shadow(0 0 0.5rem ${(props) => props.theme.logo_shadow});
+  filter: ${(props) => props.theme.logo_shadow};
 `;
 
 const NavRight = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  background: ${(props) => props.theme.main_bg};
   border-radius: 5px;
-  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1},
-    5px 5px 13px ${(props) => props.theme.box_shadow2};
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0px 1px 2px 1px ${(props) => props.theme.box_shadow1};
   color: ${(props) => props.theme.text_color};
   position: relative;
   overflow: hidden;

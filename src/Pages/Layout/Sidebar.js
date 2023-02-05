@@ -31,7 +31,7 @@ const Container = styled.div`
   height: 350px;
   border-radius: 26px;
   background: ${(props) => props.theme.main_bg};
-  box-shadow: -5px -5px 13px ${(props) => props.theme.box_shadow1}, 5px 5px 13px ${(props) => props.theme.box_shadow2};
+  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   align-items: center;
   justify-content: center;
   display: flex;
