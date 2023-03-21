@@ -50,6 +50,10 @@ const PageWrapper = styled.div`
   padding: 1rem;
   align-items: flex-start;
 
+  
+
+  
+
   @media (max-width: 992px) {
     display: flex;
     flex-direction: column;
@@ -62,13 +66,17 @@ const PageWrapper = styled.div`
 
 const ContentWrapper = styled(motion.div)`
   display: flex;
-  padding:1rem;
+  padding:0.5rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: ${(props) => props.theme.main_bg};
-  min-width: 68vw;
-  gap: 0.75rem;
+  max-height: 85vh;
+  gap: 0.5rem;
+
+  @media (max-width: 1288px) {
+    max-width: 600px;
+  }
 `;
 
 export default Home;

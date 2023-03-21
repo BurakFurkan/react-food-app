@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 import axios from "axios";
-import {lightTheme,darkTheme,greenTheme} from "./Themes";
+import {lightTheme,darkTheme} from "./Themes";
 
 
 
@@ -11,9 +11,9 @@ const initialState = {
   isLoading: true,
   meals:[],
   detailedMealID:null,
-  isLoggedIn:true,
+  isLoggedIn:false,
   userName:"",
-  theme:darkTheme,
+  theme:lightTheme,
   lang:"en",
 };
 
@@ -59,9 +59,6 @@ export const userSlice = createSlice({
           break;
         case "darkTheme":
           state.theme=darkTheme
-          break;
-        case "greenTheme":
-          state.theme=greenTheme
           break;
         default:
           state.theme=lightTheme

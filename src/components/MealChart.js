@@ -45,7 +45,7 @@ const MainWrapper = styled.div`
   width: 100%;
   height: 200px;
   border-radius: 10px;
-  background: ${(props) => props.theme.main_bg_200};
+  background: ${(props) => props.theme.dashboard_bg};
   box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   display: flex;
   color: #777785;

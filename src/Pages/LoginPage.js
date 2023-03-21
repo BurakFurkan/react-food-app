@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { registerUserName, login } from "../features/userSlice";
+import knifeImage from "../assets/knife.jpg"
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const LoginPage = () => {
         <MainLogo>HealthFree</MainLogo>
       </LogoDiv>
       <PageWrapper>
-        <h1 style={{ color: "#777785" }}>Register Form</h1>
+        <h1 style={{ color: "#57BE6C" }}>Register Form</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <InputGroup inputcontrol={watchName}>
             <label>Name</label>
@@ -41,7 +42,7 @@ const LoginPage = () => {
               {...register("nameInput", { required: true })}
             />
             {errors.nameInput && (
-              <span style={{ alignSelf: "flex-start", color: "#777785" }}>
+              <span style={{ alignSelf: "flex-start", color: "#57BE6C" }}>
                 Provide a valid name
               </span>
             )}
@@ -62,7 +63,7 @@ const LoginPage = () => {
               })}
             />
             {errors.passwordInput && (
-              <span style={{ alignSelf: "flex-start", color: "#777785" }}>
+              <span style={{ alignSelf: "flex-start", color: "#57BE6C" }}>
                 Provide a valid password
               </span>
             )}
@@ -82,7 +83,7 @@ const LoginPage = () => {
               })}
             />
             {errors.mailInput && (
-              <span style={{ alignSelf: "flex-start", color: "#777785" }}>
+              <span style={{ alignSelf: "flex-start", color: "#57BE6C" }}>
                 Provide a valid mail
               </span>
             )}
@@ -96,7 +97,10 @@ const LoginPage = () => {
 };
 
 const Container = styled(motion.div)`
-  background: #bccccd;
+  background-image: url(${knifeImage});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -157,7 +161,7 @@ const PageWrapper = styled.div`
   gap: 2rem;
   padding: 1rem;
   align-items: center;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(12px);
@@ -192,12 +196,12 @@ const InputGroup = styled.div`
     width: 98%;
     height: 100%;
     background: transparent;
-    border: 2px solid #777785;
+    border: 2px solid #57BE6C;
     border-radius: 5px;
     outline: none;
     padding: 0 10px;
     font-size: 20px;
-    color: #777785;
+    color: #666666;
   }
 
   label {
@@ -205,7 +209,7 @@ const InputGroup = styled.div`
     top: ${(props) =>
       props.inputcontrol && props.inputcontrol.length > 0 ? "-9px" : "15px"};
     left: 10px;
-    color: #777785;
+    color: #57BE6C;
     text-transform: capitalize;
     font-size: ${(props) =>
       props.inputcontrol && props.inputcontrol.length > 0 ? "1rem" : "1.15rem"};
@@ -213,17 +217,17 @@ const InputGroup = styled.div`
     padding: 0 5px;
     cursor: text;
     background-color: ${(props) =>
-      props.inputcontrol && props.inputcontrol.length > 0 ? "#C9D6D7" : "none"};
+      props.inputcontrol && props.inputcontrol.length > 0 ? "#D3CDC6" : "none"};
   }
 
   &:hover > label {
     top: -9px;
-    background-color: #c9d6d7;
+    background-color: #D3CDC6;
     font-size: 1rem;
   }
   &:focus-within > label {
     top: -9px;
-    background-color: #c9d6d7;
+    background-color: #D3CDC6;
     font-size: 1rem;
   }
 `;
@@ -231,12 +235,12 @@ const InputGroup = styled.div`
 const SubmitInput = styled.input.attrs({
   type: "submit",
 })`
-  background: #c9d6d7;
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 5px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: #777785;
+  color: #57BE6C;
   cursor: pointer;
   margin: 15px 0 0 0;
   width: 100%;
@@ -247,10 +251,12 @@ const SubmitInput = styled.input.attrs({
   transition: 0.15s;
   text-align: center;
   &:hover {
-    background-color: rgba(31, 38, 135, 0.37);
+    background-color: #57BE6C;
+    color: #FFFFFF;
   }
   &:active {
     background-color: #f1ac15;
+    color: #FFFFFF;
   }
 `;
 

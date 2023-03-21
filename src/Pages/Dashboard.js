@@ -6,7 +6,6 @@ import MainChart from "../components/MainChart";
 import MealChart from "../components/MealChart";
 import { useSelector} from "react-redux";
 import { motion } from "framer-motion";
-import useOverAllChartOptions from "../components/useOverAllChartOptions";
 
 
 const Dashboard = () => {

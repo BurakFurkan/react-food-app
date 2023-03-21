@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import DashboardChart from "./DashboardChart";
 import OverallChart from "../components/OverallChart";
 import { useSelector} from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -50,7 +49,7 @@ export default MainChart;
 const MainWrapper = styled.div`
   width: 100%;
   border-radius: 10px;
-  background: ${(props) => props.theme.main_bg_200};
+  background: ${(props) => props.theme.dashboard_bg};
   box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   z-index: 55;
   position: sticky;
@@ -77,13 +76,13 @@ const UserInfo = styled.div`
   gap: 1rem;
   justify-content: flex-start;
   align-items: flex-start;
-  color: ${(props) => props.theme.text_color3};
+  color: ${(props) => props.theme.second_bg};
   padding: 1rem;
   font-family: "Marck Script", cursive;
 
     h1{
       padding-left:2.5rem;
-      color: ${(props) => props.theme.text_color3};
+      color: ${(props) => props.theme.second_bg};
     }
 
   @media (max-width: 768px) {
@@ -115,7 +114,7 @@ const InfoWrapper = styled.div`
   text-align: center;
   padding-right: 2rem;
   position: relative;
-  color: ${(props) => props.theme.text_color3};
+  color: ${(props) => props.theme.second_bg};
   &:before{
     content:"";
     width:1px;

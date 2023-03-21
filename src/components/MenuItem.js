@@ -128,7 +128,7 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
 
 const Container = styled(motion.div)`
   width: 300px;
-  height: 400px;
+  height: 350px;
   border-radius: 26px;
   background: ${(props) => props.theme.main_bg_200};
   box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
@@ -201,17 +201,16 @@ const StarWrapper = styled.div`
 
 const StarSpan = styled.span`
   margin: 0 1rem;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 `;
 
 const RestaurantWrapper = styled.div`
   width: 100%;
-  height: 50px;
   color: ${(props) => props.theme.text_color};
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  font-size: 1rem;
+  font-size: 0.7rem;
   font-weight: 600;
 `;
 
@@ -219,17 +218,21 @@ const CardFooter = styled.div`
   width: 100%;
   height: 35%;
   color: ${(props) => props.theme.text_color};
-  padding: 1rem 0 0 0;
+  padding: 0;
 `;
 
 const PriceSpan = styled.del`
   margin-right: 0.5rem;
+  font-size: 0.9rem;
 `;
 
 const PriceSign = styled.span`
   margin-right: 0.5rem;
+  font-size: 0.9rem;
 `;
 
-const DiscountSpan = styled.span``;
+const DiscountSpan = styled.span`
+ font-size: 0.9rem;
+`;
 
 export default MenuItem;

@@ -6,6 +6,7 @@ export const lightTheme = {
   text_color2:"#FFFFFF",
   text_active:"#FFFFFF",
   text_hover:"#FFFFFF",
+  dashboard_bg:"#F7F7F7",
   box_shadow1:"#848f90",
   box_shadow2:"#f4ffff",
   logo_shadow:"drop-shadow(0 0 0.5rem #57BE6C)",
@@ -24,6 +25,7 @@ export const darkTheme = {
   text_color2:"#E3E3E3",
   text_active:"#E3E3E3",
   text_hover:"#E3E3E3",
+  dashboard_bg:"#E3E3E3",
   box_shadow1:"#C59B5B",
   box_shadow2:"#E3E3E3",
   logo_shadow:"drop-shadow(0 0 0.5rem #778899)",
@@ -33,21 +35,4 @@ export const darkTheme = {
   active2:"#8B6731",
   disabled:"#adadad",
   table_hover:"#3b9ae1"
-};
-export const greenTheme = {
-  main_bg:'#637F06',
-  second_bg:'#FCC404',
-  text_color:"#D3D59E",
-  text_color2:"#637F06",
-  text_color3:"#041C32",
-  text_hover:"#9EAA64",
-  box_shadow1:"#D3D59E",
-  box_shadow2:"#9EAA64",
-  logo_shadow:"#888895",
-  hover:"#fcc404b3",
-  hover2:"#041c3299",
-  active:"#FCC404",
-  active2:"#637f06b3",
-  disabled:"#adadad",
-  table_hover:"#F5E281"
 };

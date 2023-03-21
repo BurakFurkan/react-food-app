@@ -28,7 +28,7 @@ const SideCart = () => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 20, transition: { duration: 0.1 } }}
     >
-      <h2 >{t("userinventory")}</h2>
+      <h2>{t("userinventory")}</h2>
       <SideItemWrapper>
         {meals
           .slice(0)
@@ -73,8 +73,8 @@ const Container = styled(motion.div)`
   width: 15vw;
   height: 65vh;
   border-radius: 0.8rem;
-  background: ${props => props.theme.second_bg};
-  box-shadow: 0px 4px 6px -1px ${props => props.theme.box_shadow1};
+  background: ${(props) => props.theme.second_bg};
+  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   align-items: center;
   justify-content: flex-start;
   display: flex;
@@ -83,23 +83,22 @@ const Container = styled(motion.div)`
   padding: 1rem 5px 5px 5px;
   overflow: hidden;
 
-    h2{
-      color:${props => props.theme.text_color2}
-    }
+  h2 {
+    color: ${(props) => props.theme.text_color2};
+  }
 
   @media (max-width: 992px) {
-    width:320px;
+    min-width: 320px;
   }
-  @media (max-width: 1330px){
-    margin-top:100px;
+  @media (max-width: 1330px) {
+    margin-top: 100px;
   }
-
 `;
 
 const SideItemWrapper = styled.ul`
   width: 100%;
   height: 100%;
-  background: ${props => props.theme.main_bg};
+  background: ${(props) => props.theme.main_bg};
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
@@ -112,55 +111,53 @@ const SideItemWrapper = styled.ul`
   &::-webkit-scrollbar {
     display: none;
   }
-
-  
 `;
 
 const AnimationDiv = styled(motion.div)`
   display: flex;
+  justify-items: center;
+  align-items: center;
   box-sizing: border-box;
   position: relative;
+
 `;
 
 const SideItem = styled(motion.li)`
-  width:100%;
-  background: ${props => props.theme.second_bg};
-  height: 75px;
+  height: 80px;
+  background: ${(props) => props.theme.second_bg};
   border-radius: 15px;
-  color: ${props => props.theme.text_color2};
+  color: ${(props) => props.theme.text_color2};
   box-shadow: 0px 1px 3px -1px ${(props) => props.theme.text_color};
   display: flex;
   box-sizing: border-box;
+  flex: 1;
   position: relative;
   z-index: 2;
   font-size: 0.7rem;
   letter-spacing: 1px;
   gap: 3px;
   padding-right: 5px;
-  @media (max-width: 992px){
-    flex-direction:row;
+  @media (max-width: 992px) {
+    flex-direction: row;
   }
-  @media (max-width: 1330px){
-    flex-direction: column;
+  @media (max-width: 1330px) {
     justify-content: center;
     align-items: center;
-    height: 200px;
+    height: 100px;
   }
 `;
 
 const SideImageWrapper = styled.div`
-  flex:3.5;
-  height: 75px;
-  background: ${props => props.theme.main_bg_200};
+  flex: 3.5;
+  background: ${(props) => props.theme.main_bg_200};
   border-top-left-radius: 15px;
   border-bottom-left-radius: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${props => props.theme.second_bg};
+  color: ${(props) => props.theme.second_bg};
   padding-bottom: 5px;
-  @media (max-width: 1330px){
-    width: 80%;
+  @media (max-width: 1330px) {
     border-radius: 5px;
     height: 100px;
     justify-content: center;
@@ -179,6 +176,10 @@ const SideImage = styled.img`
   max-height: 75%;
   object-fit: cover;
   z-index: 2;
+  @media (max-width: 992px) {
+    max-width: 50%;
+    max-height: 50%;
+  }
 `;
 
 const StyledStar = styled.img`
@@ -186,12 +187,11 @@ const StyledStar = styled.img`
   height: 70px;
   position: absolute;
   z-index: 1;
-  
 `;
 const SideInfoWrapper = styled.div`
-  flex:3.5;
+  flex: 3.5;
   height: 95%;
-  background: ${props => props.theme.second_bg};
+  background: ${(props) => props.theme.second_bg};
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -200,15 +200,15 @@ const SideInfoWrapper = styled.div`
   text-overflow: ellipsis;
   white-space: pre-line;
   overflow: hidden;
-  @media (max-width: 1330px){
+  @media (max-width: 1330px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 `;
 const SideFooterWrapper = styled.div`
-  flex:3;
-  background: ${props => props.theme.second_bg};
+  flex: 3;
+  background: ${(props) => props.theme.second_bg};
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
   display: flex;
@@ -217,7 +217,7 @@ const SideFooterWrapper = styled.div`
   align-items: center;
   padding: 10px;
   gap: 3px;
-  @media (max-width: 1330px){
+  @media (max-width: 1330px) {
     flex-direction: column;
     justify-content: center;
     align-items: center;

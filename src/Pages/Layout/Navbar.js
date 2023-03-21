@@ -128,16 +128,7 @@ const NavRight = styled.div`
   box-shadow: 0px 1px 2px 1px ${(props) => props.theme.box_shadow1};
   color: ${(props) => props.theme.text_color};
   position: relative;
-  overflow: hidden;
-  @media (max-width: 992px) {
-    min-height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  @media (max-width: 1330px) {
-    min-height: 55px;
-  }
+  overflow: hidden;  
 `;
 
 const Contact = styled.div`
@@ -149,6 +140,7 @@ const Contact = styled.div`
   align-items: center;
   gap: 0.3rem;
   padding: 0.5rem;
+  
 
   &:hover {
     background: ${(props) => props.theme.hover};
@@ -156,9 +148,7 @@ const Contact = styled.div`
     color: ${(props) => props.theme.text_color2};
   }
 
-  @media (max-width: 992px) {
-    height: 100%;
-  }
+  
 `;
 
 const StyledImage = styled.img`
@@ -187,7 +177,5 @@ const StyledNavLink = styled.a`
     color: ${(props) => props.theme.text_color2};
   }
 
-  @media (max-width: 992px) {
-    height: 100%;
-  }
+  
 `;

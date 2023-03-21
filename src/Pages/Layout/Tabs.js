@@ -47,7 +47,7 @@ function Tabs() {
 
 const Container = styled.div`
   width: 100%;
-  height: 70vh;
+  min-height:65vh;
   display: flex;
   justify-content: space-around;
   align-items: stretch;
@@ -86,7 +86,7 @@ const MenuWrapper = styled.div`
 `;
 
 const LoadingDiv = styled.div`
-
+  min-height: 65vh;
   margin-top: 0.8rem;
   display: flex;
   justify-content: center;
