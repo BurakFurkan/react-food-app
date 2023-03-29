@@ -19,18 +19,18 @@ export function HomePagination() {
         aria-label="Increment value"
         onClick={() => dispatch(previousPage())}
         style={{ cursor: "pointer", fontSize: "2rem",boxShadow:`0px 4px 6px -1px ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
-        color={theme.text_color}
+        color={theme.nav_text}
       />:<BiLeftArrowAlt
       aria-label="Increment value"
       style={{fontSize: "2rem",boxShadow:`0px 4px 6px -1px ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
       color={theme.disabled}
     />}
-      <span style={{ fontSize: "1.5rem" }}>{page}</span>
+      <span style={{ fontSize: "1.5rem",color:`${theme.nav_text}` }}>{page}</span>
       <BiRightArrowAlt
         aria-label="Decrement value"
         onClick={() => dispatch(nextPage())}
         style={{ cursor: "pointer", fontSize: "2rem",boxShadow:`0px 4px 6px -1px ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
-        color={theme.text_color}
+        color={theme.nav_text}
       />
     </PaginationWrapper>
   );

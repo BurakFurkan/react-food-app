@@ -12,7 +12,7 @@ const TodayMenu = () => {
       <PageWrapper>
         <Sidebar />
         <ContentWrapper
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0, y: -100 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -100, transition: { duration: 0.2 } }}
         >
@@ -25,6 +25,7 @@ const TodayMenu = () => {
 
 const Container = styled.div`
   background: ${(props) => props.theme.main_bg};
+  
 
   @media (max-width: 992px) {
     display: flex;
@@ -51,7 +52,7 @@ const PageWrapper = styled.div`
 `;
 
 const ContentWrapper = styled(motion.div)`
-   width: 85vw;
+  width: 85vw;
   height: calc(100vh - 102px);
   display: flex;
   flex-direction: column;

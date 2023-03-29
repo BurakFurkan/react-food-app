@@ -51,18 +51,18 @@ export default function Carousel() {
           breakpoints={{
             0: {
               slidesPerView: 1,
-              spaceBetween: 10,
+              spaceBetween: 3,
               direction: "horizontal",
               mousewheel: true,
             },
             1024: {
-              spaceBetween: 5,
+              spaceBetween: 3,
               slidesPerView: 3,
               direction: "horizontal",
               mousewheel: true,
             },
             2560: {
-              spaceBetween: 10,
+              spaceBetween: 3,
               slidesPerView: 3,
               direction: "horizontal",
               mousewheel: true,

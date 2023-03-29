@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled,{useTheme} from "styled-components";
 import { motion } from "framer-motion";
 import { DropdownThemes } from "./DropdownThemes";
 import { useDispatch } from "react-redux";
@@ -9,6 +9,7 @@ import USAFlag from "../assets/usa-flag.png";
 
 export const Dropdown = ({ info }) => {
   const dispatch = useDispatch();
+  const theme = useTheme();
 
   return (
     <Container
@@ -26,7 +27,7 @@ export const Dropdown = ({ info }) => {
           style={{
             width: "75%",
             height: "1px",
-            backgroundColor: "white",
+            backgroundColor: `${theme.nav_text}`,
             border: "none",
           }}
         />
@@ -57,7 +58,7 @@ const Container = styled(motion.div)`
   border-radius: 5px;
   background-color: ${(props) => props.theme.main_bg};
   box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
-  color: ${(props) => props.theme.text_color};
+  color: ${(props) => props.theme.nav_text};
   z-index: 999 !important;
   display: flex;
   flex-direction: column;

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import OverallChart from "../components/OverallChart";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import {
   Chart as ChartJS,
@@ -11,8 +11,8 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -22,24 +22,24 @@ ChartJS.register(
   Legend
 );
 
-
-
 const MainChart = () => {
   const { t } = useTranslation();
-  const { meals,userName } = useSelector((reduxStore) => reduxStore.user);
+  const { meals, userName } = useSelector((reduxStore) => reduxStore.user);
   return (
     <MainWrapper>
       <UserInfo>
         <h1>{t("welcome")}</h1>
-        <h1 >{userName}</h1>
+        <h1>{userName}</h1>
       </UserInfo>
       <InfoWrapper>
         <h1>{t("overall")}</h1>
-        <h1 >{t("nutrients")}</h1>
+        <h1>{t("nutrients")}</h1>
       </InfoWrapper>
-      {(meals.length>0)?(<ChartWrapper>
-        <Bar options={OverallChart().config} data={OverallChart().data}  />
-        </ChartWrapper>):null}
+      {meals.length > 0 ? (
+        <ChartWrapper>
+          <Bar options={OverallChart().config} data={OverallChart().data} />
+        </ChartWrapper>
+      ) : null}
     </MainWrapper>
   );
 };
@@ -53,10 +53,10 @@ const MainWrapper = styled.div`
   box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   z-index: 55;
   position: sticky;
-  top:0;
+  top: 0;
   display: flex;
   color: ${(props) => props.theme.text_color};
-  flex:1;
+  flex: 1;
 
   @media (max-width: 992px) {
     display: flex;
@@ -80,29 +80,27 @@ const UserInfo = styled.div`
   padding: 1rem;
   font-family: "Marck Script", cursive;
 
-    h1{
-      padding-left:2.5rem;
-      color: ${(props) => props.theme.second_bg};
-    }
-
-  @media (max-width: 768px) {
-    height:85px;
-    display: flex;
-    flex-direction:row;
-    align-items: flex-start;
-    justify-content: center;
-    gap:0.5rem;
-    padding: 5px;
-
-    h1{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding:0;
-    }
-
+  h1 {
+    padding-left: 2.5rem;
+    color: ${(props) => props.theme.second_bg};
   }
 
+  @media (max-width: 768px) {
+    height: 85px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 5px;
+
+    h1 {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0;
+    }
+  }
 `;
 
 const InfoWrapper = styled.div`
@@ -115,49 +113,48 @@ const InfoWrapper = styled.div`
   padding-right: 2rem;
   position: relative;
   color: ${(props) => props.theme.second_bg};
-  &:before{
-    content:"";
-    width:1px;
+  &:before {
+    content: "";
+    width: 1px;
     height: 80%;
     background-color: ${(props) => props.theme.text_color};
     position: absolute;
-    left:0;
+    left: 0;
   }
-  &:after{
-    content:"";
-    width:1px;
+  &:after {
+    content: "";
+    width: 1px;
     height: 80%;
     background-color: ${(props) => props.theme.text_color};
     position: absolute;
-    right:0;
+    right: 0;
   }
 
   @media (max-width: 768px) {
     display: flex;
-    flex-direction:row;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap:0.5rem;
-    padding:0;
+    gap: 0.5rem;
+    padding: 0;
 
-    h1{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding:0;
+    h1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
     }
 
-    &:before{
-      width:100%;
+    &:before {
+      width: 100%;
       height: 1px;
-      top:-5px;
-  }
-  &:after{
-    width:100%;
-    height: 1px;
-    bottom:-5px;
-  }
-
+      top: -5px;
+    }
+    &:after {
+      width: 100%;
+      height: 1px;
+      bottom: -5px;
+    }
   }
 `;
 
@@ -171,7 +168,4 @@ const ChartWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
-
 `;
-
-

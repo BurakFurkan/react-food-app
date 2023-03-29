@@ -60,7 +60,6 @@ const Navbar = () => {
         </StyledNavLink>
         <Contact>
           <StyledImage src={userImage} alt="userImage" />
-          {t("user")}
         </Contact>
       </NavRight>
     </Container>
@@ -126,9 +125,9 @@ const NavRight = styled.div`
   gap: 1rem;
   border-radius: 5px;
   box-shadow: 0px 1px 2px 1px ${(props) => props.theme.box_shadow1};
-  color: ${(props) => props.theme.text_color};
+  color: ${(props) => props.theme.nav_text};
   position: relative;
-  overflow: hidden;  
+  overflow: hidden;
 `;
 
 const Contact = styled.div`
@@ -140,15 +139,12 @@ const Contact = styled.div`
   align-items: center;
   gap: 0.3rem;
   padding: 0.5rem;
-  
 
   &:hover {
     background: ${(props) => props.theme.hover};
     transition: 0.5s ease-in-out;
     color: ${(props) => props.theme.text_color2};
   }
-
-  
 `;
 
 const StyledImage = styled.img`
@@ -176,6 +172,4 @@ const StyledNavLink = styled.a`
     transition: 0.5s ease-in-out;
     color: ${(props) => props.theme.text_color2};
   }
-
-  
 `;

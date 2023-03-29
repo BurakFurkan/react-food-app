@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { registerUserName, login } from "../features/userSlice";
-import knifeImage from "../assets/knife.jpg"
+import knifeImage from "../assets/knife.jpg";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -42,8 +42,8 @@ const LoginPage = () => {
               {...register("nameInput", { required: true })}
             />
             {errors.nameInput && (
-              <span style={{ alignSelf: "flex-start", color: "#57BE6C" }}>
-                Provide a valid name
+              <span style={{ alignSelf: "flex-start", color: "red" }}>
+                *Provide a valid name
               </span>
             )}
           </InputGroup>
@@ -63,8 +63,8 @@ const LoginPage = () => {
               })}
             />
             {errors.passwordInput && (
-              <span style={{ alignSelf: "flex-start", color: "#57BE6C" }}>
-                Provide a valid password
+              <span style={{ alignSelf: "flex-start", color: "red" }}>
+                *Your password must be have at least 8 characters long
               </span>
             )}
           </InputGroup>
@@ -83,8 +83,8 @@ const LoginPage = () => {
               })}
             />
             {errors.mailInput && (
-              <span style={{ alignSelf: "flex-start", color: "#57BE6C" }}>
-                Provide a valid mail
+              <span style={{ alignSelf: "flex-start", color: "red" }}>
+                *Provide a valid mail
               </span>
             )}
           </InputGroup>
@@ -196,7 +196,7 @@ const InputGroup = styled.div`
     width: 98%;
     height: 100%;
     background: transparent;
-    border: 2px solid #57BE6C;
+    border: 2px solid #57be6c;
     border-radius: 5px;
     outline: none;
     padding: 0 10px;
@@ -209,7 +209,7 @@ const InputGroup = styled.div`
     top: ${(props) =>
       props.inputcontrol && props.inputcontrol.length > 0 ? "-9px" : "15px"};
     left: 10px;
-    color: #57BE6C;
+    color: #57be6c;
     text-transform: capitalize;
     font-size: ${(props) =>
       props.inputcontrol && props.inputcontrol.length > 0 ? "1rem" : "1.15rem"};
@@ -222,12 +222,12 @@ const InputGroup = styled.div`
 
   &:hover > label {
     top: -9px;
-    background-color: #D3CDC6;
+    background-color: #d3cdc6;
     font-size: 1rem;
   }
   &:focus-within > label {
     top: -9px;
-    background-color: #D3CDC6;
+    background-color: #d3cdc6;
     font-size: 1rem;
   }
 `;
@@ -240,7 +240,7 @@ const SubmitInput = styled.input.attrs({
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  color: #57BE6C;
+  color: #57be6c;
   cursor: pointer;
   margin: 15px 0 0 0;
   width: 100%;
@@ -251,12 +251,12 @@ const SubmitInput = styled.input.attrs({
   transition: 0.15s;
   text-align: center;
   &:hover {
-    background-color: #57BE6C;
-    color: #FFFFFF;
+    background-color: #57be6c;
+    color: #ffffff;
   }
   &:active {
     background-color: #f1ac15;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 `;
 

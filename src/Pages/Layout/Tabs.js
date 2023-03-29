@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import MenuItem from "../../components/MenuItem";
-import { useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import ClipLoader from "react-spinners/ClipLoader";
 import ErrorHandler from "../../components/ErrorHandler";
 
@@ -12,26 +12,19 @@ function Tabs() {
     borderColor: "#f4f4f5",
   };
 
-  const { products, isLoading,error } = useSelector(
-    (store) => store.product
-  );
-  const { meals } = useSelector(
-    (store) => store.user
-  );
+  const { products, isLoading, error } = useSelector((store) => store.product);
+  const { meals } = useSelector((store) => store.user);
 
-    useEffect(() =>{
-
-    },[meals])
-
+  useEffect(() => {}, [meals]);
 
   if (isLoading) {
     return (
       <LoadingDiv>
-        <ClipLoader loading={isLoading}  cssOverride={cssOverride} size={100} />
+        <ClipLoader loading={isLoading} cssOverride={cssOverride} size={100} />
       </LoadingDiv>
     );
-  }else if (error){
-    return <ErrorHandler/>
+  } else if (error) {
+    return <ErrorHandler />;
   }
 
   return (
@@ -47,7 +40,7 @@ function Tabs() {
 
 const Container = styled.div`
   width: 100%;
-  min-height:65vh;
+  min-height: 65vh;
   display: flex;
   justify-content: space-around;
   align-items: stretch;
@@ -65,20 +58,18 @@ const Container = styled.div`
   @media (max-width: 768px) {
     width: 330px;
   }
-
 `;
 
 const MenuWrapper = styled.div`
-  width: 95%;
   height: 95%;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.5rem;
   overflow: scroll;
-  padding: 1rem;
+  padding: 0.5rem;
 
   &::-webkit-scrollbar {
     display: none;
@@ -91,7 +82,6 @@ const LoadingDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
 
 export default Tabs;

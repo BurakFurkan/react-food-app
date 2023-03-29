@@ -8,13 +8,11 @@ import SideCart from "../components/SideCart";
 import { HomePagination } from "../components/HomePagination";
 import { motion } from "framer-motion";
 
-
 const Home = () => {
-
   return (
-    <Container  >
-      <Navbar/>
-      <PageWrapper >
+    <Container>
+      <Navbar />
+      <PageWrapper>
         <Sidebar />
         <ContentWrapper
           initial={{ opacity: 0, y: -100 }}
@@ -33,26 +31,22 @@ const Home = () => {
 
 const Container = styled.div`
   background: ${(props) => props.theme.main_bg};
-  min-height:100vh;
+  min-height: 100vh;
   @media (max-width: 768px) {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap:1rem;
+    gap: 1rem;
   }
 `;
 
 const PageWrapper = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 1rem;
   padding: 1rem;
   align-items: flex-start;
-
-  
-
-  
 
   @media (max-width: 992px) {
     display: flex;
@@ -61,22 +55,17 @@ const PageWrapper = styled.div`
     justify-content: flex-start;
     padding: 5px;
   }
-
 `;
 
 const ContentWrapper = styled(motion.div)`
   display: flex;
-  padding:0.5rem;
+  padding: 0.5rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: ${(props) => props.theme.main_bg};
   max-height: 85vh;
   gap: 0.5rem;
-
-  @media (max-width: 1288px) {
-    max-width: 600px;
-  }
 `;
 
 export default Home;

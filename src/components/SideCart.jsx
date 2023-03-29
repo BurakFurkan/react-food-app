@@ -119,11 +119,10 @@ const AnimationDiv = styled(motion.div)`
   align-items: center;
   box-sizing: border-box;
   position: relative;
-
 `;
 
 const SideItem = styled(motion.li)`
-  height: 80px;
+  min-height: 80px;
   background: ${(props) => props.theme.second_bg};
   border-radius: 15px;
   color: ${(props) => props.theme.text_color2};
@@ -137,6 +136,12 @@ const SideItem = styled(motion.li)`
   letter-spacing: 1px;
   gap: 3px;
   padding-right: 5px;
+
+  @media (max-width: 1288px) {
+    flex-direction: column;
+    min-height: 150px;
+  }
+
   @media (max-width: 992px) {
     flex-direction: row;
   }
@@ -163,6 +168,9 @@ const SideImageWrapper = styled.div`
     justify-content: center;
     align-items: center;
   }
+  @media (max-width: 1288px) {
+    max-height: 64px;
+  }
 `;
 
 const SideImage = styled.img`
@@ -180,6 +188,9 @@ const SideImage = styled.img`
     max-width: 50%;
     max-height: 50%;
   }
+  @media (max-width: 1288px) {
+    max-height: 70%;
+  }
 `;
 
 const StyledStar = styled.img`
@@ -187,6 +198,10 @@ const StyledStar = styled.img`
   height: 70px;
   position: absolute;
   z-index: 1;
+  @media (max-width: 1288px) {
+    max-width: 40px;
+    max-height: 40px;
+  }
 `;
 const SideInfoWrapper = styled.div`
   flex: 3.5;

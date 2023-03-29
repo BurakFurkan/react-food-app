@@ -32,40 +32,39 @@ const CategoryTabs = () => {
 
 const CategoryWrapper = styled.div`
   min-height: 50px;
-  
   display: flex;
   align-items: stretch;
   border-radius: 5px;
   overflow: hidden;
-  gap:0.5rem;
-  
+  gap: 0.5rem;
+
   &::-webkit-scrollbar {
     display: none;
   }
-  
+
   @media (max-width: 1288px) {
-    max-width: 600px;
+    max-width: 700px;
   }
   @media (max-width: 992px) {
     display: flex;
-    width:95vw;
-    overflow-x:scroll;
-    scroll-snap-type:x mandatory;
+    width: 95vw;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
   }
 `;
 
 const CategoryTab = styled.span`
   color: ${(props) => props.theme.text_color2};
-  
+
   padding: 0.75rem;
   background: ${(props) => props.theme.second_bg};
   display: flex;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
   text-transform: uppercase;
   transition: 0.2s ease-out;
-  border-radius:999px;
+  border-radius: 999px;
   &:hover {
     cursor: pointer;
     background: ${(props) => props.theme.hover2};
@@ -83,7 +82,7 @@ const CategoryTab = styled.span`
 
   @media (max-width: 992px) {
     display: flex;
-    flex:33%;
+    flex: 33%;
   }
 `;
 
