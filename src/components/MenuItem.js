@@ -27,9 +27,9 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
-    iconColor: `${theme.text_color}`,
+    iconColor: `${theme.nav_text}`,
     background: `${theme.main_bg}`,
-    color:`${theme.text_color}`,
+    color:`${theme.nav_text}`,
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);

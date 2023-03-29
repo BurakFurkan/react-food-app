@@ -51,6 +51,7 @@ const LoginPage = () => {
           <InputGroup inputcontrol={watchPassword}>
             <label>Password</label>
             <input
+            type="password"
               autoComplete="off"
               {...register("passwordInput", {
                 required: true,
