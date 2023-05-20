@@ -42,11 +42,11 @@ const Navbar = () => {
       <NavRight>
         <Contact
           onClick={() => {
-            openInNewTab("https://www.fao.org/home/en/");
+            openInNewTab("https://bftportfolio.netlify.app/");
           }}
         >
           <BiWorld style={{ fontSize: "1.3rem" }} />
-          FAO
+          {t("portfolio")}
         </Contact>
         <StyledNavLink
           ref={portalRef}

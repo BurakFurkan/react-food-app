@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { motion } from "framer-motion";
 import { ImBin } from "react-icons/im";
 import { GoLocation } from "react-icons/go";
@@ -7,18 +6,41 @@ import { useSelector, useDispatch } from "react-redux";
 import { removeFromUserMeals, removeFromUserMenu } from "../features/userSlice";
 import yellowStar from "../assets/yellowStar.png";
 import { useTranslation } from "react-i18next";
+import Swal from "sweetalert2";
+import styled,{useTheme} from "styled-components";
 
 const SideCart = () => {
   const { meals } = useSelector((reduxStore) => reduxStore.user);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [dragStart, setDragStart] = useState(0);
+  const theme=useTheme();
+
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    iconColor: `${theme.nav_text}`,
+    background: `${theme.main_bg}`,
+    color:`${theme.nav_text}`,
+    didOpen: (toast) => {
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
+  });
 
   const handleDragEnd = (e, info, mealID) => {
     const dragEnd = info.point.x;
     if (dragStart - dragEnd > 200) {
       dispatch(removeFromUserMenu(mealID));
       dispatch(removeFromUserMeals(mealID));
+      Toast.fire({
+        icon: "error",
+        title: t("ItemRemoved"),
+      });
+
     }
   };
 

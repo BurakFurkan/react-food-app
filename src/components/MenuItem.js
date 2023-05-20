@@ -4,10 +4,13 @@ import { CgAddR } from "react-icons/cg";
 import { BsHeart, BsCheckSquare } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   addToUserMenu,
   removeFromUserMenu,
   removeFromUserMeals,
+  addToFavList,
+  removeFromFavList
 } from "../features/userSlice";
 import { getUserMeals } from "../features/userSlice";
 import useRandomNumber from "./useRandomNumber";
@@ -16,11 +19,10 @@ import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 
 const MenuItem = ({ id, title, image, restaurantChain }) => {
-  const { userMenu } = useSelector((reduxStore) => reduxStore.user);
+  const { userMenu,favList } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
   const theme=useTheme();
   const price1 = useRandomNumber(50, 150);
-
   const Toast = Swal.mixin({
     toast: true,
     position: "top-end",
@@ -36,6 +38,12 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
     },
   });
 
+  const favClickHandler = (id) => {
+    favList.includes(id) ? dispatch(removeFromFavList(id)):dispatch(addToFavList(id));
+  }
+
+  const { t } = useTranslation();
+
   return (
     <Container
       initial={{ opacity: 0, y: 200, transition: { duration: 1 } }}
@@ -49,7 +57,9 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
             cursor: "pointer",
             boxSizing: "border-box",
             transition: "0.3s ease-in-out",
+            color:(favList.includes(id) ?"#d02a2a":theme.text_color)
           }}
+          onClick={()=>favClickHandler(id)}
         />
         {userMenu.includes(id) ? (
           <BsCheckSquare
@@ -65,7 +75,7 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
               dispatch(removeFromUserMeals(id));
               Toast.fire({
                 icon: "error",
-                title: "Item removed to User Daily Meal",
+                title: t("ItemRemoved"),
               });
             }}
           />
@@ -83,7 +93,7 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
               dispatch(getUserMeals(id));
               Toast.fire({
                 icon: "success",
-                title: "Item added to User Daily Meal",
+                title: t("ItemAdded"),
               });
             }}
           />

@@ -89,7 +89,7 @@ const DetailedMenuItem = ({
 
                 Toast.fire({
                   icon: "error",
-                  title: "Item removed to User Daily Meal",
+                  title: t("ItemRemoved"),
                 });
               }}
             />

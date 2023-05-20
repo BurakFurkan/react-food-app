@@ -62,7 +62,10 @@ export const translationsEn = {
     overall:"Overall",
     "overall nutrients":"Overall Nutrients",
     "not found":"Ooops.. Seems like You're lost?",
-    "add meal":"Add Some Meal"
+    "add meal":"Add Some Meal",
+    "ItemRemoved":"Item removed from Cart",
+    "ItemAdded":"Item added to Cart",
+    portfolio:"Portfolio"
     
 };
 
@@ -130,6 +133,9 @@ export const translationsTr = {
     overall:"Tüm",
     "overall nutrients":"Tüm Besin Maddeleri",
     "not found":"Kaybolmuş gibi görünüyorsun?",
-    "add meal":"Yemek Ekle"
+    "add meal":"Yemek Ekle",
+    "ItemRemoved":"Ürün sepetten çıkarıldı",
+    "ItemAdded":"Ürün sepete eklendi",
+    portfolio:"Portfolyo"
 };
 
