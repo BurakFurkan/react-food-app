@@ -5,10 +5,11 @@ import { useState } from "react";
 import styled, {useTheme} from "styled-components";
 import "swiper/css";
 import { useSelector } from "react-redux";
-import { motion } from "framer-motion";
 import { CgAddR } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
+import Modal from "../Pages/Modal";
+import { createPortal } from "react-dom";
 
 export default function Carousel() {
   const { t } = useTranslation();
@@ -19,9 +20,12 @@ export default function Carousel() {
   const selectedMeal = meals.filter((meal) => {
     return meal.id === selectedId;
   });
+  const portalRoot = document.getElementById("modal-root");
+  const ModalPortal = () =>
+    createPortal(<Modal modalHandler={modalHandler} selectHandler={selectHandler} selectedId={selectedId} selectedMeal={selectedMeal}/>, portalRoot);
 
   const modalHandler = () => {
-    selectedId && setIsOpen(isOpen ? false : true);
+    if(selectedId){(setIsOpen(!isOpen))}
   };
   const selectHandler = (itemID) => {
     setSelectedId(itemID);
@@ -83,21 +87,7 @@ export default function Carousel() {
             );
           })}
           {isOpen && (
-            <ModalWrapper
-              data-id="modal"
-              onClick={(e) => {
-                e.target.dataset.id === "modal" && modalHandler();
-                e.preventDefault();
-              }}
-              layoutId={selectedId}
-            >
-              <DetailedMenuItem
-                modalHandler={modalHandler}
-                selectHandler={selectHandler}
-                {...selectedId}
-                {...selectedMeal[0]}
-              />
-            </ModalWrapper>
+            <ModalPortal/>
           )}
         </Swiper>
       </CarouselWrapper>
@@ -110,25 +100,6 @@ const CarouselWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 320px;
-  }
-`;
-
-const ModalWrapper = styled(motion.div)`
-  position: fixed; /* Stay in place */
-  z-index: 999; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-
-  & > div {
-    transform: scale(1.2);
   }
 `;
 

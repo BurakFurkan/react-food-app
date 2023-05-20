@@ -101,7 +101,7 @@ const Container = styled(motion.div)`
   background-image: url(${knifeImage});
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -117,6 +117,7 @@ const Container = styled(motion.div)`
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    gap: 0;
   }
 `;
 
