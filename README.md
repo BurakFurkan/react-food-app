@@ -1,4 +1,6 @@
 -----USAGE------ <br/>
+Live link: https://food-app-burakfurkan.vercel.app
+
 You should get an api key from https://spoonacular.com/food-api <br/>
 Create .env file under the food-app folder 
 
