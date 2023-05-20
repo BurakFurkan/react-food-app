@@ -6,10 +6,12 @@ import { useDispatch } from "react-redux";
 import { langHandler } from "../features/userSlice";
 import TurkeyFlag from "../assets/turkey-flag.png";
 import USAFlag from "../assets/usa-flag.png";
+import { useTranslation } from "react-i18next";
 
 export const Dropdown = ({ info }) => {
   const dispatch = useDispatch();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Container
@@ -32,7 +34,7 @@ export const Dropdown = ({ info }) => {
           }}
         />
       </ul>
-      <p>Themes</p>
+      <p>{t("navTheme")}</p>
       <ul>
         <li>
           <DropdownThemes

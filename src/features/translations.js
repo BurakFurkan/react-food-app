@@ -65,7 +65,8 @@ export const translationsEn = {
     "add meal":"Add Some Meal",
     "ItemRemoved":"Item removed from Cart",
     "ItemAdded":"Item added to Cart",
-    portfolio:"Portfolio"
+    portfolio:"Portfolio",
+    navTheme:"Theme"
     
 };
 
@@ -75,7 +76,7 @@ export const translationsTr = {
     user:"Kullanıcı",
     meals:"Ürünler",
     todaymenu:"Bugünün Menüsü",
-    dashboard:"Kontrol Paneli",
+    dashboard:"Kullanıcı Paneli",
     burger:"Hamburger",
     kebab:"Kebap",
     chicken:"Tavuk",
@@ -136,6 +137,7 @@ export const translationsTr = {
     "add meal":"Yemek Ekle",
     "ItemRemoved":"Ürün sepetten çıkarıldı",
     "ItemAdded":"Ürün sepete eklendi",
-    portfolio:"Portfolyo"
+    portfolio:"Portfolyo",
+    navTheme:"Tema"
 };
 
