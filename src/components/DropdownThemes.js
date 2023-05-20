@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { useDispatch} from "react-redux";
-import {themeHandler} from "../features/userSlice";
+import { useDispatch } from "react-redux";
+import { themeHandler } from "../features/userSlice";
 
-export const DropdownThemes = (colorarray=[], theme) => {
+export const DropdownThemes = (colorarray = []) => {
   const dispatch = useDispatch();
   return (
-    <Container onClick={() =>dispatch(themeHandler(colorarray.theme))} >
+    <Container onClick={() => dispatch(themeHandler(colorarray.theme))}>
       {colorarray.colorarray.map((color, index) => {
         return <Color key={index} color={color} />;
       })}

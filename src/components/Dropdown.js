@@ -1,5 +1,5 @@
 import React from "react";
-import styled,{useTheme} from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { motion } from "framer-motion";
 import { DropdownThemes } from "./DropdownThemes";
 import { useDispatch } from "react-redux";

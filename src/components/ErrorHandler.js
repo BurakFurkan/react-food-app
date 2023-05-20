@@ -21,7 +21,7 @@ const ErrorHandler = () => {
 export default ErrorHandler;
 
 const Container = styled.div`
-  padding-top:80px;
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

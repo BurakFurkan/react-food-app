@@ -9,8 +9,8 @@ import {
   Title,
   Tooltip,
   Legend,
-} from 'chart.js';
-import { Bar } from 'react-chartjs-2';
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 ChartJS.register(
   CategoryScale,
   LinearScale,
@@ -20,21 +20,21 @@ ChartJS.register(
   Legend
 );
 
-
-
 const MealChart = (props) => {
-  
   return (
     <MainWrapper>
       <UserInfo>
         <img src={props.meal.images[1]} alt={props.meal.title} />
       </UserInfo>
       <InfoWrapper>
-        <h1 >{props.meal.title}</h1>
+        <h1>{props.meal.title}</h1>
       </InfoWrapper>
       <ChartWrapper>
-        <Bar options={DashboardChart(props.meal).config} data={DashboardChart(props.meal).data}  />
-        </ChartWrapper>
+        <Bar
+          options={DashboardChart(props.meal).config}
+          data={DashboardChart(props.meal).data}
+        />
+      </ChartWrapper>
     </MainWrapper>
   );
 };
@@ -49,7 +49,7 @@ const MainWrapper = styled.div`
   box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
   display: flex;
   color: #777785;
-  flex:1;
+  flex: 1;
 
   @media (max-width: 992px) {
     display: flex;
@@ -72,22 +72,20 @@ const UserInfo = styled.div`
   color: ${(props) => props.theme.text_color3};
   padding: 1rem;
 
-  img{
+  img {
     width: 100%;
-    height:auto;
+    height: auto;
     border-radius: 30%;
-    object-fit:cover;
-    object-position:50% 50%;
+    object-fit: cover;
+    object-position: 50% 50%;
   }
 
   @media (max-width: 768px) {
-    height:50%;
-    img{
-      width:45%
+    height: 50%;
+    img {
+      width: 45%;
     }
   }
-  
-
 `;
 
 const InfoWrapper = styled.div`
@@ -101,38 +99,38 @@ const InfoWrapper = styled.div`
   position: relative;
   font-family: "Marck Script", cursive;
   color: ${(props) => props.theme.text_color3};
-  &:before{
-    content:"";
-    width:1px;
+  &:before {
+    content: "";
+    width: 1px;
     height: 80%;
     background-color: ${(props) => props.theme.text_color};
     position: absolute;
-    left:0;
+    left: 0;
   }
-  &:after{
-    content:"";
-    width:1px;
+  &:after {
+    content: "";
+    width: 1px;
     height: 80%;
     background-color: ${(props) => props.theme.text_color};
     position: absolute;
-    right:0;
+    right: 0;
   }
 
   @media (max-width: 992px) {
-    font-size:0.8rem;
+    font-size: 0.8rem;
 
-    &:before{
-    width:80%;
-    height: 1px;
-    top:0;
-    left:10%;
-  }
-  &:after{
-    width:80%;
-    height: 1px;
-    bottom:0;
-    left:10%;
-  }
+    &:before {
+      width: 80%;
+      height: 1px;
+      top: 0;
+      left: 10%;
+    }
+    &:after {
+      width: 80%;
+      height: 1px;
+      bottom: 0;
+      left: 10%;
+    }
   }
 `;
 
@@ -145,7 +143,4 @@ const ChartWrapper = styled.div`
   justify-content: center;
   align-items: center;
   padding: 10px;
-
 `;
-
-

@@ -1,11 +1,12 @@
 import React from "react";
-import styled,{useTheme} from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { CgAddR } from "react-icons/cg";
 import { BsHeart } from "react-icons/bs";
 import { TiDeleteOutline } from "react-icons/ti";
 import { GiMagnifyingGlass } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import Placeholder from "../assets/placeholder.png";
 import {
   addToUserMenu,
   removeFromUserMenu,
@@ -27,7 +28,7 @@ const DetailedMenuItem = ({
   const { t } = useTranslation();
   const { userMenu } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
-  const theme=useTheme();
+  const theme = useTheme();
 
   const Toast = Swal.mixin({
     toast: true,
@@ -43,6 +44,10 @@ const DetailedMenuItem = ({
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
+
+  const addDefaultSrc = (ev) => {
+    ev.target.src = Placeholder;
+  };
 
   return (
     <Container
@@ -112,7 +117,13 @@ const DetailedMenuItem = ({
           />
         )}
       </CardHeader>
-      <CardImageWrapper images={(images[1] || images )} />
+      <CardImageWrapper>
+        <CardImage
+          onError={(e) => addDefaultSrc(e)}
+          src={images[0]}
+          alt="CardImage"
+        />
+      </CardImageWrapper>
       <CardInfoWrapper>
         <h2 style={{ fontSize: "1.5rem" }}>{title}</h2>
       </CardInfoWrapper>
@@ -120,9 +131,15 @@ const DetailedMenuItem = ({
         <StyledTable>
           <tbody>
             <StyledTR>
-              <StyledTH style={{color:`${theme.text_color2}`}} >{t("nutrients")}</StyledTH>
-              <StyledTH style={{color:`${theme.text_color2}`}} >{t("value")}</StyledTH>
-              <StyledTH style={{color:`${theme.text_color2}`}} >{t("dailyamount")}</StyledTH>
+              <StyledTH style={{ color: `${theme.text_color2}` }}>
+                {t("nutrients")}
+              </StyledTH>
+              <StyledTH style={{ color: `${theme.text_color2}` }}>
+                {t("value")}
+              </StyledTH>
+              <StyledTH style={{ color: `${theme.text_color2}` }}>
+                {t("dailyamount")}
+              </StyledTH>
             </StyledTR>
             {nutrition.nutrients.map((nutrient, index) => {
               return (
@@ -163,18 +180,23 @@ const Container = styled(motion.div)`
 `;
 
 const CardImageWrapper = styled.div`
+  height: auto;
+  min-height: 150px;
   width: 100%;
-  height: 400px;
-  background-image: ${(props) => `url(${props.images})`};
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  -webkit-box-shadow:  1px 1px 6px -1px ${(props) => props.theme.text_color};
-  box-shadow:  1px 1px 6px -1px ${(props) => props.theme.text_color};
-  border-radius: 25px;
+  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.text_color};
+  border-radius: 8px;
   box-sizing: border-box;
   overflow: hidden;
-  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const CardImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: ${(props) => props.theme.main_bg};
 `;
 
 const CardHeader = styled.div`
@@ -193,14 +215,12 @@ const CardHeader = styled.div`
 
 const CardInfoWrapper = styled.div`
   width: 100%;
-  height: 150px;
+  padding: 1rem 0;
   color: ${(props) => props.theme.text_color};
-  margin: 1rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  gap: 2rem;
 `;
 
 const CardFooter = styled.div`
@@ -214,10 +234,14 @@ const CardFooter = styled.div`
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
-    display: none;
+    border-radius: 4px;
+    width: 8px;
+    background-color: ${(props) => props.theme.hover};
   }
-
-  
+  &::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.main_bg};
+    border-radius: 4px;
+  }
 `;
 
 const StyledTable = styled.table`
@@ -231,13 +255,13 @@ const StyledTable = styled.table`
   @media (max-width: 768px) {
     align-items: flex-start;
     justify-content: flex-start;
-    font-size:0.8rem;
+    font-size: 0.8rem;
   }
 `;
 const StyledTR = styled.tr`
   &:nth-child(odd) {
     background-color: ${(props) => props.theme.hover};
-    color:${(props) => props.theme.text_color3};
+    color: ${(props) => props.theme.text_color3};
   }
 
   &:hover {

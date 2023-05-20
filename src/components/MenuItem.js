@@ -1,5 +1,5 @@
 import React from "react";
-import styled,{useTheme} from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { CgAddR } from "react-icons/cg";
 import { BsHeart, BsCheckSquare } from "react-icons/bs";
 import { GoLocation } from "react-icons/go";
@@ -10,8 +10,9 @@ import {
   removeFromUserMenu,
   removeFromUserMeals,
   addToFavList,
-  removeFromFavList
+  removeFromFavList,
 } from "../features/userSlice";
+import Placeholder from "../assets/placeholder.png";
 import { getUserMeals } from "../features/userSlice";
 import useRandomNumber from "./useRandomNumber";
 import ReactStars from "react-stars";
@@ -19,9 +20,9 @@ import Swal from "sweetalert2";
 import { motion } from "framer-motion";
 
 const MenuItem = ({ id, title, image, restaurantChain }) => {
-  const { userMenu,favList } = useSelector((reduxStore) => reduxStore.user);
+  const { userMenu, favList } = useSelector((reduxStore) => reduxStore.user);
   const dispatch = useDispatch();
-  const theme=useTheme();
+  const theme = useTheme();
   const price1 = useRandomNumber(50, 150);
   const Toast = Swal.mixin({
     toast: true,
@@ -31,16 +32,22 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
     timerProgressBar: true,
     iconColor: `${theme.nav_text}`,
     background: `${theme.main_bg}`,
-    color:`${theme.nav_text}`,
+    color: `${theme.nav_text}`,
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);
     },
   });
 
+  const addDefaultSrc = (ev) => {
+    ev.target.src = Placeholder;
+  };
+
   const favClickHandler = (id) => {
-    favList.includes(id) ? dispatch(removeFromFavList(id)):dispatch(addToFavList(id));
-  }
+    favList.includes(id)
+      ? dispatch(removeFromFavList(id))
+      : dispatch(addToFavList(id));
+  };
 
   const { t } = useTranslation();
 
@@ -57,9 +64,9 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
             cursor: "pointer",
             boxSizing: "border-box",
             transition: "0.3s ease-in-out",
-            color:(favList.includes(id) ?"#d02a2a":theme.text_color)
+            color: favList.includes(id) ? "#d02a2a" : theme.text_color,
           }}
-          onClick={()=>favClickHandler(id)}
+          onClick={() => favClickHandler(id)}
         />
         {userMenu.includes(id) ? (
           <BsCheckSquare
@@ -100,7 +107,11 @@ const MenuItem = ({ id, title, image, restaurantChain }) => {
         )}
       </CardHeader>
       <CardImageWrapper>
-        <CardImage src={image} alt="CardImage" />
+        <CardImage
+          onError={(e) => addDefaultSrc(e)}
+          src={image}
+          alt="CardImage"
+        />
       </CardImageWrapper>
       <CardInfoWrapper>
         <h2>{title}</h2>
@@ -153,10 +164,9 @@ const Container = styled(motion.div)`
 const CardImageWrapper = styled.div`
   height: auto;
   min-height: 150px;
-  width: auto;
-  min-width: 150px;
+  width: 100%;
   box-shadow: 0px 4px 6px -1px ${(props) => props.theme.text_color};
-  border-radius: 50%;
+  border-radius: 8px;
   box-sizing: border-box;
   overflow: hidden;
   display: flex;
@@ -168,6 +178,7 @@ const CardImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
+  background-color: ${(props) => props.theme.main_bg};
 `;
 
 const CardHeader = styled.div`
@@ -242,7 +253,7 @@ const PriceSign = styled.span`
 `;
 
 const DiscountSpan = styled.span`
- font-size: 0.9rem;
+  font-size: 0.9rem;
 `;
 
 export default MenuItem;

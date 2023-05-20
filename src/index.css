@@ -1,17 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Marck+Script&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Marck+Script&display=swap");
 
-*{
- box-sizing: border-box; 
- margin: 0;
- padding: 0;  
-
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-
-body{
-    color:rgb(237, 234, 222);
-    font-family: 'Figtree', sans-serif;
+body {
+  color: rgb(237, 234, 222);
+  font-family: "Figtree", sans-serif;
 }
-

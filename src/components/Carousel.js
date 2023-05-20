@@ -2,12 +2,12 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import DetailedMenuItem from "../components/DetailedMenuItem";
 import { useState } from "react";
-import styled, {useTheme} from "styled-components";
+import styled, { useTheme } from "styled-components";
 import "swiper/css";
 import { useSelector } from "react-redux";
 import { CgAddR } from "react-icons/cg";
 import { NavLink } from "react-router-dom";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import Modal from "../Pages/Modal";
 import { createPortal } from "react-dom";
 
@@ -16,16 +16,26 @@ export default function Carousel() {
   const { userMenu, meals } = useSelector((reduxStore) => reduxStore.user);
   const [selectedId, setSelectedId] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const theme=useTheme();
+  const theme = useTheme();
   const selectedMeal = meals.filter((meal) => {
     return meal.id === selectedId;
   });
   const portalRoot = document.getElementById("modal-root");
   const ModalPortal = () =>
-    createPortal(<Modal modalHandler={modalHandler} selectHandler={selectHandler} selectedId={selectedId} selectedMeal={selectedMeal}/>, portalRoot);
+    createPortal(
+      <Modal
+        modalHandler={modalHandler}
+        selectHandler={selectHandler}
+        selectedId={selectedId}
+        selectedMeal={selectedMeal}
+      />,
+      portalRoot
+    );
 
   const modalHandler = () => {
-    if(selectedId){(setIsOpen(!isOpen))}
+    if (selectedId) {
+      setIsOpen(!isOpen);
+    }
   };
   const selectHandler = (itemID) => {
     setSelectedId(itemID);
@@ -34,7 +44,7 @@ export default function Carousel() {
   if (userMenu.length === 0) {
     return (
       <EmptyWrapper>
-        <h1 style={{color:`${theme.second_bg}`}} >{t("add meal")}</h1>
+        <h1 style={{ color: `${theme.second_bg}` }}>{t("add meal")}</h1>
         <NavLink to="/">
           <CgAddR
             style={{
@@ -42,7 +52,7 @@ export default function Carousel() {
               cursor: "pointer",
               boxSizing: "border-box",
               transition: "0.3s ease-in-out",
-              color:`${theme.second_bg}`,
+              color: `${theme.second_bg}`,
             }}
           />
         </NavLink>
@@ -86,9 +96,7 @@ export default function Carousel() {
               </SwiperSlide>
             );
           })}
-          {isOpen && (
-            <ModalPortal/>
-          )}
+          {isOpen && <ModalPortal />}
         </Swiper>
       </CarouselWrapper>
     );

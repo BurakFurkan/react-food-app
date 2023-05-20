@@ -1,4 +1,3 @@
-import React from "react";
 import useOverAllChartOptions from "./useOverAllChartOptions";
 
 import {

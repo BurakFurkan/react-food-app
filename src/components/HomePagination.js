@@ -5,31 +5,54 @@ import styled, { useTheme } from "styled-components";
 import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
 
 export function HomePagination() {
-  const { page,error } = useSelector((reduxStore) => reduxStore.product);
+  const { page, error } = useSelector((reduxStore) => reduxStore.product);
   const dispatch = useDispatch();
-  const theme=useTheme();
+  const theme = useTheme();
 
-  if (error===true) {
-    return ("")}
-  
-  
+  if (error === true) {
+    return "";
+  }
+
   return (
     <PaginationWrapper>
-      {(page>1)?<BiLeftArrowAlt
-        aria-label="Increment value"
-        onClick={() => dispatch(previousPage())}
-        style={{ cursor: "pointer", fontSize: "2rem",boxShadow:`0px 4px 6px -1px ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
-        color={theme.nav_text}
-      />:<BiLeftArrowAlt
-      aria-label="Increment value"
-      style={{fontSize: "2rem",boxShadow:`0px 4px 6px -1px ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
-      color={theme.disabled}
-    />}
-      <span style={{ fontSize: "1.5rem",color:`${theme.nav_text}` }}>{page}</span>
+      {page > 1 ? (
+        <BiLeftArrowAlt
+          aria-label="Increment value"
+          onClick={() => dispatch(previousPage())}
+          style={{
+            cursor: "pointer",
+            fontSize: "2rem",
+            boxShadow: `0px 4px 6px -1px ${theme.box_shadow1}`,
+            borderRadius: "50%",
+            backdropFilter: "blur(12px)",
+          }}
+          color={theme.nav_text}
+        />
+      ) : (
+        <BiLeftArrowAlt
+          aria-label="Increment value"
+          style={{
+            fontSize: "2rem",
+            boxShadow: `0px 4px 6px -1px ${theme.box_shadow1}`,
+            borderRadius: "50%",
+            backdropFilter: "blur(12px)",
+          }}
+          color={theme.disabled}
+        />
+      )}
+      <span style={{ fontSize: "1.5rem", color: `${theme.nav_text}` }}>
+        {page}
+      </span>
       <BiRightArrowAlt
         aria-label="Decrement value"
         onClick={() => dispatch(nextPage())}
-        style={{ cursor: "pointer", fontSize: "2rem",boxShadow:`0px 4px 6px -1px ${theme.box_shadow1}`,borderRadius:"50%",backdropFilter:"blur(12px)" }}
+        style={{
+          cursor: "pointer",
+          fontSize: "2rem",
+          boxShadow: `0px 4px 6px -1px ${theme.box_shadow1}`,
+          borderRadius: "50%",
+          backdropFilter: "blur(12px)",
+        }}
         color={theme.nav_text}
       />
     </PaginationWrapper>
@@ -43,7 +66,7 @@ const PaginationWrapper = styled.div`
   justify-content: space-evenly;
   align-items: center;
 
-  span{
-    color:${(props) => props.theme.text_color};
+  span {
+    color: ${(props) => props.theme.text_color};
   }
 `;
