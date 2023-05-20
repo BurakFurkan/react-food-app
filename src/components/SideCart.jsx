@@ -8,6 +8,7 @@ import yellowStar from "../assets/yellowStar.png";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import styled, { useTheme } from "styled-components";
+import Placeholder from "../assets/placeholder.png";
 
 const SideCart = () => {
   const { meals } = useSelector((reduxStore) => reduxStore.user);
@@ -42,6 +43,9 @@ const SideCart = () => {
       });
     }
   };
+  const addDefaultSrc = (ev) => {
+    ev.target.src = Placeholder;
+  };
 
   return (
     <Container
@@ -72,7 +76,11 @@ const SideCart = () => {
                 >
                   <SideImageWrapper>
                     <StyledStar src={yellowStar} alt="yellowStar" />
-                    <SideImage src={meal.images[0]} alt="MealImage" />
+                    <SideImage
+                      onError={(e) => addDefaultSrc(e)}
+                      src={meal.images[0]}
+                      alt="MealImage"
+                    />
                   </SideImageWrapper>
                   <SideInfoWrapper> {meal.title}</SideInfoWrapper>
                   <SideFooterWrapper>
