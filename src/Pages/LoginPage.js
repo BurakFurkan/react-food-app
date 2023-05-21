@@ -196,8 +196,8 @@ const InputGroup = styled.div`
   input {
     width: 98%;
     height: 100%;
-    background: transparent;
-    border: 2px solid #57be6c;
+    background-color: #EDF0EE;
+    border: 1px solid #57be6c;
     border-radius: 5px;
     outline: none;
     padding: 0 10px;
@@ -217,20 +217,15 @@ const InputGroup = styled.div`
     transition: all 0.5s;
     padding: 0 5px;
     cursor: text;
-    background-color: ${(props) =>
-      props.inputcontrol && props.inputcontrol.length > 0 ? "#FAF9F6" : "none"};
+    background-color: #EDF0EE;
   }
 
   &:hover > label {
     top: -9px;
-    background-color: #EDF0EE;
     font-size: 1rem;
-    backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
   }
   &:focus-within > label {
     top: -9px;
-    background-color: #EDF0EE;
     font-size: 1rem;
   }
 `;
