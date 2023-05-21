@@ -163,11 +163,10 @@ const PageWrapper = styled.div`
   gap: 2rem;
   padding: 1rem;
   align-items: center;
-  background: rgba(255, 255, 255, 0.1);
+  background: #EDF0EE;
   border-radius: 5px;
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+
 
   form {
     width: 90%;
@@ -219,17 +218,19 @@ const InputGroup = styled.div`
     padding: 0 5px;
     cursor: text;
     background-color: ${(props) =>
-      props.inputcontrol && props.inputcontrol.length > 0 ? "#D3CDC6" : "none"};
+      props.inputcontrol && props.inputcontrol.length > 0 ? "#FAF9F6" : "none"};
   }
 
   &:hover > label {
     top: -9px;
-    background-color: #d3cdc6;
+    background-color: #EDF0EE;
     font-size: 1rem;
+    backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   }
   &:focus-within > label {
     top: -9px;
-    background-color: #d3cdc6;
+    background-color: #EDF0EE;
     font-size: 1rem;
   }
 `;
@@ -237,28 +238,26 @@ const InputGroup = styled.div`
 const SubmitInput = styled.input.attrs({
   type: "submit",
 })`
-  background: rgba(255, 255, 255, 0.1);
+  background: #EDF0EE;
   border-radius: 5px;
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   color: #57be6c;
+  border: 1px solid #57be6c;
   cursor: pointer;
   margin: 15px 0 0 0;
   width: 100%;
   height: 45px;
   font-size: 1rem;
-  border-color: transparent;
   outline: none;
   transition: 0.15s;
   text-align: center;
   &:hover {
     background-color: #57be6c;
-    color: #ffffff;
+    color: #EDF0EE;
   }
   &:active {
     background-color: #f1ac15;
-    color: #ffffff;
+    color: #EDF0EE;
   }
 `;
 

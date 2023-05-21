@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import DashboardChart from "./DashboardChart";
+import Placeholder from "../assets/placeholder.png";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -20,11 +21,16 @@ ChartJS.register(
   Legend
 );
 
+
+const addDefaultSrc = (ev) => {
+  ev.target.src = Placeholder;
+};
+
 const MealChart = (props) => {
   return (
     <MainWrapper>
       <UserInfo>
-        <img src={props.meal.images[1]} alt={props.meal.title} />
+        <img src={props.meal.images[1]} alt={props.meal.title} onError={(e) => addDefaultSrc(e)}/>
       </UserInfo>
       <InfoWrapper>
         <h1>{props.meal.title}</h1>
