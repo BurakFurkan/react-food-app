@@ -1,22 +1,77 @@
------USAGE------ <br/>
-Live link: https://react-food-app-burakfurkan.vercel.app/
+# React Food App
 
-You should get an api key from https://spoonacular.com/food-api <br/>
-Create .env file under the food-app folder 
+A modern, production-grade food ordering & discovery web application.
 
-add REACT_APP_API_KEY=YOUR_API_KEY to .env file
+**Live:** https://react-food-app-burakfurkan.vercel.app/
 
-### `npm install`
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Tech Stack
 
-https://user-images.githubusercontent.com/100779018/228979064-f11de9b9-de76-4b95-a68d-52e7a7f905ee.mp4
+- **Next.js 14** — App Router
+- **React 18** — TypeScript strict mode
+- **Tailwind CSS** — utility-first styling
+- **Framer Motion** — animations & transitions
+- **Zustand** — state management
+- **React Hook Form + Zod** — form validation
+- **Lucide React** — icons
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
+## Getting Started
 
+### 1. Clone the repo
 
+```bash
+git clone https://github.com/BurakFurkan/react-food-app.git
+cd react-food-app
+```
 
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Set up environment variables
+
+Create a `.env.local` file in the root directory:
+
+```env
+# TheMealDB (free, no key required for public endpoints)
+NEXT_PUBLIC_MEALDB_API=https://www.themealdb.com/api/json/v1/1
+```
+
+### 4. Run the development server
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+---
+
+## Scripts
+
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build |
+| `npm run start` | Start production server |
+| `npm run lint` | Run ESLint |
+| `npm run typecheck` | Run TypeScript type check |
+
+---
+
+## Project Structure
+
+```
+src/
+├── app/          # Next.js App Router pages
+├── components/   # Reusable UI components
+├── store/        # Zustand state stores
+├── types/        # TypeScript types
+├── hooks/        # Custom React hooks
+└── lib/          # Utilities & config
+```
