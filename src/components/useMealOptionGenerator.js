@@ -14,9 +14,9 @@ export default function useMealOptionGenerator(meal) {
     let nutrientsNameArray = [];
     let nutrientsAmountArray = [];
 
-    meal.nutrition.nutrients.forEach((nutrient) => {
-      nutrientsNameArray.push(t(`${nutrient.name}`) + "-" + nutrient.unit);
-      nutrientsAmountArray.push(nutrient.amount);
+    (meal.ingredients || []).forEach((ingredient, index) => {
+      nutrientsNameArray.push(ingredient.name);
+      nutrientsAmountArray.push(index + 1);
     });
 
     setAllValues((prevValues) => {
@@ -28,7 +28,7 @@ export default function useMealOptionGenerator(meal) {
         mealName: meal.title,
       };
     });
-  }, [meal,t]);
+  }, [meal, t]);
 
   return allValues;
 }

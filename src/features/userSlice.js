@@ -2,14 +2,26 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { lightTheme, darkTheme } from "./Themes";
 
+const loadAuthFromStorage = () => {
+  try {
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const userName = localStorage.getItem("userName") || "";
+    return { isLoggedIn, userName };
+  } catch {
+    return { isLoggedIn: false, userName: "" };
+  }
+};
+
+const { isLoggedIn: storedIsLoggedIn, userName: storedUserName } = loadAuthFromStorage();
+
 const initialState = {
   userMenu: [],
   favList: [],
   isLoading: true,
   meals: [],
   detailedMealID: null,
-  isLoggedIn: false,
-  userName: "",
+  isLoggedIn: storedIsLoggedIn,
+  userName: storedUserName,
   theme: lightTheme,
   lang: "en",
 };
@@ -19,9 +31,28 @@ export const getUserMeals = createAsyncThunk(
   async (selectedMealID, thunkAPI) => {
     try {
       const response = await axios(
-        `https://api.spoonacular.com/food/menuItems/${selectedMealID}?addMenuItemInformation=true&apiKey=${process.env.REACT_APP_API_KEY}`
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${selectedMealID}`
       );
-      return await response.data;
+      const meal = response.data.meals[0];
+
+      const ingredients = [];
+      for (let i = 1; i <= 20; i++) {
+        const ing = meal[`strIngredient${i}`];
+        const measure = meal[`strMeasure${i}`];
+        if (ing && ing.trim()) {
+          ingredients.push({ name: ing.trim(), measure: measure?.trim() || "" });
+        }
+      }
+
+      return {
+        id: meal.idMeal,
+        title: meal.strMeal,
+        images: [meal.strMealThumb],
+        area: meal.strArea,
+        category: meal.strCategory,
+        instructions: meal.strInstructions,
+        ingredients,
+      };
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });
     }
@@ -58,9 +89,19 @@ export const userSlice = createSlice({
     },
     registerUserName: (state, action) => {
       state.userName = action.payload;
+      try { localStorage.setItem("userName", action.payload); } catch {}
     },
     login: (state) => {
       state.isLoggedIn = true;
+      try { localStorage.setItem("isLoggedIn", "true"); } catch {}
+    },
+    logout: (state) => {
+      state.isLoggedIn = false;
+      state.userName = "";
+      try {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userName");
+      } catch {}
     },
     themeHandler: (state, action) => {
       switch (action.payload) {
@@ -102,6 +143,7 @@ export const {
   removeFromUserMeals,
   registerUserName,
   login,
+  logout,
   themeHandler,
   langHandler,
 } = userSlice.actions;

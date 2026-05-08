@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { motion } from "framer-motion";
 import { DropdownThemes } from "./DropdownThemes";
 import { useDispatch } from "react-redux";
@@ -8,99 +8,158 @@ import TurkeyFlag from "../assets/turkey-flag.png";
 import USAFlag from "../assets/usa-flag.png";
 import { useTranslation } from "react-i18next";
 
-export const Dropdown = ({ info }) => {
+export const Dropdown = ({ info, onMouseEnter, onMouseLeave }) => {
   const dispatch = useDispatch();
-  const theme = useTheme();
   const { t } = useTranslation();
 
   return (
-    <Container
-      style={{ top: `${info.top + 45}px`, left: `${info.left - 20}px` }}
+    <DropdownContainer
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      style={{ top: `${info.top + 50}px`, left: `${info.left - 28}px` }}
+      initial={{ opacity: 0, y: -8, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -8, scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 420, damping: 28 }}
     >
-      <ul>
-        <li onClick={() => dispatch(langHandler("en"))}>
-          {" "}
-          <StyledImg src={USAFlag} alt="usa-flag" />{" "}
-        </li>
-        <li onClick={() => dispatch(langHandler("tr"))}>
-          <StyledImg src={TurkeyFlag} alt="turkey-flag" />
-        </li>
-        <hr
-          style={{
-            width: "75%",
-            height: "1px",
-            backgroundColor: `${theme.nav_text}`,
-            border: "none",
-          }}
-        />
-      </ul>
-      <p>{t("navTheme")}</p>
-      <ul>
-        <li>
-          <DropdownThemes
-            colorarray={["#FFFFFF", "#57BE6C", "#F7F7F7", "#101010"]}
-            theme="lightTheme"
-          />
-        </li>
-        <li>
-          <DropdownThemes
-            colorarray={["#041C32", "#ECB365", "#777785b3", "#ecb365b3"]}
-            theme="darkTheme"
-          />
-        </li>
-      </ul>
-    </Container>
+      {/* Language */}
+      <Section>
+        <SectionLabel>Language</SectionLabel>
+        <FlagRow>
+          <FlagBtn
+            onClick={() => dispatch(langHandler("en"))}
+            aria-label="Switch to English"
+          >
+            <FlagImg src={USAFlag} alt="English" />
+            <FlagCode>EN</FlagCode>
+          </FlagBtn>
+          <FlagBtn
+            onClick={() => dispatch(langHandler("tr"))}
+            aria-label="Türkçeye geç"
+          >
+            <FlagImg src={TurkeyFlag} alt="Türkçe" />
+            <FlagCode>TR</FlagCode>
+          </FlagBtn>
+        </FlagRow>
+      </Section>
+
+      <Divider />
+
+      {/* Theme */}
+      <Section>
+        <SectionLabel>{t("navTheme")}</SectionLabel>
+        <ThemeRow>
+          <ThemeOption>
+            <DropdownThemes
+              colorarray={["#FAFAF7", "#E8451A", "#F4F1EA", "#1C1C1E"]}
+              theme="lightTheme"
+            />
+            <ThemeLabel>Light</ThemeLabel>
+          </ThemeOption>
+          <ThemeOption>
+            <DropdownThemes
+              colorarray={["#0C0C0C", "#FF5722", "#1E1E1E", "#F2F2F0"]}
+              theme="darkTheme"
+            />
+            <ThemeLabel>Dark</ThemeLabel>
+          </ThemeOption>
+        </ThemeRow>
+      </Section>
+    </DropdownContainer>
   );
 };
 
-const Container = styled(motion.div)`
-  position: absolute;
-  width: 200px;
-  height: 150px;
-  border-radius: 5px;
-  background-color: ${(props) => props.theme.main_bg};
-  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
-  color: ${(props) => props.theme.nav_text};
-  z-index: 999 !important;
+// ── Styles ────────────────────────────────────────────────────
+
+const DropdownContainer = styled(motion.div)`
+  position: fixed;
+  z-index: 9999;
+  width: 224px;
+  background: ${({ theme }) => theme.bg_elevated};
+  border: 1px solid ${({ theme }) => theme.border};
+  border-radius: 16px;
+  box-shadow: ${({ theme }) => theme.shadow_xl};
+  padding: 0.75rem;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+`;
+
+const Section = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  gap: 0.5rem;
+`;
+
+const SectionLabel = styled.p`
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: ${({ theme }) => theme.text_muted};
+  padding: 0 0.2rem;
+`;
+
+const FlagRow = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const FlagBtn = styled.button`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 5px;
-  gap: 5px;
+  gap: 0.25rem;
+  padding: 0.5rem 0.375rem;
+  border-radius: 10px;
+  border: 1.5px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.surface};
+  cursor: pointer;
+  transition: border-color 0.18s, background 0.18s;
+  font-family: inherit;
 
-  @media (max-width: 992px) {
-    top: 110px;
-    right: 260px;
-  }
-
-  ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    align-items: center;
-    gap: 0.3rem;
-
-    li {
-      width: 90px;
-      height: 50px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      list-style: none;
-      border-radius: 4px;
-      background: ${(props) => props.theme.main_bg_200};
-      &:hover {
-        background: ${(props) => props.theme.hover};
-        transition: 0.5s ease-in-out;
-        color: ${(props) => props.theme.text_color2};
-        cursor: pointer;
-      }
-    }
+  &:hover {
+    border-color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.primary_muted};
   }
 `;
 
-const StyledImg = styled.img`
-  width: 65px;
+const FlagImg = styled.img`
+  width: 34px;
   height: auto;
+  border-radius: 3px;
+`;
+
+const FlagCode = styled.span`
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text_secondary};
+  letter-spacing: 0.05em;
+`;
+
+const Divider = styled.hr`
+  border: none;
+  height: 1px;
+  background: ${({ theme }) => theme.border};
+  margin: 0.5rem 0;
+`;
+
+const ThemeRow = styled.div`
+  display: flex;
+  gap: 0.5rem;
+`;
+
+const ThemeOption = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+`;
+
+const ThemeLabel = styled.span`
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.text_secondary};
+  letter-spacing: 0.02em;
 `;

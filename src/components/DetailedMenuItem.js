@@ -6,7 +6,7 @@ import { TiDeleteOutline } from "react-icons/ti";
 import { GiMagnifyingGlass } from "react-icons/gi";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import Placeholder from "../assets/placeholder.png";
+const Placeholder = '/images/placeholder.png';
 import {
   addToUserMenu,
   removeFromUserMenu,
@@ -23,7 +23,9 @@ const DetailedMenuItem = ({
   modalHandler,
   selectedId,
   selectHandler,
-  nutrition,
+  ingredients,
+  area,
+  category,
 }) => {
   const { t } = useTranslation();
   const { userMenu } = useSelector((reduxStore) => reduxStore.user);
@@ -132,28 +134,18 @@ const DetailedMenuItem = ({
           <tbody>
             <StyledTR>
               <StyledTH style={{ color: `${theme.text_color2}` }}>
-                {t("nutrients")}
+                {t("ingredient")}
               </StyledTH>
               <StyledTH style={{ color: `${theme.text_color2}` }}>
-                {t("value")}
-              </StyledTH>
-              <StyledTH style={{ color: `${theme.text_color2}` }}>
-                {t("dailyamount")}
+                {t("measure")}
               </StyledTH>
             </StyledTR>
-            {nutrition.nutrients.map((nutrient, index) => {
-              return (
-                <StyledTR key={index}>
-                  <StyledTD>{t(`${nutrient.name}`)}</StyledTD>
-                  <StyledTD>
-                    {nutrient.amount} {nutrient.unit}
-                  </StyledTD>
-                  <StyledTD>
-                    {nutrient.percentOfDailyNeeds} {nutrient.unit}
-                  </StyledTD>
-                </StyledTR>
-              );
-            })}
+            {(ingredients || []).map((ingredient, index) => (
+              <StyledTR key={index}>
+                <StyledTD>{ingredient.name}</StyledTD>
+                <StyledTD>{ingredient.measure}</StyledTD>
+              </StyledTR>
+            ))}
           </tbody>
         </StyledTable>
       </CardFooter>

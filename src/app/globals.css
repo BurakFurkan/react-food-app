@@ -1,0 +1,161 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+/* ── Theme tokens ────────────────────────────────────────── */
+:root {
+  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Core backgrounds — clean white, not cream */
+  --bg:           #F8F9FA;
+  --bg-elevated:  #FFFFFF;
+  --bg-card:      #FFFFFF;
+  --surface:      #F1F3F5;
+  --surface-2:    #E9ECEF;
+
+  /* Brand — strong, saturated red-orange */
+  --primary:        #E84118;
+  --primary-hover:  #C93614;
+  --primary-muted:  rgba(232, 65, 24, 0.08);
+  --primary-text:   #FFFFFF;
+
+  /* Accent */
+  --accent:       #F59E0B;
+  --accent-muted: rgba(245, 158, 11, 0.10);
+
+  /* Typography — high contrast */
+  --text:           #0D0D0D;
+  --text-secondary: #4A5568;
+  --text-muted:     #909399;
+  --text-inverse:   #FFFFFF;
+
+  /* Borders — clean neutral gray */
+  --border:        #E8EAED;
+  --border-strong: #CDD0D5;
+
+  /* Shadows — subtle, clean */
+  --shadow-sm:      0 1px 2px rgba(0,0,0,0.05), 0 1px 3px rgba(0,0,0,0.04);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.07), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg:      0 8px 28px rgba(0,0,0,0.09), 0 4px 8px rgba(0,0,0,0.04);
+  --shadow-xl:      0 20px 56px rgba(0,0,0,0.11), 0 8px 20px rgba(0,0,0,0.05);
+  --shadow-primary: 0 4px 18px rgba(232, 65, 24, 0.32);
+
+  /* Nav */
+  --nav-bg:     rgba(255, 255, 255, 0.95);
+  --nav-text:   #0D0D0D;
+  --nav-border: rgba(232, 234, 237, 1);
+
+  /* Sidebar */
+  --sidebar-bg:          #FFFFFF;
+  --sidebar-active-bg:   rgba(232, 65, 24, 0.07);
+  --sidebar-active-text: #E84118;
+  --sidebar-text:        #4A5568;
+  --sidebar-hover-bg:    rgba(241, 243, 245, 0.9);
+}
+
+.dark {
+  --bg:           #0A0A0A;
+  --bg-elevated:  #131313;
+  --bg-card:      #1A1A1A;
+  --surface:      #222222;
+  --surface-2:    #2A2A2A;
+
+  --primary:       #E84118;
+  --primary-hover: #F05220;
+  --primary-muted: rgba(232, 65, 24, 0.12);
+  --primary-text:  #FFFFFF;
+
+  --accent:       #F59E0B;
+  --accent-muted: rgba(245, 158, 11, 0.12);
+
+  --text:           #F0F0F0;
+  --text-secondary: #A0A0A8;
+  --text-muted:     #6B6B75;
+  --text-inverse:   #0A0A0A;
+
+  --border:        #242424;
+  --border-strong: #363636;
+
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.32);
+  --shadow-md:      0 4px 16px rgba(0,0,0,0.44);
+  --shadow-lg:      0 12px 40px rgba(0,0,0,0.54);
+  --shadow-xl:      0 24px 64px rgba(0,0,0,0.64);
+  --shadow-primary: 0 4px 18px rgba(232, 65, 24, 0.38);
+
+  --nav-bg:     rgba(10, 10, 10, 0.95);
+  --nav-text:   #F0F0F0;
+  --nav-border: rgba(36, 36, 36, 1);
+
+  --sidebar-bg:          #131313;
+  --sidebar-active-bg:   rgba(232, 65, 24, 0.10);
+  --sidebar-active-text: #E84118;
+  --sidebar-text:        #A0A0A8;
+  --sidebar-hover-bg:    rgba(34, 34, 34, 0.9);
+}
+
+/* ── Base reset ─────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  scrollbar-gutter: stable;
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+img { max-width: 100%; display: block; }
+
+button, input, textarea, select { font-family: inherit; }
+
+a { text-decoration: none; color: inherit; }
+
+ul, ol { list-style: none; }
+
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar         { width: 4px; height: 4px; }
+::-webkit-scrollbar-track   { background: transparent; }
+::-webkit-scrollbar-thumb   { background: rgba(0,0,0,0.14); border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.26); }
+
+::selection { background: rgba(232, 69, 26, 0.18); color: inherit; }
+
+/* ── Skeleton shimmer ───────────────────────────────────── */
+@keyframes shimmer {
+  0%   { background-position: -700px 0; }
+  100% { background-position:  700px 0; }
+}
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--surface)   25%,
+    var(--surface-2) 50%,
+    var(--surface)   75%
+  );
+  background-size: 700px 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+}

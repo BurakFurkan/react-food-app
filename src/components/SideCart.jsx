@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { ImBin } from "react-icons/im";
-import { GoLocation } from "react-icons/go";
+import { motion, AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { removeFromUserMeals, removeFromUserMenu } from "../features/userSlice";
-import yellowStar from "../assets/yellowStar.png";
 import { useTranslation } from "react-i18next";
 import Swal from "sweetalert2";
 import styled, { useTheme } from "styled-components";
-import Placeholder from "../assets/placeholder.png";
+const Placeholder = '/images/placeholder.png';
+import { GoLocation } from "react-icons/go";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { BsCart3 } from "react-icons/bs";
+import { HiArrowRight } from "react-icons/hi";
 
 const SideCart = () => {
-  const { meals } = useSelector((reduxStore) => reduxStore.user);
+  const { meals } = useSelector((store) => store.user);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [dragStart, setDragStart] = useState(0);
@@ -21,11 +22,11 @@ const SideCart = () => {
     toast: true,
     position: "top-end",
     showConfirmButton: false,
-    timer: 3000,
+    timer: 2500,
     timerProgressBar: true,
-    iconColor: `${theme.nav_text}`,
-    background: `${theme.main_bg}`,
-    color: `${theme.nav_text}`,
+    iconColor: theme.primary,
+    background: theme.bg_elevated,
+    color: theme.text,
     didOpen: (toast) => {
       toast.addEventListener("mouseenter", Swal.stopTimer);
       toast.addEventListener("mouseleave", Swal.resumeTimer);
@@ -33,255 +34,343 @@ const SideCart = () => {
   });
 
   const handleDragEnd = (e, info, mealID) => {
-    const dragEnd = info.point.x;
-    if (dragStart - dragEnd > 200) {
+    if (dragStart - info.point.x > 180) {
       dispatch(removeFromUserMenu(mealID));
       dispatch(removeFromUserMeals(mealID));
-      Toast.fire({
-        icon: "error",
-        title: t("ItemRemoved"),
-      });
+      Toast.fire({ icon: "error", title: t("ItemRemoved") });
     }
   };
+
+  const handleDelete = (mealID) => {
+    dispatch(removeFromUserMenu(mealID));
+    dispatch(removeFromUserMeals(mealID));
+    Toast.fire({ icon: "error", title: t("ItemRemoved") });
+  };
+
   const addDefaultSrc = (ev) => {
     ev.target.src = Placeholder;
   };
 
   return (
-    <Container
-      initial={{ opacity: 0, y: -100 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20, transition: { duration: 0.1 } }}
+    <CartContainer
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ type: "spring", stiffness: 280, damping: 26 }}
     >
-      <h2>{t("userinventory")}</h2>
-      <SideItemWrapper>
-        {meals
-          .slice(0)
-          .reverse()
-          .map((meal) => {
-            return (
-              <AnimationDiv
-                key={meal.id}
-                initial={{ opacity: 0, y: -200, transition: { duration: 1 } }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 100, transition: { duration: 0.1 } }}
-              >
-                <SideItem
+      <CartHeader>
+        <CartTitleRow>
+          <CartIcon>
+            <BsCart3 />
+          </CartIcon>
+          <CartTitle>{t("userinventory")}</CartTitle>
+        </CartTitleRow>
+        {meals.length > 0 && <CountBadge>{meals.length}</CountBadge>}
+      </CartHeader>
+
+      <ItemsList>
+        <AnimatePresence initial={false}>
+          {meals.length === 0 ? (
+            <EmptyState
+              key="empty"
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <EmptyEmoji>🛒</EmptyEmoji>
+              <EmptyHeading>No items yet</EmptyHeading>
+              <EmptySubtext>Add meals from the menu to get started</EmptySubtext>
+            </EmptyState>
+          ) : (
+            meals
+              .slice(0)
+              .reverse()
+              .map((meal) => (
+                <CartItemWrapper
+                  key={meal.id}
+                  initial={{ opacity: 0, y: -16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, x: 60, transition: { duration: 0.2 } }}
                   drag="x"
                   dragConstraints={{ left: 0, right: 0 }}
-                  dragElastic={{ left: 0.1, right: 0.01 }}
+                  dragElastic={{ left: 0.12, right: 0.01 }}
                   onDragStart={(e, info) => setDragStart(info.point.x)}
                   onDragEnd={(e, info) => handleDragEnd(e, info, meal.id)}
-                  dragTransition={{ bounceStiffness: 600, bounceDamping: 10 }}
+                  dragTransition={{ bounceStiffness: 600, bounceDamping: 12 }}
                 >
-                  <SideImageWrapper>
-                    <StyledStar src={yellowStar} alt="yellowStar" />
-                    <SideImage
-                      onError={(e) => addDefaultSrc(e)}
-                      src={meal.images[0]}
-                      alt="MealImage"
-                    />
-                  </SideImageWrapper>
-                  <SideInfoWrapper> {meal.title}</SideInfoWrapper>
-                  <SideFooterWrapper>
-                    <GoLocation /> {meal.restaurantChain}
-                  </SideFooterWrapper>
-                </SideItem>
-                <DeleteBtn>
-                  <ImBin style={{ fontSize: "1.5rem" }} />
-                </DeleteBtn>
-              </AnimationDiv>
-            );
-          })}
-      </SideItemWrapper>
-    </Container>
+                  <ItemThumb
+                    src={meal.images?.[0]}
+                    alt={meal.title}
+                    onError={addDefaultSrc}
+                  />
+                  <ItemInfo>
+                    <ItemTitle>{meal.title}</ItemTitle>
+                    <ItemMeta>
+                      <GoLocation aria-hidden="true" />
+                      <span>{meal.restaurantChain}</span>
+                    </ItemMeta>
+                  </ItemInfo>
+                  <DeleteBtn
+                    onClick={() => handleDelete(meal.id)}
+                    aria-label="Remove item"
+                    as={motion.button}
+                    whileTap={{ scale: 0.88 }}
+                  >
+                    <RiDeleteBin6Line />
+                  </DeleteBtn>
+                </CartItemWrapper>
+              ))
+          )}
+        </AnimatePresence>
+      </ItemsList>
+
+      {meals.length > 0 && (
+        <CartFooter>
+          <CheckoutBtn
+            as={motion.button}
+            whileHover={{ scale: 1.015 }}
+            whileTap={{ scale: 0.97 }}
+          >
+            Checkout
+            <HiArrowRight />
+          </CheckoutBtn>
+        </CartFooter>
+      )}
+    </CartContainer>
   );
 };
 
-const Container = styled(motion.div)`
-  width: 15vw;
-  height: 65vh;
-  border-radius: 0.8rem;
-  background: ${(props) => props.theme.second_bg};
-  box-shadow: 0px 4px 6px -1px ${(props) => props.theme.box_shadow1};
-  align-items: center;
-  justify-content: flex-start;
+export default SideCart;
+
+// ── Styles ────────────────────────────────────────────────────
+
+const CartContainer = styled(motion.aside)`
+  width: 272px;
+  flex-shrink: 0;
+  background: ${({ theme }) => theme.bg_elevated};
+  border-radius: 20px;
+  box-shadow: ${({ theme }) => theme.shadow_lg};
+  border: 1px solid ${({ theme }) => theme.border};
   display: flex;
   flex-direction: column;
-  position: relative;
-  padding: 1rem 5px 5px 5px;
+  max-height: calc(100vh - 100px);
   overflow: hidden;
+  align-self: flex-start;
+  position: sticky;
+  top: 80px;
 
-  h2 {
-    color: ${(props) => props.theme.text_color2};
+  @media (max-width: 1200px) {
+    width: 240px;
   }
 
   @media (max-width: 992px) {
-    min-width: 320px;
-  }
-  @media (max-width: 1330px) {
-    margin-top: 100px;
+    width: 100%;
+    max-height: 320px;
+    position: static;
   }
 `;
 
-const SideItemWrapper = styled.ul`
-  width: 100%;
-  height: 100%;
-  background: ${(props) => props.theme.main_bg};
-  border-radius: 1rem;
+const CartHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.125rem 1.125rem 0.875rem;
+  border-bottom: 1px solid ${({ theme }) => theme.border};
+  flex-shrink: 0;
+`;
+
+const CartTitleRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const CartIcon = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: ${({ theme }) => theme.primary_muted};
+  color: ${({ theme }) => theme.primary};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+`;
+
+const CartTitle = styled.h2`
+  font-size: 0.925rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text};
+  letter-spacing: 0.005em;
+`;
+
+const CountBadge = styled.span`
+  background: ${({ theme }) => theme.primary};
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ItemsList = styled.div`
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.625rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 0.3rem;
-  padding: 0.4rem 0;
-  overflow: scroll;
-  scroll-behavior: smooth;
+  gap: 0.4rem;
 
   &::-webkit-scrollbar {
-    display: none;
+    width: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.border};
+    border-radius: 3px;
   }
 `;
 
-const AnimationDiv = styled(motion.div)`
+const CartItemWrapper = styled(motion.div)`
   display: flex;
-  justify-items: center;
   align-items: center;
-  box-sizing: border-box;
-  position: relative;
-`;
+  gap: 0.55rem;
+  padding: 0.55rem 0.625rem;
+  border-radius: 14px;
+  background: ${({ theme }) => theme.surface};
+  cursor: grab;
+  user-select: none;
 
-const SideItem = styled(motion.li)`
-  min-height: 80px;
-  background: ${(props) => props.theme.second_bg};
-  border-radius: 15px;
-  color: ${(props) => props.theme.text_color2};
-  box-shadow: 0px 1px 3px -1px ${(props) => props.theme.text_color};
-  display: flex;
-  box-sizing: border-box;
-  flex: 1;
-  position: relative;
-  z-index: 2;
-  font-size: 0.7rem;
-  letter-spacing: 1px;
-  gap: 3px;
-  padding-right: 5px;
-
-  @media (max-width: 1288px) {
-    flex-direction: column;
-    min-height: 150px;
-  }
-
-  @media (max-width: 992px) {
-    flex-direction: row;
-  }
-  @media (max-width: 1330px) {
-    justify-content: center;
-    align-items: center;
-    height: 100px;
+  &:active {
+    cursor: grabbing;
   }
 `;
 
-const SideImageWrapper = styled.div`
-  flex: 3.5;
-  background: ${(props) => props.theme.main_bg_200};
-  border-top-left-radius: 15px;
-  border-bottom-left-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: ${(props) => props.theme.second_bg};
-  padding-bottom: 5px;
-  @media (max-width: 1330px) {
-    border-radius: 5px;
-    height: 100px;
-    justify-content: center;
-    align-items: center;
-  }
-  @media (max-width: 1288px) {
-    max-height: 64px;
-  }
-`;
-
-const SideImage = styled.img`
-  border-radius: 35%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: auto;
-  max-width: 75%;
-  height: auto;
-  max-height: 75%;
+const ItemThumb = styled.img`
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
   object-fit: cover;
-  z-index: 2;
-  @media (max-width: 992px) {
-    max-width: 50%;
-    max-height: 50%;
-  }
-  @media (max-width: 1288px) {
-    max-height: 70%;
-  }
+  flex-shrink: 0;
+  background: ${({ theme }) => theme.border};
 `;
 
-const StyledStar = styled.img`
-  width: 70px;
-  height: 70px;
-  position: absolute;
-  z-index: 1;
-  @media (max-width: 1288px) {
-    max-width: 40px;
-    max-height: 40px;
-  }
+const ItemInfo = styled.div`
+  flex: 1;
+  min-width: 0;
 `;
-const SideInfoWrapper = styled.div`
-  flex: 3.5;
-  height: 95%;
-  background: ${(props) => props.theme.second_bg};
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 5px 5px;
-  text-overflow: ellipsis;
-  white-space: pre-line;
+
+const ItemTitle = styled.p`
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.text};
+  white-space: nowrap;
   overflow: hidden;
-  @media (max-width: 1330px) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  text-overflow: ellipsis;
+  margin-bottom: 0.18rem;
+`;
+
+const ItemMeta = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.68rem;
+  color: ${({ theme }) => theme.text_muted};
+
+  svg {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+  }
+
+  span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 `;
-const SideFooterWrapper = styled.div`
-  flex: 3;
-  background: ${(props) => props.theme.second_bg};
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
+
+const DeleteBtn = styled.button`
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: ${({ theme }) => theme.text_muted};
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  flex-shrink: 0;
+  transition: color 0.18s, background 0.18s;
+
+  &:hover {
+    color: #ef4444;
+    background: rgba(239, 68, 68, 0.1);
+  }
+`;
+
+const EmptyState = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
-  padding: 10px;
-  gap: 3px;
-  @media (max-width: 1330px) {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1rem;
+  gap: 0.5rem;
+  text-align: center;
+`;
+
+const EmptyEmoji = styled.div`
+  font-size: 2.25rem;
+  opacity: 0.5;
+  margin-bottom: 0.25rem;
+`;
+
+const EmptyHeading = styled.p`
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.text_secondary};
+`;
+
+const EmptySubtext = styled.p`
+  font-size: 0.75rem;
+  color: ${({ theme }) => theme.text_muted};
+  line-height: 1.5;
+`;
+
+const CartFooter = styled.div`
+  padding: 0.875rem;
+  border-top: 1px solid ${({ theme }) => theme.border};
+  flex-shrink: 0;
+`;
+
+const CheckoutBtn = styled.button`
+  width: 100%;
+  height: 44px;
+  border-radius: 12px;
+  border: none;
+  background: ${({ theme }) => theme.primary};
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: ${({ theme }) => theme.shadow_primary};
+  transition: background 0.18s;
+  letter-spacing: 0.01em;
+
+  svg {
+    font-size: 1rem;
+  }
+
+  &:hover {
+    background: ${({ theme }) => theme.primary_hover};
   }
 `;
-
-const DeleteBtn = styled(motion.div)`
-  z-index: 1;
-  position: absolute;
-  height: 95%;
-  width: 50%;
-  top: 50%;
-  right: 2px;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  transform: translateY(-50%);
-  background-color: red;
-  border-radius: 15px;
-  padding-right: 15px;
-`;
-
-export default SideCart;

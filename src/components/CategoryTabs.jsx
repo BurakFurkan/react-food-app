@@ -3,87 +3,107 @@ import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { pickCategory } from "../features/productSlice";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+
+const categoryEmojis = {
+  Beef: "🥩",
+  Breakfast: "🍳",
+  Chicken: "🍗",
+  Dessert: "🍰",
+  Lamb: "🐑",
+  Pasta: "🍝",
+  Seafood: "🦞",
+  Side: "🥗",
+  Starter: "🥣",
+  Vegan: "🌿",
+  Vegetarian: "🥦",
+};
 
 const CategoryTabs = () => {
   const { t } = useTranslation();
-  const { categories, category } = useSelector(
-    (reduxStore) => reduxStore.product
-  );
+  const { categories, category } = useSelector((store) => store.product);
   const dispatch = useDispatch();
 
   return (
-    <CategoryWrapper>
-      {Object.keys(categories).map((tabCategory, index) => {
-        return (
-          <CategoryTab
-            key={index}
-            className={tabCategory === category ? "isActive" : null}
-            onClick={() => {
-              dispatch(pickCategory(tabCategory));
-            }}
-          >
-            {t(`${tabCategory}`)}
-          </CategoryTab>
-        );
-      })}
-    </CategoryWrapper>
+    <TabsWrapper>
+      <TabsScroll>
+        {Object.keys(categories).map((tabCategory, index) => {
+          const isActive = tabCategory === category;
+          return (
+            <Tab
+              key={index}
+              isactive={isActive ? 1 : 0}
+              onClick={() => dispatch(pickCategory(tabCategory))}
+              as={motion.button}
+              whileTap={{ scale: 0.94 }}
+              aria-pressed={isActive}
+            >
+              <TabEmoji aria-hidden="true">
+                {categoryEmojis[tabCategory] || "🍽️"}
+              </TabEmoji>
+              <TabLabel>{t(tabCategory)}</TabLabel>
+            </Tab>
+          );
+        })}
+      </TabsScroll>
+    </TabsWrapper>
   );
 };
 
-const CategoryWrapper = styled.div`
-  min-height: 50px;
+export default CategoryTabs;
+
+const TabsWrapper = styled.div`
+  width: 100%;
+  position: relative;
+`;
+
+const TabsScroll = styled.div`
   display: flex;
-  align-items: stretch;
-  border-radius: 5px;
-  overflow: hidden;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  overflow-x: auto;
+  padding: 0.125rem 0;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
   &::-webkit-scrollbar {
     display: none;
   }
-
-  @media (max-width: 1288px) {
-    max-width: 700px;
-  }
-  @media (max-width: 992px) {
-    display: flex;
-    width: 95vw;
-    overflow-x: scroll;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-  }
 `;
 
-const CategoryTab = styled.span`
-  color: ${(props) => props.theme.text_color2};
-
-  padding: 0.75rem;
-  background: ${(props) => props.theme.second_bg};
+const Tab = styled.button`
   display: flex;
   align-items: center;
-  justify-content: center;
-  text-transform: uppercase;
-  transition: 0.2s ease-out;
+  gap: 0.35rem;
+  padding: 0.45rem 0.875rem;
   border-radius: 999px;
+  border: 1.5px solid
+    ${({ theme, isactive }) => (isactive ? theme.primary : theme.border)};
+  background: ${({ theme, isactive }) =>
+    isactive ? theme.primary_muted : theme.bg_elevated};
+  color: ${({ theme, isactive }) =>
+    isactive ? theme.primary : theme.text_secondary};
+  font-size: 0.83rem;
+  font-weight: ${({ isactive }) => (isactive ? 600 : 500)};
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+
   &:hover {
-    cursor: pointer;
-    background: ${(props) => props.theme.hover2};
-    color: ${(props) => props.theme.text_active};
-  }
-
-  &.isActive {
-    background: ${(props) => props.theme.active2};
-    color: ${(props) => props.theme.text_active};
-  }
-
-  &:focus {
-    background: ${(props) => props.theme.text_color};
-  }
-
-  @media (max-width: 992px) {
-    display: flex;
-    flex: 33%;
+    border-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.primary_muted};
   }
 `;
 
-export default CategoryTabs;
+const TabEmoji = styled.span`
+  font-size: 0.95rem;
+  line-height: 1;
+`;
+
+const TabLabel = styled.span`
+  text-transform: capitalize;
+`;

@@ -1,41 +1,51 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-
-
+const BASE_URL = "https://www.themealdb.com/api/json/v1/1";
+const PAGE_SIZE = 12;
 
 const initialState = {
-  category: "burger",
+  category: "Chicken",
   products: [],
   isLoading: true,
-  page:1,
-  error:false,
-  categories :{
-    burger:"burger",
-    kebab:"kebab",
-    chicken:"chicken",
-    pizza:"pizza",
-    fish:"fish",
-    vegan:"vegan",
-    salad:"salad",
-    pasta:"pasta",
-    steak:"steak",
-    dessert:"dessert",
-    waffle:"waffle",
-}
-
+  page: 1,
+  error: false,
+  categories: {
+    Beef: "Beef",
+    Breakfast: "Breakfast",
+    Chicken: "Chicken",
+    Dessert: "Dessert",
+    Lamb: "Lamb",
+    Pasta: "Pasta",
+    Seafood: "Seafood",
+    Side: "Side",
+    Starter: "Starter",
+    Vegan: "Vegan",
+    Vegetarian: "Vegetarian",
+  },
 };
-
-
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
-  async (selectedCategory,thunkAPI) => { 
+  async (selectedCategory, thunkAPI) => {
     const currentState = thunkAPI.getState();
     try {
-      
-      const response = await axios(`https://api.spoonacular.com/food/menuItems/search?query=${selectedCategory}&number=12&offset=${currentState.product.page}&apiKey=${process.env.REACT_APP_API_KEY}`);
-      return await response.data;
+      const response = await axios(
+        `${BASE_URL}/filter.php?c=${selectedCategory}`
+      );
+      const allMeals = response.data.meals || [];
+      const page = currentState.product.page;
+      const offset = (page - 1) * PAGE_SIZE;
+      const paginated = allMeals.slice(offset, offset + PAGE_SIZE);
+
+      return {
+        menuItems: paginated.map((meal) => ({
+          id: meal.idMeal,
+          title: meal.strMeal,
+          image: meal.strMealThumb,
+          restaurantChain: selectedCategory,
+        })),
+      };
     } catch (error) {
       return thunkAPI.rejectWithValue({ error: error.message });
     }

@@ -1,72 +1,93 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { nextPage, previousPage } from "../features/productSlice";
-import styled, { useTheme } from "styled-components";
-import { BiLeftArrowAlt, BiRightArrowAlt } from "react-icons/bi";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 export function HomePagination() {
-  const { page, error } = useSelector((reduxStore) => reduxStore.product);
+  const { page, error } = useSelector((store) => store.product);
   const dispatch = useDispatch();
-  const theme = useTheme();
 
-  if (error === true) {
-    return "";
-  }
+  if (error) return null;
+
+  const canGoBack = page > 1;
 
   return (
-    <PaginationWrapper>
-      {page > 1 ? (
-        <BiLeftArrowAlt
-          aria-label="Increment value"
-          onClick={() => dispatch(previousPage())}
-          style={{
-            cursor: "pointer",
-            fontSize: "2rem",
-            boxShadow: `0px 4px 6px -1px ${theme.box_shadow1}`,
-            borderRadius: "50%",
-            backdropFilter: "blur(12px)",
-          }}
-          color={theme.nav_text}
-        />
-      ) : (
-        <BiLeftArrowAlt
-          aria-label="Increment value"
-          style={{
-            fontSize: "2rem",
-            boxShadow: `0px 4px 6px -1px ${theme.box_shadow1}`,
-            borderRadius: "50%",
-            backdropFilter: "blur(12px)",
-          }}
-          color={theme.disabled}
-        />
-      )}
-      <span style={{ fontSize: "1.5rem", color: `${theme.nav_text}` }}>
-        {page}
-      </span>
-      <BiRightArrowAlt
-        aria-label="Decrement value"
+    <PaginationBar>
+      <PageBtn
+        onClick={() => canGoBack && dispatch(previousPage())}
+        disabled={!canGoBack}
+        aria-label="Previous page"
+        as={motion.button}
+        whileTap={canGoBack ? { scale: 0.9 } : {}}
+      >
+        <HiChevronLeft />
+      </PageBtn>
+
+      <PageIndicator>
+        <PageNum>{page}</PageNum>
+      </PageIndicator>
+
+      <PageBtn
         onClick={() => dispatch(nextPage())}
-        style={{
-          cursor: "pointer",
-          fontSize: "2rem",
-          boxShadow: `0px 4px 6px -1px ${theme.box_shadow1}`,
-          borderRadius: "50%",
-          backdropFilter: "blur(12px)",
-        }}
-        color={theme.nav_text}
-      />
-    </PaginationWrapper>
+        aria-label="Next page"
+        as={motion.button}
+        whileTap={{ scale: 0.9 }}
+      >
+        <HiChevronRight />
+      </PageBtn>
+    </PaginationBar>
   );
 }
 
-const PaginationWrapper = styled.div`
-  width: 6rem;
-  height: 1.5rem;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+// ── Styles ────────────────────────────────────────────────────
 
-  span {
-    color: ${(props) => props.theme.text_color};
+const PaginationBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0;
+`;
+
+const PageBtn = styled.button`
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1.5px solid ${({ theme }) => theme.border};
+  background: ${({ theme }) => theme.bg_elevated};
+  color: ${({ theme }) => theme.text_secondary};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: ${({ disabled }) => (disabled ? "default" : "pointer")};
+  font-size: 1.1rem;
+  opacity: ${({ disabled }) => (disabled ? 0.38 : 1)};
+  transition: border-color 0.18s, color 0.18s, background 0.18s;
+
+  &:not(:disabled):hover {
+    border-color: ${({ theme }) => theme.primary};
+    color: ${({ theme }) => theme.primary};
+    background: ${({ theme }) => theme.primary_muted};
   }
+`;
+
+const PageIndicator = styled.div`
+  min-width: 40px;
+  height: 36px;
+  border-radius: 10px;
+  background: ${({ theme }) => theme.surface};
+  border: 1.5px solid ${({ theme }) => theme.border};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.75rem;
+`;
+
+const PageNum = styled.span`
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: ${({ theme }) => theme.text};
+  letter-spacing: 0.02em;
 `;

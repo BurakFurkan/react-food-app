@@ -11,6 +11,13 @@
 # production
 /build
 
+# Next.js
+/.next/
+/out/
+
+# TypeScript
+tsconfig.tsbuildinfo
+
 # misc
 .DS_Store
 .env.local
