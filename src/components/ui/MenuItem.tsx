@@ -7,8 +7,8 @@ import { HiPlus, HiCheck } from 'react-icons/hi'
 import { GoLocation } from 'react-icons/go'
 import Swal from 'sweetalert2'
 import { useUserStore } from '@/store/userStore'
+import { useCartStore } from '@/store/cartStore'
 import { StarRating } from './StarRating'
-import { useRandomNumber } from '@/hooks/useRandomNumber'
 import { cn } from '@/lib/utils'
 import type { MenuItem as MenuItemType } from '@/types'
 const PLACEHOLDER = '/images/placeholder.png'
@@ -20,7 +20,7 @@ const cardVariants = {
 
 type Props = MenuItemType
 
-export function MenuItem({ id, title, image, restaurantChain }: Props) {
+export function MenuItem({ id, title, image, restaurantChain, price, discount, rating, reviewCount }: Props) {
   const { t } = useTranslation()
   const userMenu = useUserStore((s) => s.userMenu)
   const favList  = useUserStore((s) => s.favList)
@@ -31,12 +31,11 @@ export function MenuItem({ id, title, image, restaurantChain }: Props) {
   const removeFromFavList = useUserStore((s) => s.removeFromFavList)
   const fetchMeal         = useUserStore((s) => s.fetchMeal)
 
-  const price        = useRandomNumber(50, 150)
-  const discount     = useRandomNumber(5, 25)
   const discountedPrice = price - discount
-  const rating       = useRandomNumber(1, 5)
-  const reviewCount  = useRandomNumber(100, 2500)
-  const discountPct  = Math.round((discount / price) * 100)
+  const discountPct     = Math.round((discount / price) * 100)
+
+  const addCartItem    = useCartStore((s) => s.addItem)
+  const removeCartItem = useCartStore((s) => s.removeItem)
 
   const isInMenu = userMenu.includes(id)
   const isFav    = favList.includes(id)
@@ -55,10 +54,12 @@ export function MenuItem({ id, title, image, restaurantChain }: Props) {
     if (isInMenu) {
       removeFromUserMenu(id)
       removeFromMeals(id)
+      removeCartItem(id)
       toast().fire({ icon: 'error', title: t('ItemRemoved') })
     } else {
       addToUserMenu(id)
       fetchMeal(id)
+      addCartItem({ id, title, image, restaurantChain, price, discount })
       toast().fire({ icon: 'success', title: t('ItemAdded') })
     }
   }

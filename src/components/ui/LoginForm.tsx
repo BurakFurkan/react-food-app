@@ -1,28 +1,39 @@
 'use client'
 
 import React from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
+import { useTranslation } from 'react-i18next'
 import { useUserStore } from '@/store/userStore'
 import { cn } from '@/lib/utils'
 const knifeImage = { src: '/images/knife.jpg' }
 
-const schema = z.object({
-  nameInput: z.string().min(1, 'Please enter your name'),
-  passwordInput: z.string()
-    .min(8, 'Minimum 8 characters required')
-    .max(20, 'Maximum 20 characters'),
-  mailInput: z.string().email('Enter a valid email address'),
-})
+function useLoginSchema() {
+  const { t } = useTranslation()
+  return z.object({
+    nameInput:     z.string().min(1, t('login.nameRequired')),
+    passwordInput: z.string()
+      .min(8, t('login.minPassword'))
+      .max(20, t('login.maxPassword')),
+    mailInput: z.string().email(t('login.validEmail')),
+  })
+}
 
-type FormData = z.infer<typeof schema>
+type FormData = {
+  nameInput: string
+  passwordInput: string
+  mailInput: string
+}
 
 export function LoginForm() {
-  const router = useRouter()
-  const login  = useUserStore((s) => s.login)
+  const { t } = useTranslation()
+  const router       = useRouter()
+  const searchParams = useSearchParams()
+  const login        = useUserStore((s) => s.login)
+  const schema       = useLoginSchema()
 
   const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -30,8 +41,15 @@ export function LoginForm() {
 
   const onSubmit = (data: FormData) => {
     login(data.nameInput)
-    router.push('/')
+    const from = searchParams.get('from') ?? '/'
+    router.push(from)
   }
+
+  const stats: [string, string][] = [
+    ['50k+', t('login.statMenuItems')],
+    ['200+', t('login.statRestaurants')],
+    ['4.9★', t('login.statRating')],
+  ]
 
   return (
     <motion.div
@@ -52,17 +70,18 @@ export function LoginForm() {
                           text-[#ffb299] text-[0.72rem] font-semibold tracking-[0.09em] uppercase
                           py-[0.32rem] px-[0.7rem] rounded-full w-fit">
             <span className="w-1.5 h-1.5 rounded-full bg-[#ff5722] flex-shrink-0" />
-            Premium Food Delivery
+            {t('login.badge')}
           </div>
           <h1 className="font-display font-extrabold text-white leading-[1.06] tracking-[-0.03em]
-                         text-[clamp(2.2rem,4.5vw,3.5rem)] max-[768px]:text-[1.85rem]">
-            Great food,<br />delivered<br />to you.
+                         text-[clamp(2.2rem,4.5vw,3.5rem)] max-[768px]:text-[1.85rem]"
+              style={{ whiteSpace: 'pre-line' }}>
+            {t('login.heroTitle')}
           </h1>
           <p className="text-[0.95rem] text-white/[0.68] leading-[1.65] max-w-[380px] max-[768px]:hidden">
-            Discover the finest restaurants near you and get your favourite meals delivered fast.
+            {t('login.heroDesc')}
           </p>
           <div className="flex items-center gap-5 max-[768px]:hidden">
-            {[['50k+','Menu Items'],['200+','Restaurants'],['4.9★','Rating']].map(([num, lbl], i) => (
+            {stats.map(([num, lbl], i) => (
               <div key={i} className="flex items-center gap-5">
                 {i > 0 && <div className="w-px h-[34px] bg-white/[0.18]" />}
                 <div className="flex flex-col gap-0.5">
@@ -92,26 +111,26 @@ export function LoginForm() {
           </div>
 
           <h2 className="font-display font-bold text-[1.65rem] text-text tracking-[-0.025em] leading-[1.18] mb-1.5">
-            Create your account
+            {t('login.createAccount')}
           </h2>
-          <p className="text-[0.875rem] text-text-secondary mb-8">Join thousands of food lovers today</p>
+          <p className="text-[0.875rem] text-text-secondary mb-8">{t('login.subtitle')}</p>
 
           <form onSubmit={handleSubmit(onSubmit)} noValidate className="flex flex-col gap-[1.125rem]">
             {/* Name */}
-            <Field label="Full Name" htmlFor="nameInput" error={errors.nameInput?.message}>
-              <Input id="nameInput" placeholder="John Doe" hasError={!!errors.nameInput}
+            <Field label={t('login.fullName')} htmlFor="nameInput" error={errors.nameInput?.message}>
+              <Input id="nameInput" placeholder={t('login.namePlaceholder')} hasError={!!errors.nameInput}
                      {...register('nameInput')} />
             </Field>
 
             {/* Password */}
-            <Field label="Password" htmlFor="passwordInput" error={errors.passwordInput?.message}>
-              <Input id="passwordInput" type="password" placeholder="Min. 8 characters"
+            <Field label={t('login.password')} htmlFor="passwordInput" error={errors.passwordInput?.message}>
+              <Input id="passwordInput" type="password" placeholder={t('login.passwordPlaceholder')}
                      hasError={!!errors.passwordInput} {...register('passwordInput')} />
             </Field>
 
             {/* Email */}
-            <Field label="Email Address" htmlFor="mailInput" error={errors.mailInput?.message}>
-              <Input id="mailInput" type="email" placeholder="you@example.com"
+            <Field label={t('login.email')} htmlFor="mailInput" error={errors.mailInput?.message}>
+              <Input id="mailInput" type="email" placeholder={t('login.emailPlaceholder')}
                      hasError={!!errors.mailInput} {...register('mailInput')} />
             </Field>
 
@@ -123,12 +142,12 @@ export function LoginForm() {
                          font-semibold cursor-pointer font-body mt-2 shadow-primary
                          hover:bg-primary-hover transition-colors duration-200 tracking-[0.015em]"
             >
-              Get Started — It&apos;s Free
+              {t('login.cta')}
             </motion.button>
           </form>
 
           <p className="mt-5 text-[0.72rem] text-text-muted text-center leading-[1.55]">
-            By joining, you agree to our Terms of Service and Privacy Policy.
+            {t('login.terms')}
           </p>
         </div>
       </motion.div>
@@ -166,3 +185,4 @@ const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLI
     />
   )
 )
+Input.displayName = 'Input'

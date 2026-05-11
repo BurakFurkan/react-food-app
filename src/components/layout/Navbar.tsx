@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import { BiWorld } from 'react-icons/bi'
 import { IoOptionsOutline } from 'react-icons/io5'
-import { FiLogOut, FiUser } from 'react-icons/fi'
+import { FiLogOut, FiUser, FiGithub } from 'react-icons/fi'
 import { useTranslation } from 'react-i18next'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useUserStore } from '@/store/userStore'
@@ -86,16 +86,28 @@ export function Navbar() {
 
         {/* Actions */}
         <div className="flex items-center gap-1">
-          {/* Portfolio */}
+          {/* Contact */}
           <button
             onClick={() => window.open('https://bftportfolio.netlify.app/', '_blank', 'noopener,noreferrer')}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-[10px] text-text-secondary
                        text-sm font-medium hover:bg-surface hover:text-text transition-colors duration-200
                        max-[640px]:px-2"
-            aria-label="Portfolio"
+            aria-label={t('portfolio')}
           >
             <BiWorld className="text-[1.1rem] flex-shrink-0" />
             <span className="max-[640px]:hidden">{t('portfolio')}</span>
+          </button>
+
+          {/* GitHub */}
+          <button
+            onClick={() => window.open('https://github.com/BurakFurkan/react-food-app', '_blank', 'noopener,noreferrer')}
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-[10px] text-text-secondary
+                       text-sm font-medium hover:bg-surface hover:text-text transition-colors duration-200
+                       max-[640px]:px-2"
+            aria-label={t('github')}
+          >
+            <FiGithub className="text-[1.1rem] flex-shrink-0" />
+            <span className="max-[640px]:hidden">{t('github')}</span>
           </button>
 
           {/* Options */}
@@ -158,9 +170,9 @@ export function Navbar() {
             <Image src={userImage} alt="User" width={36} height={36}
               className="rounded-full object-cover border-2 border-border-strong flex-shrink-0" />
             <div className="flex flex-col min-w-0">
-              <span className="text-sm font-semibold text-text truncate">{userName || 'Guest'}</span>
+              <span className="text-sm font-semibold text-text truncate">{userName || t('nav.guest')}</span>
               <span className="text-[0.68rem] font-medium text-green-500">
-                {isLoggedIn ? 'Online' : 'Offline'}
+                {isLoggedIn ? t('nav.online') : t('nav.offline')}
               </span>
             </div>
           </div>
@@ -172,7 +184,7 @@ export function Navbar() {
                        text-sm font-medium hover:bg-surface hover:text-text transition-colors"
           >
             <FiUser className="text-base flex-shrink-0" />
-            <span>Dashboard</span>
+            <span>{t('dashboard')}</span>
           </Link>
           <hr className="border-none h-px bg-border my-1.5" />
           <button

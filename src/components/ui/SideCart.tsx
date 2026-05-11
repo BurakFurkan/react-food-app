@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import Swal from 'sweetalert2'
@@ -9,6 +10,7 @@ import { RiDeleteBin6Line } from 'react-icons/ri'
 import { HiArrowRight } from 'react-icons/hi'
 import { GoLocation } from 'react-icons/go'
 import { useUserStore } from '@/store/userStore'
+import { useCartStore, cartSubtotal } from '@/store/cartStore'
 const PLACEHOLDER = '/images/placeholder.png'
 
 export function SideCart() {
@@ -16,6 +18,8 @@ export function SideCart() {
   const meals           = useUserStore((s) => s.meals)
   const removeFromMeals = useUserStore((s) => s.removeFromMeals)
   const removeFromUserMenu = useUserStore((s) => s.removeFromUserMenu)
+  const removeCartItem  = useCartStore((s) => s.removeItem)
+  const subtotal        = useCartStore(cartSubtotal)
   const [dragStart, setDragStart] = useState(0)
 
   const toast = () =>
@@ -24,6 +28,7 @@ export function SideCart() {
   const handleDelete = (id: string) => {
     removeFromUserMenu(id)
     removeFromMeals(id)
+    removeCartItem(id)
     toast().fire({ icon: 'error', title: t('ItemRemoved') })
   }
 
@@ -75,9 +80,9 @@ export function SideCart() {
               className="flex flex-col items-center justify-center py-10 gap-2 text-center"
             >
               <div className="text-[2.25rem] opacity-50 mb-1">🛒</div>
-              <p className="text-sm font-semibold text-text-secondary">No items yet</p>
+              <p className="text-sm font-semibold text-text-secondary">{t('cart.noItems')}</p>
               <p className="text-[0.75rem] text-text-muted leading-relaxed">
-                Add meals from the menu to get started
+                {t('cart.addMeals')}
               </p>
             </motion.div>
           ) : (
@@ -115,7 +120,7 @@ export function SideCart() {
                 <motion.button
                   whileTap={{ scale: 0.88 }}
                   onClick={() => handleDelete(meal.id)}
-                  aria-label="Remove item"
+                  aria-label={t('cart.removeItem')}
                   className="w-7 h-7 rounded-[8px] border-none bg-transparent text-text-muted
                              flex items-center justify-center text-[0.95rem] flex-shrink-0 cursor-pointer
                              transition-colors duration-200 hover:text-red-500 hover:bg-red-500/10"
@@ -130,17 +135,21 @@ export function SideCart() {
 
       {/* Footer */}
       {meals.length > 0 && (
-        <div className="p-3.5 border-t border-border flex-shrink-0">
-          <motion.button
-            whileHover={{ scale: 1.015 }}
-            whileTap={{ scale: 0.97 }}
-            className="w-full h-11 rounded-[12px] border-none bg-primary text-white text-sm font-semibold
-                       cursor-pointer font-body flex items-center justify-center gap-2 shadow-primary
-                       transition-colors duration-200 hover:bg-primary-hover tracking-[0.01em]"
+        <div className="p-3.5 border-t border-border flex-shrink-0 flex flex-col gap-2.5">
+          <div className="flex items-center justify-between text-[0.8rem]">
+            <span className="text-text-secondary font-medium">{t('cart.subtotal')}</span>
+            <span className="font-bold text-text">{subtotal.toFixed(0)}₺</span>
+          </div>
+          <Link
+            href="/checkout"
+            className="w-full h-11 rounded-[12px] bg-primary text-white text-sm font-semibold
+                       font-body flex items-center justify-center gap-2 shadow-primary
+                       transition-colors duration-200 hover:bg-primary-hover tracking-[0.01em]
+                       active:scale-[0.97] transition-transform"
           >
-            Checkout
+            {t('cart.checkout')}
             <HiArrowRight className="text-base" />
-          </motion.button>
+          </Link>
         </div>
       )}
     </motion.aside>

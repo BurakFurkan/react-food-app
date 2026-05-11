@@ -3,6 +3,10 @@ export interface MenuItem {
   title: string
   image: string
   restaurantChain: string
+  price: number
+  discount: number
+  rating: number
+  reviewCount: number
 }
 
 export interface Ingredient {
